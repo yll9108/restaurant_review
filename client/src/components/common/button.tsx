@@ -25,21 +25,21 @@ export const Button = (props: BtnProps) => {
   //change button style
   let btnClass = "";
   switch (props.type) {
-  case BtnType.regular:
-    btnClass = REGULAR_STYLE;
-    break;
-  case BtnType.regular_google:
-    btnClass = REGULAR_GOOGLE_STYLE;
-    break;
-  case BtnType.submit:
-    btnClass = SUBMIT_STYLE;
-    break;
-  case BtnType.cancel:
-    btnClass = CANCEL_STYLE;
-    break;
-  case BtnType.delete:
-    btnClass = DELETE_STYLE;
-    break;
+    case BtnType.regular:
+      btnClass = REGULAR_STYLE;
+      break;
+    case BtnType.regular_google:
+      btnClass = REGULAR_GOOGLE_STYLE;
+      break;
+    case BtnType.submit:
+      btnClass = SUBMIT_STYLE;
+      break;
+    case BtnType.cancel:
+      btnClass = CANCEL_STYLE;
+      break;
+    case BtnType.delete:
+      btnClass = DELETE_STYLE;
+      break;
   }
   btnClass += `${props.className || ""}`;
 
