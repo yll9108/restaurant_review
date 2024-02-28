@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-function page() {
+function Page() {
   const [message, setMessage] = useState("Loading");
   useEffect(() => {
     fetch("http://localhost:8080/api/home")
@@ -19,4 +19,4 @@ function page() {
     </>
   );
 }
-export default page;
+export default Page;

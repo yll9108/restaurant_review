@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function restaurant() {
+export default function Restaurant() {
   return <div>restaurant</div>;
 }
