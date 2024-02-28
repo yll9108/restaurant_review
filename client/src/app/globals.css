@@ -2,6 +2,15 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  * {
+    @apply text-base;
+  }
+  body {
+    @apply text-base font-robot;
+  }
+}
+
 /* :root {
   --max-width: 1100px;
   --border-radius: 12px;
