@@ -3,6 +3,6 @@
   "rules": {
     "quotes": ["error", "double"],
     "jsx-quotes": ["error", "prefer-double"],
-    "indent": ["error", 2]
+    "indent": ["error", 2, { "SwitchCase": 1 }]
   }
 }
