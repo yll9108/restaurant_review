@@ -21,7 +21,7 @@ const SUBMIT_STYLE = "btn btn-primary btn-small text-white text-base ";
 const CANCEL_STYLE = "btn btn-outline btn-error text-base ";
 const DELETE_STYLE = "btn bg-outline btn-warning text-white text-base ";
 
-export const Button = (props: BtnProps) => {
+const Button = (props: BtnProps) => {
   //change button style
   let btnClass = "";
   switch (props.type) {
@@ -45,3 +45,5 @@ export const Button = (props: BtnProps) => {
 
   return <button className={btnClass}>{props.children}</button>;
 };
+
+export default Button
