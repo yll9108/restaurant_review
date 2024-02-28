@@ -45,4 +45,3 @@ export const Button = (props: BtnProps) => {
 
   return <button className={btnClass}>{props.children}</button>;
 };
-

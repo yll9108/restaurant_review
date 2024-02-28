@@ -8,11 +8,6 @@ module.exports = {
   ],
   theme: {
     extend: {
-      colors: {
-        green: "#15616D",
-        yelloew: "#FED766",
-        grey: "#EFF1F3",
-      },
       fontFamily: {
         robot: ["Roboto"],
       },
