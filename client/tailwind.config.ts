@@ -1,18 +1,8 @@
 /** @type {import('tailwindcss').Config} */
-
 module.exports = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
-      colors: {
-        green: "#15616D",
-        yelloew: "#FED766",
-        grey: "#EFF1F3",
-      },
       fontFamily: {
         robot: ["Roboto"],
       },
