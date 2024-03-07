@@ -32,7 +32,7 @@ export default function Input(props: TextProps) {
     <input
       type={type}
       placeholder={props.placeholder}
-      className="input input-bordered w-full max-w-xs"
+      className="input input-bordered w-64 mb-4"
     />
   );
 }

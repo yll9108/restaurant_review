@@ -12,14 +12,16 @@ export type BtnProps = {
   type?: BtnType;
   className?: string;
   children: ReactNode;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 // button styles
-const REGULAR_STYLE = "btn btn-primary btn-wide text-white text-base ";
-const REGULAR_GOOGLE_STYLE = "btn btn-outline btn-primary btn-wide text-base ";
-const SUBMIT_STYLE = "btn btn-primary btn-small text-white text-base ";
-const CANCEL_STYLE = "btn btn-outline btn-error text-base ";
-const DELETE_STYLE = "btn bg-outline btn-warning text-white text-base ";
+const REGULAR_STYLE = "btn btn-primary btn-wide text-white text-base mb-4 ";
+const REGULAR_GOOGLE_STYLE =
+  "btn btn-outline btn-primary btn-wide text-base mb-4 ";
+const SUBMIT_STYLE = "btn btn-primary btn-small text-white text-base mb-4 ";
+const CANCEL_STYLE = "btn btn-outline btn-error text-base mb-4 ";
+const DELETE_STYLE = "btn bg-outline btn-warning text-white text-base mb-4 ";
 
 export const Button = (props: BtnProps) => {
   //change button style
@@ -43,5 +45,9 @@ export const Button = (props: BtnProps) => {
   }
   btnClass += `${props.className || ""}`;
 
-  return <button className={btnClass}>{props.children}</button>;
+  return (
+    <button className={btnClass} onClick={props.onClick}>
+      {props.children}
+    </button>
+  );
 };

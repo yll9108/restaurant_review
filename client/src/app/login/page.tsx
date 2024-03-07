@@ -1,7 +1,10 @@
+"use client";
+import Login from "../components/login/Login";
+
 export default function Home() {
   return (
-    <main>
-      <p>login page</p>
+    <main className="bg-accent h-screen flex items-center">
+      <Login />
     </main>
   );
 }
