@@ -1,6 +1,7 @@
 "use client"; // tell react this is a client component
 
 import React, { useEffect, useState } from "react";
+import Card from "./Card";
 
 function Page() {
   // const [message, setMessage] = useState("Loading");
@@ -15,9 +16,13 @@ function Page() {
 
   return (
     <>
-      <div className="flex">
-        <div className="bg-primary">123</div>
-        <div>123</div>
+      <div className="flex flex-wrap">
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </div>
     </>
   );
