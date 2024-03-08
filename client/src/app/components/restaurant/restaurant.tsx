@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
+import Pagination from "./Pagination";
 
 function Page() {
   // const [message, setMessage] = useState("Loading");
@@ -23,6 +24,9 @@ function Page() {
         <Card />
         <Card />
         <Card />
+      </div>
+      <div className="mt-5 flex justify-center">
+        <Pagination />
       </div>
     </>
   );

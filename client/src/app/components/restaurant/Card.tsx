@@ -7,7 +7,7 @@ function Card() {
   return (
     <div>
       {/* <div>This is card section</div> */}
-      <div className="card w-96 bg-base-100 shadow-xl">
+      <div className="card w-96 bg-base-100 shadow-xl m-4">
         <div className="card-body">
           <RestaurantInfo />
           <Address />
