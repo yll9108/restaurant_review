@@ -4,6 +4,7 @@ import Tags from "../restaurant/Tags";
 import Address from "../restaurant/Address";
 import RestaurantMap from "./RestaurantMap";
 import { RestaurantMockData, restaurantMockData } from "./mockdata";
+import { Button } from "@/components/common/button";
 
 function RestaurantWithMap() {
   return (
@@ -22,6 +23,11 @@ function RestaurantWithMap() {
                   <Tags tags={restaurant.tags} />
                   <RestaurantMap map={restaurant.map} />
                   <Address add={restaurant.add} />
+                  <div className="text-center">
+                    <Button type={0} className="w-1/2">
+                      Add review
+                    </Button>
+                  </div>
                 </div>
               )
             )}
