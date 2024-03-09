@@ -8,7 +8,7 @@ function Pagination() {
         type="radio"
         name="options"
         aria-label="1"
-        checked
+        // checked
       />
       <input
         className="join-item btn btn-square"
