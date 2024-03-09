@@ -1,10 +1,14 @@
 import React from "react";
 
-function Address() {
+interface AddProps {
+  add: string;
+}
+
+function Address({ add }: AddProps) {
   return (
     <>
       <div className="bg-warning">
-        <div>Address Address Address</div>
+        <div>{add}</div>
       </div>
     </>
   );

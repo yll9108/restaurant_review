@@ -1,10 +1,14 @@
 import React from "react";
 
-function Tags() {
+interface TagsProps {
+  tags: string;
+}
+
+function Tags({ tags }: TagsProps) {
   return (
     <>
       <div className="bg-secondary flex gap-5">
-        <div>Tags</div>
+        <div>{tags}</div>
         <div>heart icon</div>
       </div>
     </>

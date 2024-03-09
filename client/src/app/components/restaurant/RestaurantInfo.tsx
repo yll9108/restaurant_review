@@ -1,14 +1,20 @@
 import React from "react";
 
-function RestaurantInfo() {
+interface RestaurantInfoProps {
+  name: string;
+  ratingNum: number;
+  reviews: number;
+}
+
+function RestaurantInfo({ name, ratingNum, reviews }: RestaurantInfoProps) {
   return (
     <>
       {/* <div className="bg-primary">this is res info</div> */}
-      <h2 className="card-title bg-slate-400">Saku</h2>
+      <h2 className="card-title bg-slate-400">{name}</h2>
       <div className="flex bg-green-200">
         <p>here is rating icons</p>
-        <p>number</p>
-        <p> ?? reviews</p>
+        <p>{ratingNum}</p>
+        <p>{reviews} reviews</p>
       </div>
     </>
   );

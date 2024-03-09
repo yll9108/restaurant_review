@@ -2,6 +2,7 @@ import React from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
+import { RestaurantMockData, restaurantMockData } from "../detailPage/mockdata";
 
 function Card() {
   return (
@@ -9,9 +10,19 @@ function Card() {
       {/* <div>This is card section</div> */}
       <div className="card w-96 bg-base-100 shadow-xl m-4">
         <div className="card-body">
-          <RestaurantInfo />
-          <Address />
-          <Tags />
+          {restaurantMockData.map(
+            (restaurant: RestaurantMockData, index: number) => (
+              <div key={index}>
+                <RestaurantInfo
+                  name={restaurant.name}
+                  ratingNum={restaurant.ratingNum}
+                  reviews={restaurant.reviews}
+                />
+                <Tags tags={restaurant.tags} />
+                <Address add={restaurant.add} />
+              </div>
+            )
+          )}
         </div>
       </div>
     </div>
