@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 
-function Page() {
+function Restaurant() {
   // const [message, setMessage] = useState("Loading");
   // useEffect(() => {
   //   fetch("http://localhost:8080/api/home")
@@ -31,4 +31,4 @@ function Page() {
     </>
   );
 }
-export default Page;
+export default Restaurant;
