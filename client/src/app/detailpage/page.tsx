@@ -1,16 +1,23 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import RestaurantWithMap from "../components/detailPage/RestaurantWithMap";
 import PersonalReview from "../components/detailPage/PersonalReview";
+import NoReviews from "../components/detailPage/NoReviews";
 
-function page() {
+function Page() {
+  const [noReviews, setNoReviews] = useState(true);
+  // check if there's review, if yes, rendering PersonalReview, if not, rendering noReviews
+
   return (
     <>
       <div className="flex">
-        <PersonalReview />
+        <div className="w-2/3">
+          {noReviews ? <NoReviews /> : <PersonalReview />}
+        </div>
         <RestaurantWithMap />
       </div>
     </>
   );
 }
 
-export default page;
+export default Page;
