@@ -4,15 +4,6 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 
-// type dummyRestaurantData = {
-//   name: string;
-//   ratingNum: number;
-//   reviews: number;
-//   tags: string;
-//   add: string;
-//   map: string;
-// };
-
 function Restaurants() {
   // const [message, setMessage] = useState("Loading");
   // useEffect(() => {

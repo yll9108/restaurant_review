@@ -2,9 +2,15 @@ import React from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
-// import { RestaurantMockData, restaurantMockData } from "../detailPage/mockdata";
+import { PartialDummyRestaurantData } from "./types";
 
-function Card({ name, ratingNum, reviews, tags, add }: DummyRestaurantData) {
+function Card({
+  name,
+  ratingNum,
+  reviews,
+  tags,
+  add,
+}: PartialDummyRestaurantData) {
   return (
     // <div>
     //   {/* <div>This is card section</div> */}

@@ -1,6 +1,11 @@
 import React from "react";
+import { PartialDummyRestaurantData } from "./types";
 
-function RestaurantInfo({ name, ratingNum, reviews }) {
+function RestaurantInfo({
+  name,
+  ratingNum,
+  reviews,
+}: PartialDummyRestaurantData) {
   return (
     <>
       {/* <div className="bg-primary">this is res info</div> */}

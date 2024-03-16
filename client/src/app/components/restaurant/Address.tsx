@@ -1,6 +1,7 @@
 import React from "react";
+import { PartialDummyRestaurantData } from "./types";
 
-function Address({ add }: DummyRestaurantData) {
+function Address({ add }: PartialDummyRestaurantData) {
   return (
     <>
       <div className="bg-warning">

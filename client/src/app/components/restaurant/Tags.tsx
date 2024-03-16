@@ -1,6 +1,7 @@
 import React from "react";
+import { PartialDummyRestaurantData } from "./types";
 
-function Tags({ tags }: DummyRestaurantData) {
+function Tags({ tags }: PartialDummyRestaurantData) {
   return (
     <>
       <div className="bg-secondary flex gap-5">

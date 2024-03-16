@@ -4,8 +4,9 @@ type DummyRestaurantData = {
   reviews: number;
   tags: string;
   add: string;
-};
-
-type DummyMap = {
   map: string;
 };
+
+type PartialDummyRestaurantData = Partial<DummyRestaurantData>;
+
+export type { DummyRestaurantData, PartialDummyRestaurantData };
