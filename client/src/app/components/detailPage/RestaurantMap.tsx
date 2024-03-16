@@ -1,11 +1,12 @@
+import { PartialDummyRestaurantData } from "@/components/common/types";
 import React from "react";
 
-interface MapProps {
-  map: string;
-}
+// interface MapProps {
+//   map: string;
+// }
 
-function RestaurantMap({ map }: MapProps) {
-  return <img src={map} />;
+function RestaurantMap({ mapString }: PartialDummyRestaurantData) {
+  return <img src={mapString} />;
 }
 
 export default RestaurantMap;

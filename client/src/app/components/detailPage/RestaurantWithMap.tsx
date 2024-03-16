@@ -18,28 +18,20 @@ function RestaurantWithMap({ noReviews }: RestaurantWithMapProps) {
       <div className="bg-red-200">
         <div className="card w-96 bg-base-100 shadow-xl m-4">
           <div className="card-body">
-            {restaurantMockData.map(
-              (restaurant: RestaurantMockData, index: number) => (
-                <div key={index}>
-                  <RestaurantInfo
-                    name={restaurant.name}
-                    ratingNum={restaurant.ratingNum}
-                    reviews={restaurant.reviews}
-                  />
-                  <Tags tags={restaurant.tags} />
-                  <RestaurantMap map={restaurant.map} />
-                  <Address add={restaurant.add} />
-                  {/* Render button only if noReviews is false */}
-                  {!noReviews && (
-                    <div className="text-center">
-                      <Button type={0} className="w-1/2">
-                        Add review
-                      </Button>
-                    </div>
-                  )}
+            <div>
+              <RestaurantInfo name={"test"} ratingNum={5} reviews={120} />
+              <Tags tags={"Japanese"} />
+              <RestaurantMap mapString={"/mockMap.png"} />
+              <Address />
+              {/* Render button only if noReviews is false */}
+              {!noReviews && (
+                <div className="text-center">
+                  <Button type={0} className="w-1/2">
+                    Add review
+                  </Button>
                 </div>
-              )
-            )}
+              )}
+            </div>
           </div>
         </div>
       </div>
