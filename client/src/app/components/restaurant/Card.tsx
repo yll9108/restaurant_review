@@ -2,7 +2,7 @@ import React from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
-import { PartialDummyRestaurantData } from "./types";
+import { PartialDummyRestaurantData } from "@/components/common/types";
 
 function Card({
   name,

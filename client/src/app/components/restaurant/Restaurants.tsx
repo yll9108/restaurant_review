@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import { DummyRestaurantData } from "./types";
+import { DummyRestaurantData } from "@/components/common/types";
 
 function Restaurants() {
   // const [message, setMessage] = useState("Loading");

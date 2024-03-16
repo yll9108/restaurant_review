@@ -1,5 +1,5 @@
 import React from "react";
-import { PartialDummyRestaurantData } from "./types";
+import { PartialDummyRestaurantData } from "@/components/common/types";
 
 function Address({ add }: PartialDummyRestaurantData) {
   return (
