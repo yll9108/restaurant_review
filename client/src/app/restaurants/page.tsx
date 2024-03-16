@@ -1,7 +1,7 @@
 "use client";
 
-import Restaurant from "@/app/components/restaurant/restaurant";
+import Restaurants from "../components/restaurant/Restaurants";
 
 export default function Page() {
-  return <Restaurant />;
+  return <Restaurants />;
 }

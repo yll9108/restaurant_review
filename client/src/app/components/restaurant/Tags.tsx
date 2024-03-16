@@ -1,10 +1,6 @@
 import React from "react";
 
-interface TagsProps {
-  tags: string;
-}
-
-function Tags({ tags }: TagsProps) {
+function Tags({ tags }: DummyRestaurantData) {
   return (
     <>
       <div className="bg-secondary flex gap-5">

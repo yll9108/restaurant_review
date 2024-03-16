@@ -1,12 +1,6 @@
 import React from "react";
 
-interface RestaurantInfoProps {
-  name: string;
-  ratingNum: number;
-  reviews: number;
-}
-
-function RestaurantInfo({ name, ratingNum, reviews }: RestaurantInfoProps) {
+function RestaurantInfo({ name, ratingNum, reviews }) {
   return (
     <>
       {/* <div className="bg-primary">this is res info</div> */}

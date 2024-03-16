@@ -2,27 +2,43 @@ import React from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
-import { RestaurantMockData, restaurantMockData } from "../detailPage/mockdata";
+// import { RestaurantMockData, restaurantMockData } from "../detailPage/mockdata";
 
-function Card() {
+function Card({ name, ratingNum, reviews, tags, add }: DummyRestaurantData) {
   return (
+    // <div>
+    //   {/* <div>This is card section</div> */}
+    //   <div className="card w-96 bg-base-100 shadow-xl m-4">
+    //     <div className="card-body">
+    //       {restaurantMockData.map(
+    //         (restaurant: RestaurantMockData, index: number) => (
+    //           <div key={index}>
+    //             <RestaurantInfo
+    //               name={restaurant.name}
+    //               ratingNum={restaurant.ratingNum}
+    //               reviews={restaurant.reviews}
+    //             />
+    //             <Tags tags={restaurant.tags} />
+    //             <Address add={restaurant.add} />
+    //           </div>
+    //         )
+    //       )}
+    //     </div>
+    //   </div>
+    // </div>
     <div>
       {/* <div>This is card section</div> */}
       <div className="card w-96 bg-base-100 shadow-xl m-4">
         <div className="card-body">
-          {restaurantMockData.map(
-            (restaurant: RestaurantMockData, index: number) => (
-              <div key={index}>
-                <RestaurantInfo
-                  name={restaurant.name}
-                  ratingNum={restaurant.ratingNum}
-                  reviews={restaurant.reviews}
-                />
-                <Tags tags={restaurant.tags} />
-                <Address add={restaurant.add} />
-              </div>
-            )
-          )}
+          <div>
+            <RestaurantInfo
+              name={name}
+              ratingNum={ratingNum}
+              reviews={reviews}
+            />
+            <Tags tags={tags} />
+            <Address add={add} />
+          </div>
         </div>
       </div>
     </div>

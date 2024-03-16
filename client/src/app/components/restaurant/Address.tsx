@@ -1,10 +1,6 @@
 import React from "react";
 
-interface AddProps {
-  add: string;
-}
-
-function Address({ add }: AddProps) {
+function Address({ add }: DummyRestaurantData) {
   return (
     <>
       <div className="bg-warning">
