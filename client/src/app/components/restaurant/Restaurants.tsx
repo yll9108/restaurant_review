@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
+import { DummyRestaurantData } from "./types";
 
 function Restaurants() {
   // const [message, setMessage] = useState("Loading");
@@ -15,16 +16,41 @@ function Restaurants() {
   //     });
   // }, []);
 
+  const dummyRestaurantList: DummyRestaurantData[] = [
+    {
+      name: "Saku",
+      ratingNum: 5,
+      reviews: 120,
+      tags: "Japanese",
+      add: "567 Clarke Rd #107, Coquitlam, BC V3J 0K7",
+      mapString: "mockMap.png",
+    },
+    {
+      name: "Haruua",
+      ratingNum: 5,
+      reviews: 120,
+      tags: "Spanish",
+      add: "Vancouver, BC V3J 0K7",
+      mapString: "mockMap.png",
+    },
+  ];
+
   return (
     <>
       <div className="flex flex-wrap">
-        <Card
-          name={"Saku"}
-          ratingNum={5}
-          reviews={4}
-          tags={"Japanese"}
-          add={"ThisHref"}
-        />
+        {dummyRestaurantList &&
+          dummyRestaurantList.map(
+            (restaurant: DummyRestaurantData, index: number) => (
+              <Card
+                key={index}
+                name={restaurant.name}
+                ratingNum={restaurant.ratingNum}
+                reviews={restaurant.reviews}
+                tags={restaurant.tags}
+                add={restaurant.add}
+              />
+            )
+          )}
       </div>
       <div className="mt-5 flex justify-center">
         <Pagination />

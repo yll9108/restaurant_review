@@ -4,7 +4,7 @@ type DummyRestaurantData = {
   reviews: number;
   tags: string;
   add: string;
-  map: string;
+  mapString: string;
 };
 
 type PartialDummyRestaurantData = Partial<DummyRestaurantData>;
