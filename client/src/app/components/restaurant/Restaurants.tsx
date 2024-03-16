@@ -18,6 +18,7 @@ function Restaurants() {
 
   const dummyRestaurantList: DummyRestaurantData[] = [
     {
+      id: 1,
       name: "Saku",
       ratingNum: 5,
       reviews: 120,
@@ -26,6 +27,7 @@ function Restaurants() {
       mapString: "mockMap.png",
     },
     {
+      id: 2,
       name: "Haruua",
       ratingNum: 5,
       reviews: 120,
@@ -43,6 +45,7 @@ function Restaurants() {
             (restaurant: DummyRestaurantData, index: number) => (
               <Card
                 key={index}
+                id={restaurant.id}
                 name={restaurant.name}
                 ratingNum={restaurant.ratingNum}
                 reviews={restaurant.reviews}

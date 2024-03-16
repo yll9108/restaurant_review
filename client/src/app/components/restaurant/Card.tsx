@@ -6,6 +6,7 @@ import { PartialDummyRestaurantData } from "@/components/common/types";
 import { useRouter } from "next/navigation";
 
 function Card({
+  id,
   name,
   ratingNum,
   reviews,
@@ -17,7 +18,7 @@ function Card({
   const clickRestaurant = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log("clicked");
-    router.push("/detailpage");
+    router.push(`restaurants/${id}`);
   };
 
   return (

@@ -1,4 +1,5 @@
 type DummyRestaurantData = {
+  id: number;
   name: string;
   ratingNum: number;
   reviews: number;
