@@ -4,8 +4,24 @@ import React, { useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { DummyRestaurantData } from "@/components/common/types";
+import { dummyRestaurantList } from "./dummyRestaurantList";
 
 function Restaurants() {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [restaurantPerPage, setRestaurantPerPage] = useState(6);
+
+  // logic for pagination
+  const indexOfLastRestaurant = currentPage * restaurantPerPage;
+  const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantPerPage;
+  const currentRestaurants = dummyRestaurantList.slice(
+    indexOfFirstRestaurant,
+    indexOfLastRestaurant
+  );
+
+  // when click on different page, set to that page
+  const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
+
+  // leave for now, will use later for fetching data
   // const [message, setMessage] = useState("Loading");
   // useEffect(() => {
   //   fetch("http://localhost:8080/api/home")
@@ -16,32 +32,11 @@ function Restaurants() {
   //     });
   // }, []);
 
-  const dummyRestaurantList: DummyRestaurantData[] = [
-    {
-      id: 1,
-      name: "Saku",
-      ratingNum: 5,
-      reviews: 120,
-      tags: "Japanese",
-      add: "567 Clarke Rd #107, Coquitlam, BC V3J 0K7",
-      mapString: "mockMap.png",
-    },
-    {
-      id: 2,
-      name: "Haruua",
-      ratingNum: 5,
-      reviews: 120,
-      tags: "Spanish",
-      add: "Vancouver, BC V3J 0K7",
-      mapString: "mockMap.png",
-    },
-  ];
-
   return (
     <>
       <div className="flex flex-wrap">
-        {dummyRestaurantList &&
-          dummyRestaurantList.map(
+        {currentRestaurants &&
+          currentRestaurants.map(
             (restaurant: DummyRestaurantData, index: number) => (
               <Card
                 key={index}
@@ -56,7 +51,12 @@ function Restaurants() {
           )}
       </div>
       <div className="mt-5 flex justify-center">
-        <Pagination />
+        <Pagination
+          restaurantsPerPage={restaurantPerPage}
+          totalRestaurants={dummyRestaurantList.length}
+          paginate={paginate}
+          currentPage={currentPage}
+        />
       </div>
     </>
   );

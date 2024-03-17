@@ -10,4 +10,11 @@ type DummyRestaurantData = {
 
 type PartialDummyRestaurantData = Partial<DummyRestaurantData>;
 
-export type { DummyRestaurantData, PartialDummyRestaurantData };
+type PaginationData = {
+  restaurantsPerPage: number;
+  totalRestaurants: number;
+  paginate: (pageNumber: number) => void;
+  currentPage: number;
+};
+
+export type { DummyRestaurantData, PartialDummyRestaurantData, PaginationData };
