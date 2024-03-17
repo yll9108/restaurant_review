@@ -21,7 +21,7 @@ function Page() {
   const params = useParams();
   // console.log("params", params);
 
-  const [noReviews, setNoReviews] = useState(true);
+  const [noReviews, setNoReviews] = useState(false);
   // check if there's review, if yes, rendering PersonalReview, if not, rendering noReviews
 
   return (

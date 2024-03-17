@@ -6,6 +6,7 @@ import Address from "../restaurant/Address";
 import RestaurantMap from "./RestaurantMap";
 import { RestaurantMockData, restaurantMockData } from "./mockdata";
 import { Button } from "@/components/common/button";
+import AddReview from "../review/AddReview";
 
 // Add noReviews prop to RestaurantWithMap component
 interface RestaurantWithMapProps {
@@ -26,9 +27,7 @@ function RestaurantWithMap({ noReviews }: RestaurantWithMapProps) {
               {/* Render button only if noReviews is false */}
               {!noReviews && (
                 <div className="text-center">
-                  <Button type={0} className="w-1/2">
-                    Add review
-                  </Button>
+                  <AddReview />
                 </div>
               )}
             </div>
