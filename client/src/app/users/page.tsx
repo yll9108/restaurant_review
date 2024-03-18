@@ -13,7 +13,7 @@ export default function Page() {
           className="tab"
           aria-label="My Favorite"
         />
-        <div role="tabpanel" className="tab-content p-10">
+        <div role="tabpanel" className="tab-content p-4">
           <MyFavorite />
         </div>
 
@@ -25,7 +25,7 @@ export default function Page() {
           aria-label="My Reviews"
           // checked
         />
-        <div role="tabpanel" className="tab-content p-10">
+        <div role="tabpanel" className="tab-content p-4">
           <MyReviews />
         </div>
 
@@ -36,7 +36,7 @@ export default function Page() {
           className="tab"
           aria-label="User Profile"
         />
-        <div role="tabpanel" className="tab-content p-10">
+        <div role="tabpanel" className="tab-content p-4">
           <UserProfile />
         </div>
       </div>

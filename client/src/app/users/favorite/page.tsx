@@ -1,5 +1,5 @@
 "use client";
-
+import Restaurants from "@/app/components/restaurant/Restaurants";
 export default function MyFavorite() {
-  return <div>My Favorite page</div>;
+  return <Restaurants />;
 }
