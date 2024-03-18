@@ -1,10 +1,7 @@
 import React from "react";
+import { PartialDummyRestaurantData } from "@/components/common/types";
 
-interface TagsProps {
-  tags: string;
-}
-
-function Tags({ tags }: TagsProps) {
+function Tags({ tags }: PartialDummyRestaurantData) {
   return (
     <>
       <div className="bg-secondary flex gap-5">
