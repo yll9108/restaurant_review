@@ -1,10 +1,7 @@
 import React from "react";
+import { PartialDummyRestaurantData } from "@/components/common/types";
 
-interface AddProps {
-  add: string;
-}
-
-function Address({ add }: AddProps) {
+function Address({ add }: PartialDummyRestaurantData) {
   return (
     <>
       <div className="bg-warning">

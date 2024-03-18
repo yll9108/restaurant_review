@@ -1,33 +1,33 @@
+import { PaginationData } from "@/components/common/types";
 import React from "react";
 
-function Pagination() {
+function Pagination({
+  restaurantsPerPage,
+  totalRestaurants,
+  paginate,
+  currentPage,
+}: PaginationData) {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(totalRestaurants / restaurantsPerPage); i++) {
+    pageNumbers.push(i);
+  }
+
   return (
     <div className="join">
-      <input
-        className="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="1"
-        // checked
-      />
-      <input
-        className="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="2"
-      />
-      <input
-        className="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="3"
-      />
-      <input
-        className="join-item btn btn-square"
-        type="radio"
-        name="options"
-        aria-label="4"
-      />
+      {pageNumbers.map((number) => (
+        <input
+          key={number}
+          className={`join-item btn btn-square ${
+            number === currentPage ? "active" : ""
+          }`}
+          type="radio"
+          name="options"
+          aria-label={`${number}`}
+          onClick={() => paginate(number)}
+          defaultChecked={number === currentPage}
+        />
+      ))}
     </div>
   );
 }
