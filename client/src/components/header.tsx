@@ -12,7 +12,7 @@ export default function Header() {
     homeRouter.push("/");
   };
   return (
-    <header className="w-full bg-accent h-16 flex justify-end items-center">
+    <header className="w-full bg-primary h-16 flex justify-end items-center">
       <HeaderLogo />
       <div className="flex justify-center">
         <Input textType={3} className="mr-2 mb-0" />

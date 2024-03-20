@@ -1,5 +1,5 @@
 "use client";
-
+import UserProfiles from "@/app/components/users/userProfile/UserProfile";
 export default function UserProfile() {
-  return <div>User Profile Page</div>;
+  return <UserProfiles />;
 }
