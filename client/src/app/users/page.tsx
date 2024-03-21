@@ -8,7 +8,7 @@ import UserProfile from "./userProfile/page";
 
 export default function Users() {
   const router = useRouter();
-  const searchParams = useSearchParams();
+  // const searchParams = useSearchParams();
   // const [activeTab, setActiveTab] = useState(
   //   searchParams.get("tab") || "favorite"
   // );
