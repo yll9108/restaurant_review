@@ -1,7 +1,7 @@
 "use client";
 import "./globals.css";
 import Header from "@/components/header";
-import Users from "./users/page";
+import { DropDownContextProvider } from "@/context/DropDownContext";
 import { usePathname } from "next/navigation";
 
 export default function RootLayout({
@@ -24,8 +24,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {isHeaderReady() && <Header />}
-        {children}
+        <DropDownContextProvider>
+          {isHeaderReady() && <Header />}
+          {children}
+        </DropDownContextProvider>
       </body>
     </html>
   );
