@@ -3,12 +3,13 @@ import { FaHeart, FaSignOutAlt } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 
 export default function Avatar() {
   // const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
+  const dropDownRef = useRef<HTMLDetailsElement>(null);
   // const { activeTab, setActiveTab, changedTabs } = useContext(DropDownContext);
   const { activeTab, setActiveTab } = useContext(DropDownContext);
 
@@ -18,6 +19,9 @@ export default function Avatar() {
     // setIsOpen(!isOpen);
     setActiveTab("favorite");
     // changedTabs("favorite");
+    if (dropDownRef.current) {
+      dropDownRef.current.removeAttribute("open");
+    }
   };
   const clickedMyReviews = (event: React.MouseEvent<HTMLLIElement>) => {
     event.preventDefault();
@@ -26,12 +30,18 @@ export default function Avatar() {
     setActiveTab("reviews");
 
     // changedTabs("reviews");
+    if (dropDownRef.current) {
+      dropDownRef.current.removeAttribute("open");
+    }
   };
   const clickedUserProfile = (event: React.MouseEvent<HTMLLIElement>) => {
     event.preventDefault();
     router.push("/users?tab=userProfile");
     // setIsOpen(!isOpen);
     setActiveTab("userProfile");
+    if (dropDownRef.current) {
+      dropDownRef.current.removeAttribute("open");
+    }
   };
 
   const clickedSignOutHandler = (event: React.MouseEvent<HTMLLIElement>) => {
@@ -42,7 +52,7 @@ export default function Avatar() {
   console.log("avatar", activeTab);
 
   return (
-    <details className="dropdown dropdown-end mr-12 ">
+    <details className="dropdown dropdown-end mr-12 " ref={dropDownRef}>
       <summary
         // tabIndex={0}
         // role="button"
