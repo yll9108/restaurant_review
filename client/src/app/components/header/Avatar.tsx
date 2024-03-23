@@ -7,38 +7,13 @@ import { useState, useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 
 export default function Avatar() {
-  // const [isOpen, setIsOpen] = useState<boolean>(false);
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
-  // const { activeTab, setActiveTab, changedTabs } = useContext(DropDownContext);
-  const { activeTab, setActiveTab } = useContext(DropDownContext);
+  const { setActiveTab } = useContext(DropDownContext);
 
-  const clickedMyFavorite = (event: React.MouseEvent<HTMLLIElement>) => {
-    event.preventDefault();
-    router.push("/users?tab=favorite");
-    // setIsOpen(!isOpen);
-    setActiveTab("favorite");
-    // changedTabs("favorite");
-    if (dropDownRef.current) {
-      dropDownRef.current.removeAttribute("open");
-    }
-  };
-  const clickedMyReviews = (event: React.MouseEvent<HTMLLIElement>) => {
-    event.preventDefault();
-    router.push("/users?tab=reviews");
-    // setIsOpen(!isOpen);
-    setActiveTab("reviews");
-
-    // changedTabs("reviews");
-    if (dropDownRef.current) {
-      dropDownRef.current.removeAttribute("open");
-    }
-  };
-  const clickedUserProfile = (event: React.MouseEvent<HTMLLIElement>) => {
-    event.preventDefault();
-    router.push("/users?tab=userProfile");
-    // setIsOpen(!isOpen);
-    setActiveTab("userProfile");
+  const changedTabs = (tabName: string) => {
+    setActiveTab(tabName);
+    router.push(`/users?tab=${tabName}`);
     if (dropDownRef.current) {
       dropDownRef.current.removeAttribute("open");
     }
@@ -49,27 +24,18 @@ export default function Avatar() {
     router.push("/login");
   };
 
-  console.log("avatar", activeTab);
-
   return (
     <details className="dropdown dropdown-end mr-12 " ref={dropDownRef}>
-      <summary
-        // tabIndex={0}
-        // role="button"
-        className="btn btn-secondary btn-circle avatar placeholder"
-      >
+      <summary className="btn btn-secondary btn-circle avatar placeholder">
         <div className="w-10 rounded-full">
           {/* <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
           <span>SY</span>
         </div>
       </summary>
-      <ul
-        // tabIndex={0}
-        className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 "
-      >
+      <ul className="mt-3  p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 z-10">
         <li
           className="btn btn-ghost px-2 min-h-0 h-9"
-          onClick={clickedMyFavorite}
+          onClick={() => changedTabs("favorite")}
         >
           <div>
             <FaHeart className="text-secondary" />
@@ -78,7 +44,7 @@ export default function Avatar() {
         </li>
         <li
           className="btn btn-ghost px-2 min-h-0 h-9"
-          onClick={clickedMyReviews}
+          onClick={() => changedTabs("reviews")}
         >
           <div>
             <MdReviews className="text-secondary" />
@@ -87,7 +53,7 @@ export default function Avatar() {
         </li>
         <li
           className="btn btn-ghost px-2 min-h-0 h-9"
-          onClick={clickedUserProfile}
+          onClick={() => changedTabs("userProfile")}
         >
           <div>
             <CgProfile className="text-secondary" />

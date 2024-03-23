@@ -28,8 +28,6 @@ export function DropDownContextProvider({ children }: { children: ReactNode }) {
   //   router.push(`/users?tab=${tabName}`);
   // };
 
-  console.log("test context", activeTab);
-
   return (
     <DropDownContext.Provider
       // value={{ searchParams, activeTab, setActiveTab, changedTabs }}
