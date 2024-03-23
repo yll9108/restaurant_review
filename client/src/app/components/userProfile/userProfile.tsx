@@ -3,13 +3,13 @@ import User from "@/components/common/User";
 import { BtnType, Button } from "@/components/common/button";
 import { useRouter } from "next/navigation";
 import { FaExclamationTriangle } from "react-icons/fa";
+import { useContext } from "react";
+import { DropDownContext } from "@/context/DropDownContext";
 
 export default function UserProfile() {
+  const { changedTabs } = useContext(DropDownContext);
   const router = useRouter();
-  const clickedHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    router.push("/users?tab=userProfile/edit");
-  };
+
   return (
     <>
       <div className="w-64 bg-secondary mx-auto mt-10">
@@ -18,7 +18,7 @@ export default function UserProfile() {
         <Button
           type={BtnType.regular}
           className=" btn-small block mx-auto mt-10"
-          onClick={clickedHandler}
+          onClick={() => changedTabs("userEdit")}
         >
           Edit
         </Button>
