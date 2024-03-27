@@ -2,24 +2,29 @@ import { Button } from "@/components/common/button";
 import React from "react";
 import {
   BsEmojiAngry,
-  BsEmojiAngryFill,
   BsEmojiAstonished,
-  BsEmojiAstonishedFill,
   BsEmojiExpressionless,
-  BsEmojiExpressionlessFill,
   BsEmojiSmile,
-  BsEmojiSmileFill,
   BsEmojiHeartEyes,
-  BsEmojiHeartEyesFill,
 } from "react-icons/bs";
 
 function AddReview() {
   const options = [];
   for (let i = 1.0; i <= 5.0; i += 0.5) {
-    options.push(i);
+    let face;
+    if (i === 1.0 || i === 1.5) {
+      face = <BsEmojiAngry />;
+    } else if (i === 2.0 || i === 2.5) {
+      face = <BsEmojiAstonished />;
+    } else if (i === 3.0 || i === 3.5) {
+      face = <BsEmojiExpressionless />;
+    } else if (i === 4.0 || i === 4.5) {
+      face = <BsEmojiSmile />;
+    } else {
+      face = <BsEmojiHeartEyes />;
+    }
+    options.push({ num: i, face });
   }
-
-  // const optionsWithFace =
 
   return (
     <>
@@ -40,12 +45,12 @@ function AddReview() {
           {/* <div className="modal-action"> */}
           <form method="dialog" className="flex flex-col gap-4">
             {/* if there is a button in form, it will close the modal */}
-            <div className="flex">
+            <div className="bg-red-300 flex">
               {options.map((option) => (
-                <label key={option}>
-                  <input type="radio" name="options" value={option} />
-                  {option}
-                  {/* {option.face} */}
+                <label key={option.num}>
+                  <input type="radio" name="options" value={option.num} />
+                  {option.face}
+                  {option.num}
                 </label>
               ))}
             </div>
