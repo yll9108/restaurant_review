@@ -1,7 +1,26 @@
 import { Button } from "@/components/common/button";
 import React from "react";
+import {
+  BsEmojiAngry,
+  BsEmojiAngryFill,
+  BsEmojiAstonished,
+  BsEmojiAstonishedFill,
+  BsEmojiExpressionless,
+  BsEmojiExpressionlessFill,
+  BsEmojiSmile,
+  BsEmojiSmileFill,
+  BsEmojiHeartEyes,
+  BsEmojiHeartEyesFill,
+} from "react-icons/bs";
 
 function AddReview() {
+  const options = [];
+  for (let i = 1.0; i <= 5.0; i += 0.5) {
+    options.push(i);
+  }
+
+  // const optionsWithFace =
+
   return (
     <>
       <Button
@@ -22,18 +41,13 @@ function AddReview() {
           <form method="dialog" className="flex flex-col gap-4">
             {/* if there is a button in form, it will close the modal */}
             <div className="flex">
-              <label>
-                <input type="radio" name="options" />1
-              </label>
-              <label>
-                <input type="radio" name="options" />2
-              </label>
-              <label>
-                <input type="radio" name="options" />3
-              </label>
-              <label>
-                <input type="radio" name="options" />4
-              </label>
+              {options.map((option) => (
+                <label key={option}>
+                  <input type="radio" name="options" value={option} />
+                  {option}
+                  {/* {option.face} */}
+                </label>
+              ))}
             </div>
 
             <input type="text" className="input" placeholder="Title" />
