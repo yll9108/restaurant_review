@@ -1,5 +1,5 @@
 import { Button } from "@/components/common/button";
-import React from "react";
+import React, { useState } from "react";
 import {
   BsEmojiAngry,
   BsEmojiAstonished,
@@ -7,8 +7,16 @@ import {
   BsEmojiSmile,
   BsEmojiHeartEyes,
 } from "react-icons/bs";
+import ConfirmationAddReview from "./ConfirmationAddReview";
 
 function AddReview() {
+  const [showConfirm, setShowConfirm] = useState(false);
+
+  const handleConfirm = () => {
+    setShowConfirm(!showConfirm);
+    console.log(showConfirm);
+  };
+
   const options = [];
   for (let i = 1.0; i <= 5.0; i += 0.5) {
     let face;
@@ -61,7 +69,7 @@ function AddReview() {
               <Button type={3} className="btn">
                 Cancel
               </Button>
-              <Button type={0} className="btn">
+              <Button type={0} className="btn" onClick={() => handleConfirm()}>
                 Add
               </Button>
             </div>
@@ -69,6 +77,7 @@ function AddReview() {
         </div>
         {/* </div> */}
       </dialog>
+      <ConfirmationAddReview showConfirm={showConfirm} />
     </>
   );
 }
