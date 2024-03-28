@@ -17,4 +17,18 @@ type PaginationData = {
   currentPage: number;
 };
 
-export type { DummyRestaurantData, PartialDummyRestaurantData, PaginationData };
+type DummyReviewList = {
+  id: number;
+  icon: string;
+  rating: number;
+  date: Date;
+  title: string;
+  content: string;
+};
+
+export type {
+  DummyRestaurantData,
+  PartialDummyRestaurantData,
+  PaginationData,
+  DummyReviewList,
+};
