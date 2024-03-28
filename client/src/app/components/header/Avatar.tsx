@@ -9,7 +9,7 @@ import { DropDownContext } from "@/context/DropDownContext";
 export default function Avatar() {
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
-  const { setActiveTab } = useContext(DropDownContext);
+  const { activeTab, setActiveTab } = useContext(DropDownContext);
 
   const changedTabs = (tabName: string) => {
     setActiveTab(tabName);
