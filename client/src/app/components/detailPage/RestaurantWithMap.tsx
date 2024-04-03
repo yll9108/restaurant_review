@@ -4,7 +4,7 @@ import RestaurantInfo from "../restaurant/RestaurantInfo";
 import Tags from "../restaurant/Tags";
 import Address from "../restaurant/Address";
 import RestaurantMap from "./RestaurantMap";
-import { RestaurantMockData, restaurantMockData } from "./mockdata";
+// import { RestaurantMockData, restaurantMockData } from "./mockdata";
 import { Button } from "@/components/common/button";
 import AddReview from "../review/AddReview";
 

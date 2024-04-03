@@ -11,6 +11,10 @@
   }
 }
 
+.active-tab {
+  color: black;
+}
+
 /* div {
   background-color: red;
 } */

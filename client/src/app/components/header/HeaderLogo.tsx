@@ -10,7 +10,10 @@ export default function HeaderLogo() {
   };
   return (
     <div className="flex-1 ml-12">
-      <a className="btn btn-ghost text-xl p-0" onClick={clickedHomeHandler}>
+      <a
+        className="btn btn-ghost text-xl p-0 text-accent"
+        onClick={clickedHomeHandler}
+      >
         home
       </a>
     </div>
