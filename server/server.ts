@@ -14,11 +14,11 @@ const corsOptions = {
 
 server.use(cors(corsOptions));
 
+// Connect to DB
+connectDB();
+
 server.get("/", (req: express.Request, res: express.Response) => {
   res.send("hello world");
 });
-
-// Connect to DB
-connectDB();
 
 export default server;
