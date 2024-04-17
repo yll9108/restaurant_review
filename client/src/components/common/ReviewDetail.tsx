@@ -1,22 +1,25 @@
 import React from "react";
+import { DummyReviewList } from "./types";
 
-function ReviewDetail() {
+function ReviewDetail({
+  id,
+  icon,
+  rating,
+  date,
+  title,
+  content,
+}: DummyReviewList) {
   return (
     <>
       {/* <div className="card-body"> */}
       <div className="flex flex-col">
-        <div className="flex">
-          <p>icon</p>
-          <p>ratings</p>
-          <p>date</p>
+        <div className="flex" key={id}>
+          <p>{icon}</p>
+          <p>{rating}</p>
+          {/* <p>{date}</p> */}
         </div>
-        <h2 className="card-title">Review Title</h2>
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum
-          voluptates excepturi impedit hic deserunt repudiandae. Ipsam totam,
-          impedit quisquam nesciunt voluptatem fuga optio, voluptate dignissimos
-          suscipit illum cupiditate quos blanditiis!
-        </p>
+        <h2 className="card-title">{title}</h2>
+        <p>{content}</p>
         {/* </div> */}
       </div>
     </>
