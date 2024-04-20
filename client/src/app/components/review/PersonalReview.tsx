@@ -1,15 +1,23 @@
 import ReviewDetail from "@/components/common/ReviewDetail";
 import User from "@/components/common/User";
-import React from "react";
+import React, { useState } from "react";
 import "./custom.css";
 import { Button } from "@/components/common/button";
 import { dummyReviewList } from "./dummyReviewList";
 
 function PersonalReview() {
+  const [showAllReviews, setShowAllReviews] = useState(false);
+  const displayAllReviews = showAllReviews
+    ? dummyReviewList
+    : dummyReviewList.slice(0, 5);
+  const toggleReviews = () => {
+    setShowAllReviews(!showAllReviews);
+  };
+
   return (
     <>
       <div className="flex flex-col">
-        {dummyReviewList.map((review) => (
+        {displayAllReviews.map((review) => (
           <div key={review.id} className="card bg-base-100 shadow-xl m-5">
             <div className="card-body flexRow">
               <User />
@@ -39,9 +47,13 @@ function PersonalReview() {
             ))}
           </div>
         </div> */}
-        <div className="text-center">
-          <Button type={1}>See more reviews</Button>
-        </div>
+        {!showAllReviews && (
+          <div className="text-center">
+            <Button type={1} onClick={toggleReviews}>
+              See more reviews
+            </Button>
+          </div>
+        )}
       </div>
     </>
   );
