@@ -8,12 +8,12 @@ import { RestaurantMockData, restaurantMockData } from "./mockdata";
 import { Button } from "@/components/common/button";
 import AddReview from "../review/AddReview";
 
-// Add noReviews prop to RestaurantWithMap component
+// Add hasReviews prop to RestaurantWithMap component
 interface RestaurantWithMapProps {
-  noReviews: boolean;
+  hasReviews: boolean;
 }
 
-function RestaurantWithMap({ noReviews }: RestaurantWithMapProps) {
+function RestaurantWithMap({ hasReviews }: RestaurantWithMapProps) {
   return (
     <>
       <div className="bg-red-200">
@@ -24,8 +24,8 @@ function RestaurantWithMap({ noReviews }: RestaurantWithMapProps) {
               <Tags tags={"Japanese"} />
               <RestaurantMap mapString={"/mockMap.png"} />
               <Address />
-              {/* Render button only if noReviews is false */}
-              {!noReviews && (
+              {/* Render button only if hasReviews is false */}
+              {!hasReviews && (
                 <div className="text-center">
                   <AddReview />
                 </div>

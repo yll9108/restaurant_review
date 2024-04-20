@@ -14,7 +14,7 @@ function PersonalReview() {
             <div className="card-body flexRow">
               <User />
               <ReviewDetail
-                key={review.id}
+                id={review.id}
                 icon={review.icon}
                 rating={review.rating}
                 date={review.date}
