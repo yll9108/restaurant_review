@@ -27,7 +27,7 @@ function Page() {
   const [hasReviews, setHasReviews] = useState(dummyReviewList.length > 0);
   useEffect(() => {
     setHasReviews(dummyReviewList.length > 0);
-  }, [dummyReviewList]);
+  }, []);
   // check if there's review, if yes, rendering PersonalReview, if not, rendering noReviews
 
   return (
