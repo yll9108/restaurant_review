@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import Input from "@/components/common/Input";
+import { useContext } from "react";
+import { Input } from "@/components/common/Input";
 import { Button } from "@/components/common/button";
-
+import { LoginStatus, UserContext } from "@/context/UserContext";
 export default function Signup() {
   return (
     <div className="bg-secondary">

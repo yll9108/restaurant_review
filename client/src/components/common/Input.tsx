@@ -13,7 +13,7 @@ export type TextProps = {
   placeholder?: string;
 };
 
-export default function Input(props: TextProps) {
+export function Input(props: TextProps) {
   let type = "";
   switch (props.textType) {
     case TextType.text:
@@ -37,7 +37,7 @@ export default function Input(props: TextProps) {
     <input
       type={type}
       placeholder={props.placeholder}
-      className={`input input-bordered w-64 mb-4 ${props.className}`}
+      className={`input input-bordered w-64  mb-4 ${props.className}`}
     />
   );
   if (props.textType === TextType.question) {
