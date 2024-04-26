@@ -6,62 +6,55 @@ export const dummyReviewList: DummyReviewList[] = [
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "11111",
+    content: "1111111111111111111111111",
   },
   {
     id: 2,
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "22222",
+    content: "22222222222222222222",
   },
   {
     id: 3,
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "333333",
+    content: "333333333333333333333333333333",
   },
   {
     id: 4,
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "444444",
+    content: "444444444444444444444444",
   },
   {
     id: 5,
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "555555",
+    content: "555555555555555555555555555555555555",
   },
   {
     id: 6,
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "66666666",
+    content: "6666666666666666666666666666666666666666",
   },
   {
     id: 7,
     icon: "icon1",
     rating: 4.0,
     date: new Date(2024, 0, 1),
-    title: "Testing Title",
-    content:
-      "stringstringstringstringstringstringstringstringstringstringstring",
+    title: "777777777",
+    content: "777777777777777777777777777777777777",
   },
 ];
