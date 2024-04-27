@@ -21,5 +21,5 @@ server.get("/", (req: express.Request, res: express.Response) => {
   res.send("hello world");
 });
 
-server.use("api/users", usersRouter);
+server.use("/api/users", usersRouter);
 export default server;
