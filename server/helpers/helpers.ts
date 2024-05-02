@@ -1,6 +1,7 @@
-import { RestaurantInput, UserInput } from "../types/types";
+import { RestaurantInput, ReviewInput, UserInput } from "../types/types";
 import userModels from "../models/userModels";
 import restaurantModels from "../models/restaurantModels";
+import reviewModels from "../models/reviewModels";
 
 export const createUser = (values: UserInput) => {
   new userModels(values).save().then((user) => {
@@ -30,5 +31,11 @@ export const validateUserInput = (
 export const createRestaurant = (values: RestaurantInput) => {
   new restaurantModels(values).save().then((restaurant) => {
     restaurant.toObject();
+  });
+};
+
+export const createReview = (values: ReviewInput) => {
+  new reviewModels(values).save().then((review) => {
+    review.toObject();
   });
 };
