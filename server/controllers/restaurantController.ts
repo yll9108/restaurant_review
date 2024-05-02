@@ -24,6 +24,7 @@ export const addRestaurant = async (
 ) => {
   const restaurantInput: RestaurantInput = req.body;
   console.log("req.body", req.body);
+  //   console.log("req.params", req.params);
 
   try {
     const restaurant = createRestaurant(restaurantInput);
@@ -31,5 +32,23 @@ export const addRestaurant = async (
     return res.status(200).json(restaurant);
   } catch (err) {
     console.log(err);
+  }
+};
+
+//find restaurant by :restaurantId
+export const findRestaurant = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const restaurantId = req.params.restaurantId;
+  console.log("restaurantId", restaurantId);
+
+  try {
+    const restaurant = await restaurantModels.findById(restaurantId);
+
+    res.status(200).json(restaurant);
+  } catch (error) {
+    console.log("findUser error -", error);
+    res.status(500).json(error);
   }
 };
