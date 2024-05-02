@@ -16,15 +16,16 @@ const RestaurantSchema = new Schema({
   },
   restaurant_tags: {
     type: String,
-    required: true,
+    // required: true,
   },
   restaurant_number_reviews: {
-    type: String,
-    required: true,
+    type: Number,
+    // required: true,
   },
   restaurant_reviews: {
     type: String,
-    required: true,
+    // required: true,
+    default: "good",
   },
 });
 
