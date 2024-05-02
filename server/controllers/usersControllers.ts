@@ -1,20 +1,25 @@
 import express from "express";
 import UserModel from "../models/userModels";
 import { UserInput } from "../types/types";
+import { createUser, validateUserInput } from "../helpers/helpers";
 
 export const registerUser = async (
   req: express.Request,
   res: express.Response
 ) => {
+  const userInput: UserInput = req.body;
+  console.log("req.body: ", req.body);
+
+  // console.log("email: ", userInput.user_email);
+  const { result, message } = validateUserInput(userInput);
+  if (!result) {
+    res.status(500).send(message);
+    return;
+  }
+
   try {
-    const userInput: UserInput = req.body;
-    if (
-      !userInput.user_name ||
-      !userInput.user_email ||
-      !userInput.user_password
-    ) {
-      res.send(404);
-    }
+    const user = createUser(userInput);
+    return res.status(200).json(user);
   } catch (err) {
     console.log(err);
   }

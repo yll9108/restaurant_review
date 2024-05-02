@@ -11,6 +11,8 @@ export type TextProps = {
   textType: TextType;
   className?: string;
   placeholder?: string;
+  value?: TextType;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export function Input(props: TextProps) {
@@ -38,6 +40,8 @@ export function Input(props: TextProps) {
       type={type}
       placeholder={props.placeholder}
       className={`input input-bordered w-64  mb-4 ${props.className}`}
+      onChange={props.onChange}
+      value={props.textType}
     />
   );
   if (props.textType === TextType.question) {
