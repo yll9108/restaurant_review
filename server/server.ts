@@ -3,6 +3,7 @@ import cors from "cors";
 import connectDB from "./db";
 import "dotenv/config";
 import usersRouter from "./routes/usersRoutes";
+import restaurantRouter from "./routes/restaurantRoutes";
 type Express = express.Application;
 
 const server: Express = express();
@@ -22,4 +23,5 @@ server.get("/", (req: express.Request, res: express.Response) => {
 });
 
 server.use("/api/users", usersRouter);
+server.use("/api/restaurants", restaurantRouter);
 export default server;
