@@ -21,4 +21,5 @@ export type ReviewInput = {
   reviews_date: Date;
   review_title: string;
   review_description: string;
+  restaurantId: string;
 };

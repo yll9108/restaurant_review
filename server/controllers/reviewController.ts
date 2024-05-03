@@ -2,6 +2,7 @@ import express from "express";
 import reviewModels from "../models/reviewModels";
 import { ReviewInput } from "../types/types";
 import { createReview } from "../helpers/helpers";
+import restaurantModels from "../models/restaurantModels";
 
 export const getReview = async (
   req: express.Request,
@@ -22,14 +23,21 @@ export const addReview = async (
   req: express.Request,
   res: express.Response
 ) => {
+  const restaurantId = req.params.restaurantId;
   const reviewInput: ReviewInput = req.body;
   console.log("req.body", req.body);
-  //   console.log("req.params", req.params);
+  console.log("restaurantId", restaurantId);
 
   try {
-    const review = createReview(reviewInput);
-    console.log("successful");
-    return res.status(200).json(review);
+    const restaurant = await restaurantModels.findById(restaurantId);
+    if (!restaurant) {
+      console.log("please select a restaurant");
+      return res.status(400).json("restaurantId not exist");
+    } else {
+      const review = createReview(reviewInput, restaurantId);
+      console.log("successful");
+      return res.status(200).json(review);
+    }
   } catch (err) {
     console.log(err);
   }
