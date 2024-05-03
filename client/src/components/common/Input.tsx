@@ -41,7 +41,6 @@ export function Input(props: TextProps) {
       placeholder={props.placeholder}
       className={`input input-bordered w-64  mb-4 ${props.className}`}
       onChange={props.onChange}
-      value={props.textType}
     />
   );
   if (props.textType === TextType.question) {
