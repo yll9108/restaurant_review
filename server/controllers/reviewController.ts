@@ -9,13 +9,23 @@ export const getReview = async (
   res: express.Response
 ) => {
   try {
-    const review = await reviewModels.find();
-    res.status(200).json(review);
-    console.log("review", review);
+    // Get the restaurantId from request parameters
+    const restaurantId = req.params.restaurantId;
+    // Ask DB to find review(s) which have this restaurantId
+    const reviews: ReviewInput[] = await reviewModels.find();
+    // Filter reviews based on restaurantId
+    const filteredReviews = reviews.filter(
+      (review) => review.restaurantId === restaurantId
+    );
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } catch (err: any) {
-    res.status(500).send(err.message);
+    if (filteredReviews.length > 0) {
+      res.status(200).json(filteredReviews);
+      console.log("reviews", filteredReviews);
+    } else {
+      res.status(404).json({ message: "No reviews found for this restaurant" });
+    }
+  } catch (err) {
+    console.log(err);
   }
 };
 
@@ -25,7 +35,7 @@ export const addReview = async (
 ) => {
   const restaurantId = req.params.restaurantId;
   const reviewInput: ReviewInput = req.body;
-  console.log("req.body", req.body);
+  // console.log("req.body", req.body);
   console.log("restaurantId", restaurantId);
 
   try {

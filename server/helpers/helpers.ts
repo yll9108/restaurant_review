@@ -40,6 +40,8 @@ export const createReview = async (
 ) => {
   try {
     const reviewWithRestaurantId = { ...values, restaurantId };
+    console.log("reviewWithRestaurantId", reviewWithRestaurantId);
+
     const review = await new reviewModels(reviewWithRestaurantId).save();
     return review.toObject();
   } catch (err) {

@@ -18,6 +18,10 @@ const ReviewSchema = new Schema({
     type: String,
     require: true,
   },
+  restaurantId: {
+    type: String,
+    require: true,
+  },
 });
 
 const ReviewModel = mongoose.model("Review", ReviewSchema);
