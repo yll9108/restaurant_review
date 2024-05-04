@@ -15,3 +15,11 @@ export type RestaurantInput = {
   restaurant_number_reviews: number;
   restaurant_reviews: string;
 };
+
+export type ReviewInput = {
+  review_ratings: number;
+  reviews_date: Date;
+  review_title: string;
+  review_description: string;
+  restaurantId: string;
+};
