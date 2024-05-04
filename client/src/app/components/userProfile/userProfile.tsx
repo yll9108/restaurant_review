@@ -16,7 +16,7 @@ export default function UserProfile() {
         <h2 className="text-center text-2xl mb-4">User Profile</h2>
         <User />
         <Button
-          type={BtnType.regular}
+          type={BtnType.submit}
           className=" btn-small block mx-auto mt-10"
           onClick={() => changedTabs("userEdit")}
         >

@@ -1,12 +1,16 @@
 "use client";
 import { Input } from "@/components/common/Input";
 import { Button } from "@/components/common/button";
+import { useContext } from "react";
 import { useRouter } from "next/navigation";
+import { LoginStatus, UserContext } from "@/context/UserContext";
 
 export default function Login() {
+  const { setLoginStatus } = useContext(UserContext);
   const router = useRouter();
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    setLoginStatus(LoginStatus.LoggedOut);
     router.push("/signup");
   };
   return (
