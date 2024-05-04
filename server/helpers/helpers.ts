@@ -1,6 +1,7 @@
-import { RestaurantInput, UserInput } from "../types/types";
+import { RestaurantInput, ReviewInput, UserInput } from "../types/types";
 import userModels from "../models/userModels";
 import restaurantModels from "../models/restaurantModels";
+import reviewModels from "../models/reviewModels";
 
 export const createUser = (values: UserInput) => {
   new userModels(values).save().then((user) => {
@@ -31,4 +32,19 @@ export const createRestaurant = (values: RestaurantInput) => {
   new restaurantModels(values).save().then((restaurant) => {
     restaurant.toObject();
   });
+};
+
+export const createReview = async (
+  values: ReviewInput,
+  restaurantId: string
+) => {
+  try {
+    const reviewWithRestaurantId = { ...values, restaurantId };
+    console.log("reviewWithRestaurantId", reviewWithRestaurantId);
+
+    const review = await new reviewModels(reviewWithRestaurantId).save();
+    return review.toObject();
+  } catch (err) {
+    throw new Error("Failed to create review");
+  }
 };
