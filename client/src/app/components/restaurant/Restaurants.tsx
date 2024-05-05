@@ -9,11 +9,12 @@ import { dummyRestaurantList } from "./dummyRestaurantList";
 function Restaurants() {
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
+  const [restaurantsData, setRestaurantsData] = useState([]);
 
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
   const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantPerPage;
-  const currentRestaurants = dummyRestaurantList.slice(
+  const currentRestaurants = restaurantsData.slice(
     indexOfFirstRestaurant,
     indexOfLastRestaurant
   );
@@ -28,6 +29,7 @@ function Restaurants() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
+        setRestaurantsData(data);
       });
   }, []);
 
@@ -39,12 +41,12 @@ function Restaurants() {
             (restaurant: DummyRestaurantData, index: number) => (
               <Card
                 key={index}
-                id={restaurant.id}
-                name={restaurant.name}
-                ratingNum={restaurant.ratingNum}
-                reviews={restaurant.reviews}
-                tags={restaurant.tags}
-                add={restaurant.add}
+                _id={restaurant._id}
+                restaurant_name={restaurant.restaurant_name}
+                restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
+                restaurant_number_reviews={restaurant.restaurant_number_reviews}
+                restaurant_tags={restaurant.restaurant_tags}
+                restaurant_add={restaurant.restaurant_add}
               />
             )
           )}
@@ -52,7 +54,7 @@ function Restaurants() {
       <div className="mt-5 flex justify-center">
         <Pagination
           restaurantsPerPage={restaurantPerPage}
-          totalRestaurants={dummyRestaurantList.length}
+          totalRestaurants={restaurantsData.length}
           paginate={paginate}
           currentPage={currentPage}
         />

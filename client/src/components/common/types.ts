@@ -1,10 +1,10 @@
 type DummyRestaurantData = {
-  id: number;
-  name: string;
-  ratingNum: number;
-  reviews: number;
-  tags: string;
-  add: string;
+  _id: number;
+  restaurant_name: string;
+  restaurant_avg_ratings: number;
+  restaurant_number_reviews: number;
+  restaurant_tags: string;
+  restaurant_add: string;
   mapString: string;
 };
 

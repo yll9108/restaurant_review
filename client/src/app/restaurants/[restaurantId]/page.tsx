@@ -21,7 +21,7 @@ import { useEffect, useState } from "react";
 
 function Page() {
   const params = useParams();
-  // console.log("params", params);
+  console.log("params", params);
 
   // const hasReviews = dummyRestaurantList.length > 0;
   const [hasReviews, setHasReviews] = useState(dummyReviewList.length > 0);

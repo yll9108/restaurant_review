@@ -1,11 +1,11 @@
 import React from "react";
 import { PartialDummyRestaurantData } from "@/components/common/types";
 
-function Tags({ tags }: PartialDummyRestaurantData) {
+function Tags({ restaurant_tags }: PartialDummyRestaurantData) {
   return (
     <>
       <div className="bg-secondary flex gap-5">
-        <div>{tags}</div>
+        <div>{restaurant_tags}</div>
         <div>heart icon</div>
       </div>
     </>
