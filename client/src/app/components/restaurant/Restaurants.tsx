@@ -23,14 +23,13 @@ function Restaurants() {
 
   // leave for now, will use later for fetching data
   // const [message, setMessage] = useState("Loading");
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/api/home")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setMessage(data.message);
-  //     });
-  // }, []);
+  useEffect(() => {
+    fetch("http://localhost:8080/api/restaurants")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      });
+  }, []);
 
   return (
     <>
