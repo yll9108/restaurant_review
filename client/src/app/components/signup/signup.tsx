@@ -33,7 +33,7 @@ export default function Signup() {
     }
   };
 
-  const handleSingUp = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSingUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const formData = new FormData();
@@ -42,15 +42,19 @@ export default function Signup() {
     formData.append("user_picture", "");
     formData.append("user_email", email);
     formData.append("user_password", password);
+    console.log("name", name);
+
+    console.log("formData", formData);
+
     axios
-      .post("http://localhost:3000/api/users/register", formData, {
+      .post("http://localhost:8080/api/users/register", formData, {
         headers: { "Content-type": "multipart/form-data" },
       })
       .then((res) => {
         console.log("test", res.data);
         setLoginStatus(LoginStatus.LoggedIn);
+        router.replace("/");
       });
-    router.replace("/");
   };
   return (
     <>
