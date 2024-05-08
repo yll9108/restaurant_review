@@ -1,15 +1,19 @@
 "use client"; // tell react this is a client component
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { DummyRestaurantData } from "@/components/common/types";
 import { dummyRestaurantList } from "./dummyRestaurantList";
+import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Restaurants() {
+  const { restaurantsData } = useContext(RestaurantContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
-  const [restaurantsData, setRestaurantsData] = useState([]);
+
+  // move to context
+  // const [restaurantsData, setRestaurantsData] = useState([]);
 
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
@@ -24,14 +28,16 @@ function Restaurants() {
 
   // leave for now, will use later for fetching data
   // const [message, setMessage] = useState("Loading");
-  useEffect(() => {
-    fetch("http://localhost:8080/api/restaurants")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        setRestaurantsData(data);
-      });
-  }, []);
+
+  // move to context
+  // useEffect(() => {
+  //   fetch("http://localhost:8080/api/restaurants")
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setRestaurantsData(data);
+  //     });
+  // }, []);
 
   return (
     <>
