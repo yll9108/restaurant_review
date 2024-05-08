@@ -10,6 +10,10 @@ type DummyRestaurantData = {
 
 type PartialDummyRestaurantData = Partial<DummyRestaurantData>;
 
+type RestaurantContextType = {
+  restaurantsData: DummyRestaurantData[];
+};
+
 type PaginationData = {
   restaurantsPerPage: number;
   totalRestaurants: number;
@@ -31,4 +35,5 @@ export type {
   PartialDummyRestaurantData,
   PaginationData,
   DummyReviewList,
+  RestaurantContextType,
 };

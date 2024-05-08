@@ -3,12 +3,13 @@
 import {
   DummyRestaurantData,
   PartialDummyRestaurantData,
+  RestaurantContextType,
 } from "@/components/common/types";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
-export const RestaurantContext = createContext<DummyRestaurantData>(
-  {} as DummyRestaurantData
-);
+export const RestaurantContext = createContext<RestaurantContextType>({
+  restaurantsData: [],
+});
 
 export function RestaurantContextProvider({
   children,
