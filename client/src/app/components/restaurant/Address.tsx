@@ -1,11 +1,11 @@
 import React from "react";
 import { PartialDummyRestaurantData } from "@/components/common/types";
 
-function Address({ add }: PartialDummyRestaurantData) {
+function Address({ restaurant_add }: PartialDummyRestaurantData) {
   return (
     <>
       <div className="bg-warning">
-        <div>{add}</div>
+        <div>{restaurant_add}</div>
       </div>
     </>
   );
