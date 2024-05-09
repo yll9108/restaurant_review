@@ -9,6 +9,8 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 
 export const RestaurantContext = createContext<RestaurantContextType>({
   restaurantsData: [],
+  clickedRestaurant: null,
+  setClickedRestaurant: () => {},
 });
 
 export function RestaurantContextProvider({
@@ -17,6 +19,8 @@ export function RestaurantContextProvider({
   children: ReactNode;
 }) {
   const [restaurantsData, setRestaurantsData] = useState([]);
+  const [clickedRestaurant, setClickedRestaurant] =
+    useState<DummyRestaurantData | null>(null);
   useEffect(() => {
     fetch("http://localhost:8080/api/restaurants")
       .then((response) => response.json())
@@ -27,7 +31,9 @@ export function RestaurantContextProvider({
   }, []);
 
   return (
-    <RestaurantContext.Provider value={{ restaurantsData }}>
+    <RestaurantContext.Provider
+      value={{ restaurantsData, clickedRestaurant, setClickedRestaurant }}
+    >
       {children}
     </RestaurantContext.Provider>
   );

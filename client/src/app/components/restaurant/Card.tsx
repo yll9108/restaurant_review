@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
 import { PartialDummyRestaurantData } from "@/components/common/types";
 import { useRouter } from "next/navigation";
+import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Card({
   _id,
@@ -15,6 +16,18 @@ function Card({
 }: PartialDummyRestaurantData) {
   // click restaurant div, will lead to detailPage //
   const router = useRouter();
+
+  const { setClickedRestaurant } = useContext(RestaurantContext);
+
+  // const handleClick = (restaurantId) => {
+  //   fetch(`http://localhost:8080/api/restaurants/${restaurantId}`)
+  //     .then((response) => response.json())
+  //     .then((data) => {
+  //       console.log(data);
+  //       setClickedRestaurant(data);
+  //     });
+  // };
+
   const clickRestaurant = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log("clicked");

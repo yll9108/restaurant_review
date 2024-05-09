@@ -12,6 +12,10 @@ type PartialDummyRestaurantData = Partial<DummyRestaurantData>;
 
 type RestaurantContextType = {
   restaurantsData: DummyRestaurantData[];
+  clickedRestaurant: DummyRestaurantData | null;
+  setClickedRestaurant: React.Dispatch<
+    React.SetStateAction<DummyRestaurantData | null>
+  >;
 };
 
 type PaginationData = {
