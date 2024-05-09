@@ -29,14 +29,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <RestaurantContextProvider>
-          <UserContextProvider>
+        <UserContextProvider>
+          <RestaurantContextProvider>
             <DropDownContextProvider>
               {isHeaderReady() && <Header />}
               {children}
             </DropDownContextProvider>
-          </UserContextProvider>
-        </RestaurantContextProvider>
+          </RestaurantContextProvider>
+        </UserContextProvider>
       </body>
     </html>
   );
