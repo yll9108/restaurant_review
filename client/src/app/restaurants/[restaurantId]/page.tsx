@@ -1,20 +1,9 @@
-// import React from "react";
-
-// function page({ params }: { params: { restaurantId: string } }) {
-//   return <div>Details about restaurant {params.restaurantId}</div>;
-// }
-
-// export default page;
-
 "use client";
 
 import RestaurantWithMap from "@/app/components/detailPage/RestaurantWithMap";
-import Card from "@/app/components/restaurant/Card";
-import { dummyRestaurantList } from "@/app/components/restaurant/dummyRestaurantList";
 import NoReviews from "@/app/components/review/NoReviews";
 import PersonalReview from "@/app/components/review/PersonalReview";
-import { dummyReviewList } from "@/app/components/review/dummyReviewList";
-import { DummyRestaurantData, Review } from "@/components/common/types";
+import { Review } from "@/components/common/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
 // import { useParams, usePathname, useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
@@ -25,52 +14,43 @@ function Page() {
   const restaurantId = params.restaurantId;
   const { clickedRestaurant, setClickedRestaurant, setRestaurantId } =
     useContext(RestaurantContext);
-  const clickedRestaurantId = clickedRestaurant ? clickedRestaurant._id : null;
+
   const [reviews, setReviews] = useState<Review[]>([]);
-  // const { clickedRestaurant, setClickedRestaurant } =
-  //   useContext(RestaurantContext);
-  // console.log("params", params);
-  console.log("clickedRestaurantId", clickedRestaurantId);
+  const [hasReviews, setHasReviews] = useState<boolean>(false);
 
   useEffect(() => {
     setRestaurantId(restaurantId);
   }, [restaurantId, setRestaurantId]);
 
-  useEffect(() => {
-    fetch(`http://localhost:8080/api/restaurants/${restaurantId}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setClickedRestaurant(data);
-        console.log("clickedRestaurant", data);
-      })
-      .catch((error) => {
-        console.log("Error");
-      });
-  }, [restaurantId]);
-
   // create only one function that fetch restaurant data and review data
-  // if do two fetchs, it'll only do one by one.
-  useEffect(() => {
-    if (clickedRestaurantId) {
-      fetch(
-        `http://localhost:8080/api/restaurants/${clickedRestaurantId}/review/`
+  const getData = async () => {
+    try {
+      await fetch(`http://localhost:8080/api/restaurants/${restaurantId}`)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log("1111", data);
+          setClickedRestaurant(data);
+        });
+      await fetch(
+        `http://localhost:8080/api/restaurants/${restaurantId}/review/`
       )
         .then((response) => response.json())
         .then((data) => {
-          // console.warn("review", data);
-          // console.warn("restaurantId", restaurantId);
+          console.log("2222", data);
           setReviews(data);
-          setHasReviews(data.length > 0);
+          if (data.length > 0) {
+            setHasReviews(true);
+          }
+          console.log("hasReviews???", hasReviews);
         });
+    } catch (error) {
+      console.log("error", error);
     }
-  }, [clickedRestaurantId]);
+  };
 
-  // const hasReviews = dummyRestaurantList.length > 0;
-  const [hasReviews, setHasReviews] = useState(reviews.length > 0);
-  // useEffect(() => {
-  //   setHasReviews(reviews.length > 0);
-  // }, []);
-  // check if there's review, if yes, rendering PersonalReview, if not, rendering noReviews
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <>

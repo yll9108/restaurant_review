@@ -7,12 +7,12 @@ import RestaurantMap from "./RestaurantMap";
 // import { RestaurantMockData, restaurantMockData } from "./mockdata";
 import { Button } from "@/components/common/button";
 import AddReview from "../review/AddReview";
-import { DummyRestaurantData } from "@/components/common/types";
+import { Restaurant } from "@/components/common/types";
 
 // Add hasReviews prop to RestaurantWithMap component
 interface RestaurantWithMapProps {
   hasReviews: boolean;
-  clickedRestaurant: DummyRestaurantData | null;
+  clickedRestaurant: Restaurant | null;
 }
 
 function RestaurantWithMap({

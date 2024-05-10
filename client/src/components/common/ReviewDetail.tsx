@@ -16,7 +16,7 @@ function ReviewDetail({
         <div className="flex" key={id}>
           <p>{icon}</p>
           <p>{rating}</p>
-          {/* <p>{date}</p> */}
+          <p>{date}</p>
         </div>
         <h2 className="card-title">{title}</h2>
         <p>{content}</p>

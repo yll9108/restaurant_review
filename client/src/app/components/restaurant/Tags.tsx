@@ -1,7 +1,7 @@
 import React from "react";
-import { PartialDummyRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/components/common/types";
 
-function Tags({ restaurant_tags }: PartialDummyRestaurantData) {
+function Tags({ restaurant_tags }: PartialRestaurantData) {
   return (
     <>
       <div className="bg-secondary flex gap-5">

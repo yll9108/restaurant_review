@@ -1,4 +1,4 @@
-type DummyRestaurantData = {
+type Restaurant = {
   _id: number;
   restaurant_name: string;
   restaurant_avg_ratings: number;
@@ -8,14 +8,12 @@ type DummyRestaurantData = {
   mapString: string;
 };
 
-type PartialDummyRestaurantData = Partial<DummyRestaurantData>;
+type PartialRestaurantData = Partial<Restaurant>;
 
 type RestaurantContextType = {
-  restaurantsData: DummyRestaurantData[];
-  clickedRestaurant: DummyRestaurantData | null;
-  setClickedRestaurant: React.Dispatch<
-    React.SetStateAction<DummyRestaurantData | null>
-  >;
+  restaurantsData: Restaurant[];
+  clickedRestaurant: Restaurant | null;
+  setClickedRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>;
 };
 
 type PaginationData = {
@@ -27,16 +25,16 @@ type PaginationData = {
 
 type Review = {
   _id: number;
-  icon: string;
+  review_icon: string;
   review_ratings: number;
-  date: Date;
+  review_date: Date;
   review_title: string;
   review_description: string;
 };
 
 export type {
-  DummyRestaurantData,
-  PartialDummyRestaurantData,
+  Restaurant,
+  PartialRestaurantData,
   PaginationData,
   Review,
   RestaurantContextType,
