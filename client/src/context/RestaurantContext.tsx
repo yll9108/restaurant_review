@@ -18,6 +18,8 @@ export function RestaurantContextProvider({
 }: {
   children: ReactNode;
 }) {
+  const [restaurantId, setRestaurantId] = useState();
+
   const [restaurantsData, setRestaurantsData] = useState([]);
   const [clickedRestaurant, setClickedRestaurant] =
     useState<DummyRestaurantData | null>(null);
@@ -32,7 +34,13 @@ export function RestaurantContextProvider({
 
   return (
     <RestaurantContext.Provider
-      value={{ restaurantsData, clickedRestaurant, setClickedRestaurant }}
+      value={{
+        restaurantsData,
+        clickedRestaurant,
+        setClickedRestaurant,
+        restaurantId,
+        setRestaurantId,
+      }}
     >
       {children}
     </RestaurantContext.Provider>

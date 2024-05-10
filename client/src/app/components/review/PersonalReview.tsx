@@ -1,30 +1,52 @@
 import ReviewDetail from "@/components/common/ReviewDetail";
 import User from "@/components/common/User";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./custom.css";
 import { Button } from "@/components/common/button";
 import { dummyReviewList } from "./dummyReviewList";
+import { RestaurantContext } from "@/context/RestaurantContext";
+import { DummyReviewList, Review } from "@/components/common/types";
 
-function PersonalReview() {
+// this props that the componment is receving has props called reviews that
+// is an array of type review
+type Props = {
+  reviews: Review[];
+};
+function PersonalReview({ reviews }: Props) {
+  // ** have questio here  ** //
+
+  // function PersonalReview({ reviews }: DummyReviewList[]) {
   // fetch review
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    fetch(
-      "http://localhost:8080/api/restaurants/6636eb854f21f73d829772c5/review/"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.warn("data", data);
-        setReviews(data);
-      });
-  }, []);
+  // const [reviews, setReviews] = useState([]);
+  // const { clickedRestaurant } = useContext(RestaurantContext);
+  // const clickedRestaurantId = clickedRestaurant ? clickedRestaurant._id : null;
+  // console.log("lll", clickedRestaurant);
+
+  // useEffect(() => {
+  //   if (clickedRestaurantId) {
+  //     fetch(
+  //       `http://localhost:8080/api/restaurants/${clickedRestaurantId}/review/`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((data) => {
+  //         // console.warn("data", data);
+  //         // console.warn("restaurantId", restaurantId);
+  //         setReviews(data);
+  //       });
+  //   }
+  // }, [clickedRestaurantId]);
 
   const [showAllReviews, setShowAllReviews] = useState(false);
-  const displayAllReviews = showAllReviews ? reviews : reviews.slice(0, 5);
+  const displayAllReviews = Array.isArray(reviews)
+    ? showAllReviews
+      ? reviews
+      : reviews.slice(0, 5)
+    : [];
   const toggleReviews = () => {
     setShowAllReviews(!showAllReviews);
   };
   console.log("displayAllReviews", displayAllReviews);
+  console.log("reviews", reviews);
 
   return (
     <>
@@ -35,9 +57,9 @@ function PersonalReview() {
               <User />
               <ReviewDetail
                 id={review._id}
-                // icon={review.icon}
+                icon={review.icon}
                 rating={review.review_ratings}
-                // date={review.date}
+                date={review.date}
                 title={review.review_title}
                 content={review.review_description}
               />

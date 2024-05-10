@@ -14,7 +14,7 @@ import { dummyRestaurantList } from "@/app/components/restaurant/dummyRestaurant
 import NoReviews from "@/app/components/review/NoReviews";
 import PersonalReview from "@/app/components/review/PersonalReview";
 import { dummyReviewList } from "@/app/components/review/dummyReviewList";
-import { DummyRestaurantData } from "@/components/common/types";
+import { DummyRestaurantData, Review } from "@/components/common/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
 // import { useParams, usePathname, useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
@@ -23,37 +23,60 @@ import { useContext, useEffect, useState } from "react";
 function Page() {
   const params = useParams();
   const restaurantId = params.restaurantId;
-  const { clickedRestaurant, setClickedRestaurant } =
+  const { clickedRestaurant, setClickedRestaurant, setRestaurantId } =
     useContext(RestaurantContext);
+  const clickedRestaurantId = clickedRestaurant ? clickedRestaurant._id : null;
+  const [reviews, setReviews] = useState<Review[]>([]);
   // const { clickedRestaurant, setClickedRestaurant } =
   //   useContext(RestaurantContext);
-  console.log("params", params);
-  console.log("restaurantId", restaurantId);
+  // console.log("params", params);
+  console.log("clickedRestaurantId", clickedRestaurantId);
+
+  useEffect(() => {
+    setRestaurantId(restaurantId);
+  }, [restaurantId, setRestaurantId]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/api/restaurants/${restaurantId}`)
       .then((response) => response.json())
       .then((data) => {
         setClickedRestaurant(data);
-        console.log("data", data);
+        console.log("clickedRestaurant", data);
       })
       .catch((error) => {
         console.log("Error");
       });
   }, [restaurantId]);
 
-  // const hasReviews = dummyRestaurantList.length > 0;
-  const [hasReviews, setHasReviews] = useState(dummyReviewList.length > 0);
+  // create only one function that fetch restaurant data and review data
+  // if do two fetchs, it'll only do one by one.
   useEffect(() => {
-    setHasReviews(dummyReviewList.length > 0);
-  }, []);
+    if (clickedRestaurantId) {
+      fetch(
+        `http://localhost:8080/api/restaurants/${clickedRestaurantId}/review/`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          // console.warn("review", data);
+          // console.warn("restaurantId", restaurantId);
+          setReviews(data);
+          setHasReviews(data.length > 0);
+        });
+    }
+  }, [clickedRestaurantId]);
+
+  // const hasReviews = dummyRestaurantList.length > 0;
+  const [hasReviews, setHasReviews] = useState(reviews.length > 0);
+  // useEffect(() => {
+  //   setHasReviews(reviews.length > 0);
+  // }, []);
   // check if there's review, if yes, rendering PersonalReview, if not, rendering noReviews
 
   return (
     <>
       <div className="flex">
         <div className="w-2/3">
-          {hasReviews ? <PersonalReview /> : <NoReviews />}
+          {hasReviews ? <PersonalReview reviews={reviews} /> : <NoReviews />}
         </div>
 
         <div>

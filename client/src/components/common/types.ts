@@ -25,19 +25,19 @@ type PaginationData = {
   currentPage: number;
 };
 
-type DummyReviewList = {
-  id: number;
+type Review = {
+  _id: number;
   icon: string;
-  rating: number;
+  review_ratings: number;
   date: Date;
-  title: string;
-  content: string;
+  review_title: string;
+  review_description: string;
 };
 
 export type {
   DummyRestaurantData,
   PartialDummyRestaurantData,
   PaginationData,
-  DummyReviewList,
+  Review,
   RestaurantContextType,
 };
