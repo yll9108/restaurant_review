@@ -47,7 +47,7 @@ function PersonalReview({ reviews }: Props) {
             </div>
           </div>
         ))}
-        {!showAllReviews && (
+        {reviews.length > 5 && !showAllReviews && (
           <div className="text-center">
             <Button type={1} onClick={toggleReviews}>
               See more reviews
