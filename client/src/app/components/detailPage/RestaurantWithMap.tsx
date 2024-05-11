@@ -10,10 +10,10 @@ import AddReview from "../review/AddReview";
 import { Restaurant } from "@/components/common/types";
 
 // Add hasReviews prop to RestaurantWithMap component
-interface RestaurantWithMapProps {
+type RestaurantWithMapProps = {
   hasReviews: boolean;
   clickedRestaurant: Restaurant | null;
-}
+};
 
 function RestaurantWithMap({
   hasReviews,

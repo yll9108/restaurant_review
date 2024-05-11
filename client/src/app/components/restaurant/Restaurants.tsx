@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
 import { Restaurant } from "@/components/common/types";
-import { dummyRestaurantList } from "./dummyRestaurantList";
 import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Restaurants() {

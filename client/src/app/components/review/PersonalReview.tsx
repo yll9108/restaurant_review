@@ -31,12 +31,18 @@ function PersonalReview({ reviews }: Props) {
             <div className="card-body flexRow">
               <User />
               <ReviewDetail
-                id={review._id}
-                icon={review.review_icon}
-                rating={review.review_ratings}
-                date={review.review_date}
-                title={review.review_title}
-                content={review.review_description}
+                _id={review._id}
+                review_icon={review.review_icon}
+                review_ratings={review.review_ratings}
+                review_date={review.review_date}
+                review_title={review.review_title}
+                review_description={review.review_description}
+                // id={review._id}
+                // icon={review.review_icon}
+                // rating={review.review_ratings}
+                // date={review.review_date}
+                // title={review.review_title}
+                // content={review.review_description}
               />
             </div>
           </div>
