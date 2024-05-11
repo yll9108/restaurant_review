@@ -1,7 +1,7 @@
 import React from "react";
-import { PartialDummyRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/components/common/types";
 
-function Address({ restaurant_add }: PartialDummyRestaurantData) {
+function Address({ restaurant_add }: PartialRestaurantData) {
   return (
     <>
       <div className="bg-warning">

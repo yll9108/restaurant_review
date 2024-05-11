@@ -3,8 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import { DummyRestaurantData } from "@/components/common/types";
-import { dummyRestaurantList } from "./dummyRestaurantList";
+import { Restaurant } from "@/components/common/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Restaurants() {
@@ -43,19 +42,17 @@ function Restaurants() {
     <>
       <div className="flex flex-wrap">
         {currentRestaurants &&
-          currentRestaurants.map(
-            (restaurant: DummyRestaurantData, index: number) => (
-              <Card
-                key={index}
-                _id={restaurant._id}
-                restaurant_name={restaurant.restaurant_name}
-                restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
-                restaurant_number_reviews={restaurant.restaurant_number_reviews}
-                restaurant_tags={restaurant.restaurant_tags}
-                restaurant_add={restaurant.restaurant_add}
-              />
-            )
-          )}
+          currentRestaurants.map((restaurant: Restaurant, index: number) => (
+            <Card
+              key={index}
+              _id={restaurant._id}
+              restaurant_name={restaurant.restaurant_name}
+              restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
+              restaurant_number_reviews={restaurant.restaurant_number_reviews}
+              restaurant_tags={restaurant.restaurant_tags}
+              restaurant_add={restaurant.restaurant_add}
+            />
+          ))}
       </div>
       <div className="mt-5 flex justify-center">
         <Pagination

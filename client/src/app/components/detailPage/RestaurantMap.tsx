@@ -1,11 +1,11 @@
-import { PartialDummyRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/components/common/types";
 import React from "react";
 
 // interface MapProps {
 //   map: string;
 // }
 
-function RestaurantMap({ mapString }: PartialDummyRestaurantData) {
+function RestaurantMap({ mapString }: PartialRestaurantData) {
   return <img src={mapString} />;
 }
 

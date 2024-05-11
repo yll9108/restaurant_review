@@ -1,11 +1,11 @@
 import React from "react";
-import { PartialDummyRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/components/common/types";
 
 function RestaurantInfo({
   restaurant_name,
   restaurant_avg_ratings,
   restaurant_number_reviews,
-}: PartialDummyRestaurantData) {
+}: PartialRestaurantData) {
   return (
     <>
       {/* <div className="bg-primary">this is res info</div> */}
