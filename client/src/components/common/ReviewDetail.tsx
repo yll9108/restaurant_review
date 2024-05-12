@@ -1,25 +1,27 @@
 import React from "react";
-import { DummyReviewList } from "./types";
+import { Review } from "./types";
+import moment from "moment";
 
+// function ReviewDetail({ id, icon, rating, date, title, content }: Review) {
 function ReviewDetail({
-  id,
-  icon,
-  rating,
-  date,
-  title,
-  content,
-}: DummyReviewList) {
+  _id,
+  review_icon,
+  review_ratings,
+  review_date,
+  review_title,
+  review_description,
+}: Review) {
   return (
     <>
       {/* <div className="card-body"> */}
       <div className="flex flex-col">
-        <div className="flex" key={id}>
-          <p>{icon}</p>
-          <p>{rating}</p>
-          {/* <p>{date}</p> */}
+        <div className="flex" key={_id}>
+          <p>{review_icon}</p>
+          <p>{review_ratings}</p>
+          <p>Time:{moment(review_date).calendar()}</p>
         </div>
-        <h2 className="card-title">{title}</h2>
-        <p>{content}</p>
+        <h2 className="card-title">{review_title}</h2>
+        <p>{review_description}</p>
         {/* </div> */}
       </div>
     </>

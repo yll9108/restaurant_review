@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useContext } from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
-import { PartialDummyRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/components/common/types";
 import { useRouter } from "next/navigation";
+import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Card({
-  id,
-  name,
-  ratingNum,
-  reviews,
-  tags,
-  add,
-}: PartialDummyRestaurantData) {
+  _id,
+  restaurant_name,
+  restaurant_avg_ratings,
+  restaurant_number_reviews,
+  restaurant_tags,
+  restaurant_add,
+}: PartialRestaurantData) {
   // click restaurant div, will lead to detailPage //
   const router = useRouter();
+
+  // const { setClickedRestaurant } = useContext(RestaurantContext);
+
   const clickRestaurant = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log("clicked");
-    router.push(`restaurants/${id}`);
+    router.push(`restaurants/${_id}`);
   };
 
   return (
@@ -27,12 +31,12 @@ function Card({
         <div className="card-body">
           <div>
             <RestaurantInfo
-              name={name}
-              ratingNum={ratingNum}
-              reviews={reviews}
+              restaurant_name={restaurant_name}
+              restaurant_avg_ratings={restaurant_avg_ratings}
+              restaurant_number_reviews={restaurant_number_reviews}
             />
-            <Tags tags={tags} />
-            <Address add={add} />
+            <Tags restaurant_tags={restaurant_tags} />
+            <Address restaurant_add={restaurant_add} />
           </div>
         </div>
       </div>

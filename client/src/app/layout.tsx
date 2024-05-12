@@ -2,6 +2,10 @@
 import "./globals.css";
 import Header from "@/components/header";
 import { DropDownContextProvider } from "@/context/DropDownContext";
+import {
+  RestaurantContext,
+  RestaurantContextProvider,
+} from "@/context/RestaurantContext";
 import { UserContextProvider } from "@/context/UserContext";
 import { usePathname } from "next/navigation";
 
@@ -26,10 +30,12 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <UserContextProvider>
-          <DropDownContextProvider>
-            {isHeaderReady() && <Header />}
-            {children}
-          </DropDownContextProvider>
+          <RestaurantContextProvider>
+            <DropDownContextProvider>
+              {isHeaderReady() && <Header />}
+              {children}
+            </DropDownContextProvider>
+          </RestaurantContextProvider>
         </UserContextProvider>
       </body>
     </html>

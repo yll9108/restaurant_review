@@ -1,19 +1,23 @@
 "use client"; // tell react this is a client component
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import { DummyRestaurantData } from "@/components/common/types";
-import { dummyRestaurantList } from "./dummyRestaurantList";
+import { Restaurant } from "@/components/common/types";
+import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Restaurants() {
+  const { restaurantsData } = useContext(RestaurantContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
+
+  // move to context
+  // const [restaurantsData, setRestaurantsData] = useState([]);
 
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
   const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantPerPage;
-  const currentRestaurants = dummyRestaurantList.slice(
+  const currentRestaurants = restaurantsData.slice(
     indexOfFirstRestaurant,
     indexOfLastRestaurant
   );
@@ -23,12 +27,14 @@ function Restaurants() {
 
   // leave for now, will use later for fetching data
   // const [message, setMessage] = useState("Loading");
+
+  // move to context
   // useEffect(() => {
-  //   fetch("http://localhost:8080/api/home")
+  //   fetch("http://localhost:8080/api/restaurants")
   //     .then((response) => response.json())
   //     .then((data) => {
   //       console.log(data);
-  //       setMessage(data.message);
+  //       setRestaurantsData(data);
   //     });
   // }, []);
 
@@ -36,24 +42,22 @@ function Restaurants() {
     <>
       <div className="flex flex-wrap">
         {currentRestaurants &&
-          currentRestaurants.map(
-            (restaurant: DummyRestaurantData, index: number) => (
-              <Card
-                key={index}
-                id={restaurant.id}
-                name={restaurant.name}
-                ratingNum={restaurant.ratingNum}
-                reviews={restaurant.reviews}
-                tags={restaurant.tags}
-                add={restaurant.add}
-              />
-            )
-          )}
+          currentRestaurants.map((restaurant: Restaurant, index: number) => (
+            <Card
+              key={index}
+              _id={restaurant._id}
+              restaurant_name={restaurant.restaurant_name}
+              restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
+              restaurant_number_reviews={restaurant.restaurant_number_reviews}
+              restaurant_tags={restaurant.restaurant_tags}
+              restaurant_add={restaurant.restaurant_add}
+            />
+          ))}
       </div>
       <div className="mt-5 flex justify-center">
         <Pagination
           restaurantsPerPage={restaurantPerPage}
-          totalRestaurants={dummyRestaurantList.length}
+          totalRestaurants={restaurantsData.length}
           paginate={paginate}
           currentPage={currentPage}
         />
