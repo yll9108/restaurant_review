@@ -11,7 +11,7 @@ import { useContext, useEffect, useState } from "react";
 
 function Page() {
   const params = useParams();
-  const restaurantId = params.restaurantId;
+  const restaurantId = params.restaurantId as string;
   const { clickedRestaurant, setClickedRestaurant, setRestaurantId } =
     useContext(RestaurantContext);
 

@@ -1,5 +1,5 @@
 type Restaurant = {
-  _id: number;
+  _id: string;
   restaurant_name: string;
   restaurant_avg_ratings: number;
   restaurant_number_reviews: number;
@@ -11,6 +11,8 @@ type Restaurant = {
 type PartialRestaurantData = Partial<Restaurant>;
 
 type RestaurantContextType = {
+  restaurantId: Restaurant["_id"];
+  setRestaurantId: (restaurantId: string) => void;
   restaurantsData: Restaurant[];
   clickedRestaurant: Restaurant | null;
   setClickedRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>;
