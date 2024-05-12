@@ -26,8 +26,6 @@ export default function Signup() {
 
     if (password === confirmPassword) {
       setLoginStatus(LoginStatus.SigningUp);
-      setPassword("");
-      setConfirmPassword("");
     } else {
       setAlertMessage("Password and Confirm Password doesn't match");
     }
@@ -42,18 +40,22 @@ export default function Signup() {
     formData.append("user_picture", "");
     formData.append("user_email", email);
     formData.append("user_password", password);
-    console.log("name", name);
+    formData.append("user_favorite_restaurant", "");
+    console.log("formData", formData.get("user_name"));
+    console.log("formData", formData.get("user_email"));
 
-    console.log("formData", formData);
-
-    axios
+    await axios
       .post("http://localhost:8080/api/users/register", formData, {
-        headers: { "Content-type": "multipart/form-data" },
+        headers: { "Content-type": "application/json" },
       })
       .then((res) => {
-        console.log("test", res.data);
+        console.log("is it working?");
+        console.log("test", res);
         setLoginStatus(LoginStatus.LoggedIn);
         router.replace("/");
+      })
+      .catch((error) => {
+        console.error(error.response.data);
       });
   };
   return (

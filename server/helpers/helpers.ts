@@ -3,8 +3,8 @@ import userModels from "../models/userModels";
 import restaurantModels from "../models/restaurantModels";
 import reviewModels from "../models/reviewModels";
 
-export const createUser = (values: UserInput) => {
-  new userModels(values).save().then((user) => {
+export const createUser = async (values: UserInput) => {
+  return new userModels(values).save().then((user) => {
     user.toObject();
   });
 };
