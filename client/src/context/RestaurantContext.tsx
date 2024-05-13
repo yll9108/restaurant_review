@@ -4,6 +4,8 @@ import { Restaurant, RestaurantContextType } from "@/components/common/types";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 export const RestaurantContext = createContext<RestaurantContextType>({
+  restaurantId: "",
+  setRestaurantId: () => {},
   restaurantsData: [],
   clickedRestaurant: null,
   setClickedRestaurant: () => {},
@@ -14,7 +16,7 @@ export function RestaurantContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const [restaurantId, setRestaurantId] = useState();
+  const [restaurantId, setRestaurantId] = useState("");
 
   const [restaurantsData, setRestaurantsData] = useState([]);
   const [clickedRestaurant, setClickedRestaurant] = useState<Restaurant | null>(

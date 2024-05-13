@@ -8,7 +8,12 @@ export const registerUser = async (
   res: express.Response
 ) => {
   const userInput: UserInput = req.body;
-  console.log("req.body: ", req.body);
+  console.log("users ", req.body);
+  console.log("users email", req.body.user_email);
+  console.log("users name", req.body.user_name);
+  console.log("users password", req.body.user_password);
+  console.log("users picture", req.body.user_picture);
+  console.log("users restaurant", req.body.user_favorite_restaurant);
 
   // console.log("email: ", userInput.user_email);
   const { result, message } = validateUserInput(userInput);
@@ -18,7 +23,7 @@ export const registerUser = async (
   }
 
   try {
-    const user = createUser(userInput);
+    const user = await createUser(userInput);
     return res.status(200).json(user);
   } catch (err) {
     console.log(err);

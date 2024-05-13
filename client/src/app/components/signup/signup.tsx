@@ -4,6 +4,8 @@ import { Input, TextType } from "@/components/common/Input";
 import { BtnType, Button } from "@/components/common/button";
 import { LoginStatus, UserContext } from "@/context/UserContext";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+
 export default function Signup() {
   const { loginStatus, setLoginStatus } = useContext(UserContext);
 
@@ -24,17 +26,37 @@ export default function Signup() {
 
     if (password === confirmPassword) {
       setLoginStatus(LoginStatus.SigningUp);
-      setPassword("");
-      setConfirmPassword("");
     } else {
       setAlertMessage("Password and Confirm Password doesn't match");
     }
   };
 
-  const handleSingUp = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSingUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoginStatus(LoginStatus.LoggedIn);
-    router.push("/");
+
+    const formData = new FormData();
+
+    formData.append("user_name", name);
+    formData.append("user_picture", "");
+    formData.append("user_email", email);
+    formData.append("user_password", password);
+    formData.append("user_favorite_restaurant", "");
+    console.log("formData", formData.get("user_name"));
+    console.log("formData", formData.get("user_email"));
+
+    await axios
+      .post("http://localhost:8080/api/users/register", formData, {
+        headers: { "Content-type": "application/json" },
+      })
+      .then((res) => {
+        console.log("is it working?");
+        console.log("test", res);
+        setLoginStatus(LoginStatus.LoggedIn);
+        router.replace("/");
+      })
+      .catch((error) => {
+        console.error(error.response.data);
+      });
   };
   return (
     <>
@@ -45,7 +67,7 @@ export default function Signup() {
           //first step
           <div>
             <p className="text-warning">{alertMessage}</p>
-            <form action="" onSubmit={handleEmailAuth}>
+            <form onSubmit={handleEmailAuth}>
               <div className="flex flex-col items-center">
                 <Input
                   textType={TextType.text}
@@ -73,10 +95,15 @@ export default function Signup() {
         )}
 
         {loginStatus === LoginStatus.SigningUp && (
+          // second step
           <div>
-            <form action="" onSubmit={handleSingUp}>
+            <form onSubmit={handleSingUp}>
               <div className="flex flex-col">
-                <Input textType={TextType.text} />
+                <Input
+                  textType={TextType.text}
+                  placeholder="type your name"
+                  onChange={(event) => setName(event.target.value)}
+                />
                 <Button type={BtnType.submit}>Register</Button>
               </div>
             </form>
