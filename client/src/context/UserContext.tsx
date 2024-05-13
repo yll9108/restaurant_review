@@ -9,7 +9,7 @@ export enum LoginStatus {
 }
 
 export type User = {
-  id: string;
+  // id: string;
   name: string;
   email: string;
 };

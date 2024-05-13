@@ -35,7 +35,7 @@ export const addReview = async (
 ) => {
   const restaurantId = req.params.restaurantId;
   const reviewInput: ReviewInput = req.body;
-  // console.log("req.body", req.body);
+
   console.log("restaurantId", restaurantId);
 
   try {

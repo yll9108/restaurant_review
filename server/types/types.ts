@@ -4,7 +4,7 @@ export type UserInput = {
   user_picture: string;
   user_email: string;
   user_password: string;
-  user_favorite_restaurant: string[];
+  user_favorite_restaurant: string;
 };
 
 export type RestaurantInput = {
