@@ -6,9 +6,9 @@ const ReviewSchema = new Schema({
     type: Number,
     required: true,
   },
-  reviews_date: {
+  review_date: {
     type: Date,
-    require: true,
+    default: Date.now,
   },
   review_title: {
     type: String,
