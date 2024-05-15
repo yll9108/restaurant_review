@@ -1,5 +1,5 @@
 import { Button } from "@/components/common/button";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   BsEmojiAngry,
   BsEmojiAstonished,
@@ -10,6 +10,24 @@ import {
 import ConfirmationAddReview from "./ConfirmationAddReview";
 
 function AddReview() {
+  // useRef stores a reference to an element in the DOM
+  // starting without any element
+  const addReviewModal = useRef<HTMLDialogElement>(null);
+
+  // syntax to access .current
+  const openAddReviewModal = () => {
+    console.log("addReviewModal", addReviewModal);
+
+    if (addReviewModal.current) {
+      addReviewModal.current.showModal();
+    }
+  };
+
+  const closeReviewModal = () => {
+    console.log("closeReviewModal", addReviewModal.current);
+    setShowConfirm(!showConfirm);
+  };
+
   const [showConfirm, setShowConfirm] = useState(false);
 
   const handleConfirm = () => {
@@ -34,21 +52,16 @@ function AddReview() {
     options.push({ num: i, face });
   }
 
+  // write a function to post review to the backend and pass this function to confirmation
+  // call it when user click add in confirmation add btn
+
   return (
     <>
-      <Button
-        type={0}
-        onClick={() => {
-          if (document) {
-            (
-              document.getElementById("my_modal_1") as HTMLFormElement
-            ).showModal();
-          }
-        }}
-      >
+      <Button type={0} onClick={openAddReviewModal}>
         Add reviews
       </Button>
-      <dialog id="my_modal_1" className="modal">
+      {/* the ref of this dialog is the reference of addReviewModal */}
+      <dialog id="my_modal_1" ref={addReviewModal} className="modal">
         <div className="modal-box">
           {/* <div className="modal-action"> */}
           <form method="dialog" className="flex flex-col gap-4">
@@ -77,7 +90,10 @@ function AddReview() {
         </div>
         {/* </div> */}
       </dialog>
-      <ConfirmationAddReview showConfirm={showConfirm} />
+      <ConfirmationAddReview
+        showConfirm={showConfirm}
+        closeReviewModal={closeReviewModal}
+      />
     </>
   );
 }

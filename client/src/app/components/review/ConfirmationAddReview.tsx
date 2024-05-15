@@ -1,7 +1,13 @@
 import { Button } from "@/components/common/button";
-import React from "react";
+import React, { useRef } from "react";
 
-function ConfirmationAddReview({ showConfirm }: { showConfirm: boolean }) {
+function ConfirmationAddReview({
+  showConfirm,
+  closeReviewModal,
+}: {
+  closeReviewModal: () => void;
+  showConfirm: boolean;
+}) {
   return (
     <>
       {showConfirm && (
@@ -10,15 +16,21 @@ function ConfirmationAddReview({ showConfirm }: { showConfirm: boolean }) {
             <h3 className="font-bold text-lg">Preview</h3>
             <p className="py-4">Will you publish?</p>
             {/* <div className="modal-action"> */}
-            <div className="flex gap-2">
-              <Button type={3} className="btn flex-1">
-                Cancel
-              </Button>
-              <Button type={0} className="btn flex-1">
-                Add
-              </Button>
-              {/* </div> */}
-            </div>
+            <form method="dialog">
+              <div className="flex gap-2">
+                <Button
+                  type={3}
+                  className="btn flex-1"
+                  onClick={closeReviewModal}
+                >
+                  Cancel
+                </Button>
+                <Button type={0} className="btn flex-1">
+                  Add
+                </Button>
+                {/* </div> */}
+              </div>
+            </form>
           </div>
         </div>
       )}

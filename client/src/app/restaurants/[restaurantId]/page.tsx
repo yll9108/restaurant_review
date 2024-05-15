@@ -18,9 +18,9 @@ function Page() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [hasReviews, setHasReviews] = useState<boolean>(false);
 
-  useEffect(() => {
-    setRestaurantId(restaurantId);
-  }, [restaurantId, setRestaurantId]);
+  // useEffect(() => {
+  //   setRestaurantId(restaurantId);
+  // }, [restaurantId, setRestaurantId]);
 
   // create only one function that fetch restaurant data and review data
   const getData = async () => {
