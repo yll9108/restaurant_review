@@ -4,8 +4,16 @@ export type UserInput = {
   user_picture: string;
   user_email: string;
   user_password: string;
-  user_favorite_restaurant: string;
+  user_favorite_restaurant: string[];
 };
+// export type UserDataType = {
+//   // _id: string;
+//   user_name: string;
+//   user_picture: string;
+//   user_email: string;
+//   user_password: string;
+//   user_favorite_restaurant: string[];
+// };
 
 export type RestaurantInput = {
   restaurant_name: string;

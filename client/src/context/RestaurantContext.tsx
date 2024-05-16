@@ -1,6 +1,6 @@
 "use client";
 
-import { Restaurant, RestaurantContextType } from "@/components/common/types";
+import { Restaurant, RestaurantContextType } from "@/types/types";
 import { ReactNode, createContext, useEffect, useState } from "react";
 
 export const RestaurantContext = createContext<RestaurantContextType>({

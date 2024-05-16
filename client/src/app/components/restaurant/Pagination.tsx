@@ -1,4 +1,4 @@
-import { PaginationData } from "@/components/common/types";
+import { PaginationData } from "@/types/types";
 import React from "react";
 
 function Pagination({

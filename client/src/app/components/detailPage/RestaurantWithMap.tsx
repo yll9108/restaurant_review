@@ -7,7 +7,7 @@ import RestaurantMap from "./RestaurantMap";
 // import { RestaurantMockData, restaurantMockData } from "./mockdata";
 import { Button } from "@/components/common/button";
 import AddReview from "../review/AddReview";
-import { Restaurant } from "@/components/common/types";
+import { Restaurant } from "@/types/types";
 
 // Add hasReviews prop to RestaurantWithMap component
 type RestaurantWithMapProps = {

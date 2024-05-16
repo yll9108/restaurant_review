@@ -1,5 +1,5 @@
 import React from "react";
-import { Review } from "./types";
+import { Review } from "../../types/types";
 import moment from "moment";
 
 // function ReviewDetail({ id, icon, rating, date, title, content }: Review) {

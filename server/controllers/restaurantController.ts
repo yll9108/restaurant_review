@@ -10,7 +10,7 @@ export const getRestaurant = async (
   try {
     const restaurants = await restaurantModels.find();
     res.status(200).json(restaurants);
-    console.log("restaurants", restaurants);
+    // console.log("restaurants", restaurants);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {

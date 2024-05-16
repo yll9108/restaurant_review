@@ -1,4 +1,4 @@
-import { PartialRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/types/types";
 import React from "react";
 
 // interface MapProps {

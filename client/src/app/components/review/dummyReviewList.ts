@@ -1,4 +1,4 @@
-import { DummyReviewList } from "@/components/common/types";
+import { DummyReviewList } from "@/types/types";
 
 export const dummyReviewList: DummyReviewList[] = [
   {

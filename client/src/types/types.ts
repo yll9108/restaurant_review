@@ -34,10 +34,20 @@ type Review = {
   review_description: string;
 };
 
+type User = {
+  _id: string;
+  user_name: string;
+  user_picture: string;
+  user_email: string;
+  user_password: string;
+  user_favorite_restaurant: string[];
+};
+
 export type {
   Restaurant,
   PartialRestaurantData,
   PaginationData,
   Review,
   RestaurantContextType,
+  User,
 };

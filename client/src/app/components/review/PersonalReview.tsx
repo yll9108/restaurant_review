@@ -3,7 +3,7 @@ import User from "@/components/common/User";
 import React, { useState } from "react";
 import "./custom.css";
 import { Button } from "@/components/common/button";
-import { Review } from "@/components/common/types";
+import { Review } from "@/types/types";
 
 // this props that the componment is receving has props called reviews that
 // is an array of type review

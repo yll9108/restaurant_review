@@ -1,5 +1,5 @@
 import React from "react";
-import { PartialRestaurantData } from "@/components/common/types";
+import { PartialRestaurantData } from "@/types/types";
 
 function Tags({ restaurant_tags }: PartialRestaurantData) {
   return (
