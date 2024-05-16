@@ -56,13 +56,16 @@ export default function Signup() {
       }
     });
 
-    // console.log("url", process.env.BACKEND_URL);
-    // console.log("url");
+    console.log("url", process.env.NEXT_PUBLIC_BACKEND_URL);
 
     await axios
-      .post("http://localhost:8080/api/users/register", formData, {
-        headers: { "Content-Type": "application/json" },
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/users/register`,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .then((res) => {
         setUser(res.data);
 
