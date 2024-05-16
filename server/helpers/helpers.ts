@@ -4,23 +4,26 @@ import restaurantModels from "../models/restaurantModels";
 import reviewModels from "../models/reviewModels";
 
 export const createUser = async (values: UserInput) => {
-  return new userModels(values).save().then((user) => {
-    user.toObject();
-  });
+  const user = new userModels(values);
+  const savedUser = await user.save();
+  return savedUser.toObject();
+  // return new userModels(values).save().then((user) => {
+  //   user.toObject();
+  // });
 };
 
 export const validateUserInput = (
-  userInput: UserInput
+  userData: UserInput
 ): { result: boolean; message: string } => {
   let result = false;
   let message = "";
 
-  if (!userInput.user_email) {
-    message = "Please enter your email address";
-  } else if (!userInput.user_name) {
-    message = "Please enter your name";
-  } else if (!userInput.user_password) {
+  if (!/^[^@]+@[^.]+\..+$/.test(userData.user_email)) {
+    message = "your email address is not correct";
+  } else if (!userData.user_password) {
     message = "Please enter your password";
+  } else if (!userData.user_name) {
+    message = "Please enter your name";
   } else {
     result = true;
   }

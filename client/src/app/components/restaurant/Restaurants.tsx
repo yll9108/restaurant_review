@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import { Restaurant } from "@/components/common/types";
+import { Restaurant } from "@/types/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
 
 function Restaurants() {

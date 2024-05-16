@@ -3,7 +3,7 @@
 import RestaurantWithMap from "@/app/components/detailPage/RestaurantWithMap";
 import NoReviews from "@/app/components/review/NoReviews";
 import PersonalReview from "@/app/components/review/PersonalReview";
-import { Review } from "@/components/common/types";
+import { Review } from "@/types/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
 // import { useParams, usePathname, useRouter } from "next/navigation";
 import { useParams } from "next/navigation";

@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 
 export default function Signup() {
-  const { loginStatus, setLoginStatus } = useContext(UserContext);
+  const { setUser, loginStatus, setLoginStatus } = useContext(UserContext);
 
   const router = useRouter();
 
@@ -21,13 +21,15 @@ export default function Signup() {
 
   const handleEmailAuth = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log("password", password);
-    console.log("confirmPassword", confirmPassword);
 
-    if (password === confirmPassword) {
-      setLoginStatus(LoginStatus.SigningUp);
-    } else {
+    if (!email || !password) {
+      setAlertMessage("missing Information");
+    } else if (!/^[^@]+@[^.]+\..+$/.test(email)) {
+      setAlertMessage("your email address is not correct");
+    } else if (password != confirmPassword) {
       setAlertMessage("Password and Confirm Password doesn't match");
+    } else {
+      setLoginStatus(LoginStatus.SigningUp);
     }
   };
 
@@ -35,27 +37,43 @@ export default function Signup() {
     event.preventDefault();
 
     const formData = new FormData();
+    const userInputObj = {
+      user_name: name,
+      user_picture: "",
+      user_email: email,
+      user_password: password,
+      user_favorite_restaurant: [""],
+    };
 
-    formData.append("user_name", name);
-    formData.append("user_picture", "");
-    formData.append("user_email", email);
-    formData.append("user_password", password);
-    formData.append("user_favorite_restaurant", "");
-    console.log("formData", formData.get("user_name"));
-    console.log("formData", formData.get("user_email"));
+    Object.entries(userInputObj).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((v, i) => {
+          //array divided to reenter formData
+          formData.append(key + "[]", v);
+        });
+      } else {
+        formData.append(key, value);
+      }
+    });
+
+    console.log("url", process.env.NEXT_PUBLIC_BACKEND_URL);
 
     await axios
-      .post("http://localhost:8080/api/users/register", formData, {
-        headers: { "Content-type": "application/json" },
-      })
+      .post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/users/register`,
+        formData,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      )
       .then((res) => {
-        console.log("is it working?");
-        console.log("test", res);
+        setUser(res.data);
+
         setLoginStatus(LoginStatus.LoggedIn);
         router.replace("/");
       })
       .catch((error) => {
-        console.error(error.response.data);
+        console.error(error.response.data.message);
       });
   };
   return (
