@@ -3,7 +3,8 @@ import { Input } from "@/components/common/Input";
 import { Button } from "@/components/common/button";
 import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { LoginStatus, UserContext } from "@/context/UserContext";
+import { UserContext } from "@/context/UserContext";
+import { LoginStatus } from "@/types/types";
 import axios from "axios";
 
 export default function Login() {
