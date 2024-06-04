@@ -9,7 +9,7 @@ import { getAuth } from "firebase/auth";
 import { LoginStatus, PageStatus } from "@/types/types";
 import axios from "axios";
 import Loading from "@/app/loading";
-import NotFound from "@/app/NotFound";
+import NotFound from "@/app/not-found";
 import Header from "@/components/header";
 
 export default function AuthProvider({
@@ -25,8 +25,6 @@ export default function AuthProvider({
     useContext(UserContext);
 
   useEffect(() => {
-    console.log("working useEffect");
-
     initializeFirebase;
 
     getAuth().onAuthStateChanged(async (firebaseAccount) => {
@@ -34,13 +32,8 @@ export default function AuthProvider({
       if (loginStatus !== LoginStatus.Unknown) {
         return;
       }
-      console.log("working useEffect 1");
-
-      console.log("getAuth firebase account", firebaseAccount);
 
       if (firebaseAccount) {
-        console.log("firebaseAccount", firebaseAccount);
-
         setFirebaseAccount(firebaseAccount);
         // Get user data from server
         await axios
@@ -48,8 +41,6 @@ export default function AuthProvider({
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${firebaseAccount.uid}`
           )
           .then((res: any) => {
-            console.log("auth_provider", res.data);
-
             setUser(res.data);
             setLoginStatus(LoginStatus.LoggedIn);
           })
@@ -64,7 +55,6 @@ export default function AuthProvider({
       }
     });
   }, [loginStatus, setFirebaseAccount, setLoginStatus, setUser]);
-  // console.log("get user", loginStatus);
 
   useEffect(() => {
     // When the user switches the page, check the page restriction

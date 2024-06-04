@@ -10,14 +10,8 @@ import { LoginStatus } from "@/types/types";
 
 export default function Header() {
   const router = useRouter();
-  const { user, loginStatus, setLoginStatus } = useContext(UserContext);
+  const { user } = useContext(UserContext);
 
-  console.log("header login status", loginStatus);
-  const handleLogIn = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-    setLoginStatus(LoginStatus.LoggedOut);
-    router.push("/login");
-  };
   return (
     <header className="w-full bg-primary h-16 flex justify-end items-center">
       <HeaderLogo />
@@ -26,7 +20,7 @@ export default function Header() {
         {user ? (
           <Avatar />
         ) : (
-          <Button type={BtnType.submit} onClick={handleLogIn}>
+          <Button type={BtnType.submit} onClick={() => router.push("/login")}>
             Log In
           </Button>
         )}
