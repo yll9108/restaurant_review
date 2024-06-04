@@ -66,7 +66,7 @@ export default function Login() {
     <>
       <div className="flex flex-col justify-center items-center  w-80 h-96 mx-auto">
         <p>{alertMessage}</p>
-        <form onSubmit={handleEmailLogin}>
+        <form onSubmit={handleEmailLogin} className="w-64">
           <Input
             textType={TextType.email}
             placeholder="Email"

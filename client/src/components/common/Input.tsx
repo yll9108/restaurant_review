@@ -39,7 +39,7 @@ export function Input(props: TextProps) {
     <input
       type={type}
       placeholder={props.placeholder}
-      className={`input input-bordered w-64  mb-4 ${props.className}`}
+      className={` ${props.className} input input-bordered w-64  mb-4`}
       onChange={props.onChange}
     />
   );
@@ -58,7 +58,11 @@ export function Input(props: TextProps) {
             clipRule="evenodd"
           />
         </svg>
-        <input type="text" className="grow" placeholder="Search" />
+        <input
+          type="text"
+          className={`${props.className} grow`}
+          placeholder="Search"
+        />
         {/* {RRText} */}
       </label>
     );

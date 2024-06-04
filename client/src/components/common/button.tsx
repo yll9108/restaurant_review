@@ -5,6 +5,7 @@ export enum BtnType {
   regular_google, // google login, signup, etc...
   cancel,
   delete,
+  logIn,
 }
 
 export type BtnProps = {
@@ -20,6 +21,7 @@ const REGULAR_GOOGLE_STYLE =
   "btn btn-outline btn-primary btn-wide text-base mb-4 ";
 const CANCEL_STYLE = "btn btn-outline btn-error text-base mb-4 ";
 const DELETE_STYLE = "btn bg-outline btn-warning text-white text-base mb-4 ";
+const LOGIN_STYLE = "btn btn-secondary btn-md text-black text-base";
 
 export const Button = (props: BtnProps) => {
   //change button style
@@ -37,8 +39,10 @@ export const Button = (props: BtnProps) => {
     case BtnType.delete:
       btnClass = DELETE_STYLE;
       break;
+    case BtnType.logIn:
+      btnClass = LOGIN_STYLE;
   }
-  btnClass += `${props.className || ""}`;
+  btnClass += `${props.className ?? ""}`;
 
   return (
     <button className={btnClass} onClick={props.onClick}>

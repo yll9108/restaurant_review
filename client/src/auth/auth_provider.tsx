@@ -100,7 +100,7 @@ export default function AuthProvider({
           return { isAllowed: false, redirection: "/signup" };
         }
       }
-      // console.log("loginStatus", loginStatus);
+      console.log("loginStatus", loginStatus);
 
       return { isAllowed: true, redirection: "" };
     };
@@ -130,7 +130,6 @@ export default function AuthProvider({
     return false;
   };
   const getComponent = () => {
-    console.log("check PageStatus", pageStatus);
     switch (pageStatus) {
       case PageStatus.Loading:
         return (

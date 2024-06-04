@@ -41,6 +41,11 @@ export const PAGES: Page[] = [
     isLoadingRequired: true,
   },
   {
+    path: /^\/users$/,
+    limitation: Limitation.LoggedIn,
+    isLoadingRequired: false,
+  },
+  {
     path: /^\/users\?tab=favorite$/,
     limitation: Limitation.LoggedIn,
     isLoadingRequired: false,
