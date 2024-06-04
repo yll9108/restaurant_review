@@ -1,39 +1,89 @@
 "use client";
-import { Input } from "@/components/common/Input";
-import { Button } from "@/components/common/button";
-import { useContext } from "react";
+import { Input, TextType } from "@/components/common/Input";
+import { BtnType, Button } from "@/components/common/button";
+import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
 import { LoginStatus } from "@/types/types";
 import axios from "axios";
+import {
+  GoogleAuthProvider,
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
+import { getErrorMessage } from "@/auth/errors";
 
 export default function Login() {
-  const { setLoginStatus } = useContext(UserContext);
+  const { setUser, setLoginStatus, setFirebaseAccount } =
+    useContext(UserContext);
   const router = useRouter();
-  const handleLogin = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // Alert Message
+  const [alertMessage, setAlertMessage] = useState("");
+
+  const getUserFromServer = (uid: string) => {
     axios
-      .get("http://localhost:8080/api/users")
-      .then((res) => console.log(res.data));
-    router.push("/");
+      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`)
+      .then((res: any) => {
+        setUser(res.data);
+        setLoginStatus(LoginStatus.LoggedIn);
+        router.replace("/restaurants");
+      })
+      .catch((error: any) => {
+        setUser(null);
+        setLoginStatus(LoginStatus.SigningUp);
+      });
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleEmailLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setLoginStatus(LoginStatus.LoggedOut);
-    router.push("/signup");
+    await signInWithEmailAndPassword(getAuth(), email, password)
+      .then((result) => {
+        setFirebaseAccount(result.user);
+        getUserFromServer(result.user.uid);
+      })
+      .catch((error) => {
+        setAlertMessage(getErrorMessage(error.code));
+      });
   };
+
+  const handleGoogleLogin = async () => {
+    await signInWithPopup(getAuth(), new GoogleAuthProvider())
+      .then((result) => {
+        setFirebaseAccount(result.user);
+        getUserFromServer(result.user.uid);
+      })
+      .catch((error) => {
+        setAlertMessage(error.code);
+      });
+  };
+
   return (
     <>
       <div className="flex flex-col justify-center items-center  w-80 h-96 mx-auto">
-        <Input textType={2} placeholder="Email" />
-        <Input textType={1} placeholder="Password" />
-        <Button type={0} onClick={handleLogin}>
-          Log In
+        <p>{alertMessage}</p>
+        <form onSubmit={handleEmailLogin}>
+          <Input
+            textType={TextType.email}
+            placeholder="Email"
+            onChange={(event) => setEmail(event.target.value)}
+          />
+          <Input
+            textType={TextType.password}
+            placeholder="Password"
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <Button type={BtnType.submit}>Log In</Button>
+        </form>
+        <Button type={BtnType.regular_google} onClick={handleGoogleLogin}>
+          Log In with Google
         </Button>
-        <Button type={1}>Log In with Google</Button>
         <p className="mb-4">or</p>
-        <Button type={0} onClick={handleClick}>
+        <Button type={BtnType.submit} onClick={() => router.push("/signup")}>
           Sign Up
         </Button>
       </div>

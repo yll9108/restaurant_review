@@ -1,5 +1,5 @@
 export type UserInput = {
-  user_id: string;
+  _id: string;
   user_name: string;
   user_picture: string;
   user_email: string;
@@ -7,14 +7,6 @@ export type UserInput = {
   user_favorite_restaurant: string[];
   provider: string;
 };
-// export type UserDataType = {
-//   // _id: string;
-//   user_name: string;
-//   user_picture: string;
-//   user_email: string;
-//   user_password: string;
-//   user_favorite_restaurant: string[];
-// };
 
 export type RestaurantInput = {
   restaurant_name: string;

@@ -11,7 +11,6 @@ import axios from "axios";
 import Loading from "@/app/loading";
 import NotFound from "@/app/NotFound";
 import Header from "@/components/header";
-import firebase from "firebase/compat/app";
 
 export default function AuthProvider({
   children,
@@ -26,6 +25,8 @@ export default function AuthProvider({
     useContext(UserContext);
 
   useEffect(() => {
+    console.log("working useEffect");
+
     initializeFirebase;
 
     getAuth().onAuthStateChanged(async (firebaseAccount) => {
@@ -33,9 +34,12 @@ export default function AuthProvider({
       if (loginStatus !== LoginStatus.Unknown) {
         return;
       }
+      console.log("working useEffect 1");
+
+      console.log("getAuth firebase account", firebaseAccount);
 
       if (firebaseAccount) {
-        // console.log("firebaseAccount", firebaseAccount);
+        console.log("firebaseAccount", firebaseAccount);
 
         setFirebaseAccount(firebaseAccount);
         // Get user data from server
@@ -61,60 +65,61 @@ export default function AuthProvider({
     });
   }, [loginStatus, setFirebaseAccount, setLoginStatus, setUser]);
   // console.log("get user", loginStatus);
-  const isAllowedPage = (): Permission => {
-    const page = getPage(pathName);
-    if (page === undefined) {
-      return { isAllowed: true, redirection: "" };
-    }
-    //wait until the login status is confirmed
-    else if (loginStatus === LoginStatus.Unknown) {
-      return { isAllowed: false, redirection: "" };
-    }
-    // If user is logged in
-    else if (loginStatus === LoginStatus.LoggedIn) {
-      if (user) {
-        if (
-          !(
-            page.limitation === Limitation.None ||
-            page.limitation === Limitation.LoggedIn
-          )
-        ) {
+
+  useEffect(() => {
+    // When the user switches the page, check the page restriction
+    const isAllowedPage = (): Permission => {
+      const page = getPage(pathName);
+      if (page === undefined) {
+        return { isAllowed: true, redirection: "" };
+      }
+      //wait until the login status is confirmed
+      else if (loginStatus === LoginStatus.Unknown) {
+        return { isAllowed: false, redirection: "" };
+      }
+      // If user is logged in
+      else if (loginStatus === LoginStatus.LoggedIn) {
+        if (user) {
+          if (
+            !(
+              page.limitation === Limitation.None ||
+              page.limitation === Limitation.LoggedIn
+            )
+          ) {
+            return { isAllowed: false, redirection: "/restaurants" };
+          }
+        } else {
+          console.error("User is logged in but the data doesn't exist");
           return { isAllowed: false, redirection: "/restaurants" };
         }
-      } else {
-        console.error("User is logged in but the data doesn't exist");
-        return { isAllowed: false, redirection: "/restaurants" };
       }
-    }
-    // If the user is not logged in
-    else if (loginStatus === LoginStatus.LoggedOut) {
-      // Give permission only to allowed pages
-      if (page.limitation !== Limitation.None) {
-        // Go to the login page, but don't redirect from sign up page
-        if (pathName !== "/signup" && pathName !== "/login") {
-          return { isAllowed: false, redirection: "/login" };
+      // If the user is not logged in
+      else if (loginStatus === LoginStatus.LoggedOut) {
+        // Give permission only to allowed pages
+        if (page.limitation !== Limitation.None) {
+          // Go to the login page, but don't redirect from sign up page
+          if (pathName !== "/signup" && pathName !== "/login") {
+            return { isAllowed: false, redirection: "/login" };
+          }
         }
       }
-    }
-    // If this user is in the process of sign up
-    else if (loginStatus === LoginStatus.SigningUp) {
-      // Go to the sign up page, but don't redirect from sign up page
-      if (pathName !== "/signup") {
-        return { isAllowed: false, redirection: "/signup" };
+      // If this user is in the process of sign up
+      else if (loginStatus === LoginStatus.SigningUp) {
+        // Go to the sign up page, but don't redirect from sign up page
+        if (pathName !== "/signup") {
+          return { isAllowed: false, redirection: "/signup" };
+        }
       }
-    }
-    // console.log("loginStatus", loginStatus);
+      // console.log("loginStatus", loginStatus);
 
-    return { isAllowed: true, redirection: "" };
-  };
+      return { isAllowed: true, redirection: "" };
+    };
 
-  // When the user switches the page, check the page restriction
-  useEffect(() => {
-    const result: Permission = isAllowedPage();
+    const result = isAllowedPage();
     if (!result.isAllowed && result.redirection) {
       router.replace(result.redirection);
     }
-  }, [pathName, loginStatus, user]);
+  }, [pathName, loginStatus, user, router]);
 
   useEffect(() => {
     if (loginStatus === LoginStatus.Unknown) {
@@ -135,6 +140,7 @@ export default function AuthProvider({
     return false;
   };
   const getComponent = () => {
+    console.log("check PageStatus", pageStatus);
     switch (pageStatus) {
       case PageStatus.Loading:
         return (

@@ -5,11 +5,14 @@ import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
 import { useState, useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
+import { UserContext } from "@/context/UserContext";
+import { LoginStatus } from "@/types/types";
 
 export default function Avatar() {
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
   const { activeTab, setActiveTab } = useContext(DropDownContext);
+  const { setLoginStatus } = useContext(UserContext);
 
   const changedTabs = (tabName: string) => {
     setActiveTab(tabName);
@@ -21,6 +24,7 @@ export default function Avatar() {
 
   const clickedSignOutHandler = (event: React.MouseEvent<HTMLLIElement>) => {
     event.preventDefault();
+    setLoginStatus(LoginStatus.LoggedOut);
     router.push("/login");
   };
 

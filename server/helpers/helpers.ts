@@ -19,8 +19,6 @@ export const validateUserInput = (
 
   if (!/^[^@]+@[^.]+\..+$/.test(userData.user_email)) {
     message = "your email address is not correct";
-    // } else if (!userData.user_password) {
-    //   message = "Please enter your password";
   } else if (!userData.user_name) {
     message = "Please enter your name";
   } else {

@@ -52,9 +52,9 @@ export default function Signup() {
       setAlertMessage("Password and Confirm Password doesn't much");
     }
   };
-  console.log("handleEmailAuth loginStatus", loginStatus);
+  // console.log("handleEmailAuth loginStatus", loginStatus);
 
-  const handleGoogleAuth = async () => {
+  const handleGoogleAuth = () => {
     signInWithPopup(getAuth(), new GoogleAuthProvider())
       .then((result) => {
         setFirebaseAccount(result.user);
@@ -72,14 +72,14 @@ export default function Signup() {
       console.error("No firebase account");
       return;
     }
+    console.log("firebase account", firebaseAccount);
 
     const formData = new FormData();
     const userInputObj = {
-      user_id: firebaseAccount.uid,
+      _id: firebaseAccount.uid,
       user_name: name,
       user_picture: "",
       user_email: firebaseAccount.email!,
-      user_password: password,
       user_favorite_restaurant: [""],
       provider: firebaseAccount.providerData![0].providerId,
     };
@@ -99,13 +99,15 @@ export default function Signup() {
 
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/users/register`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/register`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
         }
       )
       .then((res) => {
+        console.log("here", res);
+
         setUser(res.data);
         setLoginStatus(LoginStatus.LoggedIn);
         router.replace("/restaurants");

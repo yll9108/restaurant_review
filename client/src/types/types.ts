@@ -52,12 +52,13 @@ type PageContextProps = {
 
 // Type for Users
 type User = {
-  user_id: string;
+  _id: string;
   user_name: string;
   user_picture: string;
   user_email: string;
   user_password: string;
   user_favorite_restaurant: string[];
+  provider?: string;
 };
 
 type FirebaseAccount = {

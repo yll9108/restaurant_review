@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
-  user_id: {
+  _id: {
     type: String,
     required: true,
   },
@@ -17,10 +17,6 @@ const UserSchema = new Schema({
   user_email: {
     type: String,
     required: true,
-  },
-  user_password: {
-    type: String,
-    // required: true,
   },
   user_favorite_restaurant: [
     {
