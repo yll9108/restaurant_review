@@ -5,11 +5,15 @@ import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
 import { useState, useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
+import { UserContext } from "@/context/UserContext";
+import { LoginStatus } from "@/types/types";
+import { getAuth, signOut } from "firebase/auth";
 
 export default function Avatar() {
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
   const { activeTab, setActiveTab } = useContext(DropDownContext);
+  const { setUser, setLoginStatus } = useContext(UserContext);
 
   const changedTabs = (tabName: string) => {
     setActiveTab(tabName);
@@ -19,9 +23,16 @@ export default function Avatar() {
     }
   };
 
-  const clickedSignOutHandler = (event: React.MouseEvent<HTMLLIElement>) => {
-    event.preventDefault();
-    router.push("/login");
+  const handleLogOut = async () => {
+    await signOut(getAuth())
+      .then(() => {
+        setUser(null);
+        setLoginStatus(LoginStatus.LoggedOut);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+    router.push("/");
   };
 
   return (
@@ -60,10 +71,7 @@ export default function Avatar() {
             <a>User Profile</a>
           </div>
         </li>
-        <li
-          className="btn btn-ghost  min-h-0 h-9"
-          onClick={clickedSignOutHandler}
-        >
+        <li className="btn btn-ghost  min-h-0 h-9" onClick={handleLogOut}>
           <div>
             <FaSignOutAlt className="text-secondary" />
             <a className="pr-4">Sign Out</a>

@@ -2,12 +2,26 @@
 import { useContext, useState } from "react";
 import { Input, TextType } from "@/components/common/Input";
 import { BtnType, Button } from "@/components/common/button";
-import { LoginStatus, UserContext } from "@/context/UserContext";
+import { UserContext } from "@/context/UserContext";
+import { LoginStatus } from "@/types/types";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+} from "firebase/auth";
+import { getErrorMessage } from "@/auth/errors";
 
 export default function Signup() {
-  const { setUser, loginStatus, setLoginStatus } = useContext(UserContext);
+  const {
+    setUser,
+    firebaseAccount,
+    setFirebaseAccount,
+    loginStatus,
+    setLoginStatus,
+  } = useContext(UserContext);
 
   const router = useRouter();
 
@@ -22,28 +36,55 @@ export default function Signup() {
   const handleEmailAuth = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!email || !password) {
-      setAlertMessage("missing Information");
-    } else if (!/^[^@]+@[^.]+\..+$/.test(email)) {
-      setAlertMessage("your email address is not correct");
-    } else if (password != confirmPassword) {
-      setAlertMessage("Password and Confirm Password doesn't match");
+    if (password === confirmPassword) {
+      createUserWithEmailAndPassword(getAuth(), email, password)
+        .then((result) => {
+          console.log("handleEmailAuth", result.user);
+
+          setFirebaseAccount(result.user);
+          setLoginStatus(LoginStatus.SigningUp);
+        })
+        .catch((error: any) => {
+          setAlertMessage(getErrorMessage(error.code));
+          console.log(error);
+        });
     } else {
-      setLoginStatus(LoginStatus.SigningUp);
+      setAlertMessage("Password and Confirm Password doesn't much");
     }
   };
+  // console.log("handleEmailAuth loginStatus", loginStatus);
 
+  const handleGoogleAuth = () => {
+    signInWithPopup(getAuth(), new GoogleAuthProvider())
+      .then((result) => {
+        setFirebaseAccount(result.user);
+        setLoginStatus(LoginStatus.SigningUp);
+      })
+      .catch((error: any) => {
+        setFirebaseAccount(null);
+        setAlertMessage(getErrorMessage(error.code));
+      });
+  };
   const handleSingUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    if (!firebaseAccount) {
+      console.error("No firebase account");
+      return;
+    }
+    console.log("firebase account", firebaseAccount);
+
     const formData = new FormData();
     const userInputObj = {
+      _id: firebaseAccount.uid,
       user_name: name,
       user_picture: "",
-      user_email: email,
-      user_password: password,
+      user_email: firebaseAccount.email!,
       user_favorite_restaurant: [""],
+      provider: firebaseAccount.providerData![0].providerId,
     };
+
+    console.log("userInputObj", userInputObj);
 
     Object.entries(userInputObj).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -56,21 +97,20 @@ export default function Signup() {
       }
     });
 
-    console.log("url", process.env.NEXT_PUBLIC_BACKEND_URL);
-
     await axios
       .post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}api/users/register`,
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/register`,
         formData,
         {
           headers: { "Content-Type": "application/json" },
         }
       )
       .then((res) => {
-        setUser(res.data);
+        console.log("here", res);
 
+        setUser(res.data);
         setLoginStatus(LoginStatus.LoggedIn);
-        router.replace("/");
+        router.replace("/restaurants");
       })
       .catch((error) => {
         console.error(error.response.data.message);
@@ -104,7 +144,10 @@ export default function Signup() {
                 />
                 <Button type={BtnType.submit}>Next</Button>
                 <p className="mb-4">or</p>
-                <Button type={BtnType.regular_google}>
+                <Button
+                  type={BtnType.regular_google}
+                  onClick={handleGoogleAuth}
+                >
                   Sign up with Google
                 </Button>
               </div>

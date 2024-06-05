@@ -33,3 +33,18 @@ export const getUsers = async (req: express.Request, res: express.Response) => {
     res.status(500).send(err.message);
   }
 };
+
+export const getUser = async (req: express.Request, res: express.Response) => {
+  // console.log("getUsr", req.params);
+
+  const userId = req.params.id;
+  // console.log("userId: ", userId);
+
+  try {
+    const user = await UserModel.findById(userId);
+    res.status(200).json(user);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(500).send(err.message);
+  }
+};
