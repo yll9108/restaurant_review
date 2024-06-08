@@ -35,21 +35,23 @@ export default function AuthProvider({
 
       if (firebaseAccount) {
         setFirebaseAccount(firebaseAccount);
-        // Get user data from server
-        await axios
-          .get(
+
+        try {
+          const res = await axios.get(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${firebaseAccount.uid}`
-          )
-          .then((res: any) => {
+          );
+
+          if (res.status === 200 && res.data) {
             setUser(res.data);
             setLoginStatus(LoginStatus.LoggedIn);
-          })
-          .catch((err: any) => {
-            setUser(null);
-            setLoginStatus(LoginStatus.SigningUp);
-          });
+          } else {
+            throw new Error("User not found");
+          }
+        } catch (err) {
+          setUser(null);
+          setLoginStatus(LoginStatus.SigningUp);
+        }
       } else {
-        // When the user looged out or doesn't have an account
         setUser(null);
         setLoginStatus(LoginStatus.LoggedOut);
       }
@@ -93,14 +95,15 @@ export default function AuthProvider({
           }
         }
       }
+
       // If this user is in the process of sign up
       else if (loginStatus === LoginStatus.SigningUp) {
         // Go to the sign up page, but don't redirect from sign up page
+
         if (pathName !== "/signup") {
           return { isAllowed: false, redirection: "/signup" };
         }
       }
-      console.log("loginStatus", loginStatus);
 
       return { isAllowed: true, redirection: "" };
     };
