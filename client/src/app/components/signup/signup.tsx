@@ -106,8 +106,6 @@ export default function Signup() {
         }
       )
       .then((res) => {
-        console.log("here", res);
-
         setUser(res.data);
         setLoginStatus(LoginStatus.LoggedIn);
         router.replace("/restaurants");

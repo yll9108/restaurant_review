@@ -48,3 +48,23 @@ export const getUser = async (req: express.Request, res: express.Response) => {
     res.status(500).send(err.message);
   }
 };
+
+export const deleteUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const userId = req.params.id;
+  console.log("deleteUser", userId);
+
+  if (!userId) {
+    res.status(404).send("Delete user not found");
+  } else {
+    try {
+      const deleteUser = await UserModel.findByIdAndDelete(userId);
+      res.status(200).json(deleteUser);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      res.status(500).send(err.message);
+    }
+  }
+};
