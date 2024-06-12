@@ -25,7 +25,7 @@ export default function UserProfile() {
   const handleDelete = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     const auth = getAuth();
-    console.log("hadele delete user", user);
+
     if (user) {
       const currentUser = auth.currentUser;
       const credential = EmailAuthProvider.credential(
@@ -40,7 +40,6 @@ export default function UserProfile() {
         await axios.delete(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${user?._id}`
         );
-        console.log("delete User", currentUser);
 
         await deleteUser(currentUser!).then(() => {
           console.log("User deleted successfully");
