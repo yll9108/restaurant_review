@@ -41,6 +41,7 @@ export const Button = (props: BtnProps) => {
       break;
     case BtnType.logIn:
       btnClass = LOGIN_STYLE;
+      break;
   }
   btnClass += `${props.className ?? ""}`;
 

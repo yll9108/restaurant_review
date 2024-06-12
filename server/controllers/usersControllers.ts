@@ -8,7 +8,7 @@ export const registerUser = async (
   res: express.Response
 ) => {
   const userInput: UserInput = req.body;
-  console.log("userInput", userInput);
+  console.log("registerUser", userInput);
 
   const { result, message } = validateUserInput(userInput);
   if (!result) {
