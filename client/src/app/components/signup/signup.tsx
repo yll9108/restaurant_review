@@ -33,14 +33,12 @@ export default function Signup() {
   //Alert Message
   const [alertMessage, setAlertMessage] = useState("");
 
-  const handleEmailAuth = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleEmailAuth = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (password === confirmPassword) {
-      createUserWithEmailAndPassword(getAuth(), email, password)
+      await createUserWithEmailAndPassword(getAuth(), email, password)
         .then((result) => {
-          console.log("handleEmailAuth", result.user);
-
           setFirebaseAccount(result.user);
           setLoginStatus(LoginStatus.SigningUp);
         })
@@ -52,10 +50,9 @@ export default function Signup() {
       setAlertMessage("Password and Confirm Password doesn't much");
     }
   };
-  // console.log("handleEmailAuth loginStatus", loginStatus);
 
-  const handleGoogleAuth = () => {
-    signInWithPopup(getAuth(), new GoogleAuthProvider())
+  const handleGoogleAuth = async () => {
+    await signInWithPopup(getAuth(), new GoogleAuthProvider())
       .then((result) => {
         setFirebaseAccount(result.user);
         setLoginStatus(LoginStatus.SigningUp);
@@ -65,6 +62,7 @@ export default function Signup() {
         setAlertMessage(getErrorMessage(error.code));
       });
   };
+
   const handleSingUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -72,7 +70,6 @@ export default function Signup() {
       console.error("No firebase account");
       return;
     }
-    console.log("firebase account", firebaseAccount);
 
     const formData = new FormData();
     const userInputObj = {
@@ -83,8 +80,6 @@ export default function Signup() {
       user_favorite_restaurant: [""],
       provider: firebaseAccount.providerData![0].providerId,
     };
-
-    console.log("userInputObj", userInputObj);
 
     Object.entries(userInputObj).forEach(([key, value]) => {
       if (Array.isArray(value)) {
@@ -114,61 +109,57 @@ export default function Signup() {
         console.error(error.response.data.message);
       });
   };
+
   return (
-    <>
-      <div className="bg-secondary">
-        <h1 className="text-3xl text-center mb-5">Sign Up</h1>
+    <div>
+      <h1 className="text-3xl text-center mb-5">Sign Up</h1>
 
-        {loginStatus === LoginStatus.LoggedOut && (
-          //first step
-          <div>
-            <p className="text-warning">{alertMessage}</p>
-            <form onSubmit={handleEmailAuth}>
-              <div className="flex flex-col items-center">
-                <Input
-                  textType={TextType.text}
-                  placeholder="Your email address"
-                  onChange={(event) => setEmail(event.target.value)}
-                />
-                <Input
-                  textType={TextType.password}
-                  placeholder="Create password"
-                  onChange={(event) => setPassword(event.target.value)}
-                />
-                <Input
-                  textType={TextType.password}
-                  placeholder="Confirm password"
-                  onChange={(event) => setConfirmPassword(event.target.value)}
-                />
-                <Button type={BtnType.submit}>Next</Button>
-                <p className="mb-4">or</p>
-                <Button
-                  type={BtnType.regular_google}
-                  onClick={handleGoogleAuth}
-                >
-                  Sign up with Google
-                </Button>
-              </div>
-            </form>
-          </div>
-        )}
+      {loginStatus === LoginStatus.LoggedOut && (
+        //first step
+        <div>
+          <p className="text-warning">{alertMessage}</p>
+          <form onSubmit={handleEmailAuth} name="handleEmailAuth">
+            <div className="flex flex-col items-center">
+              <Input
+                textType={TextType.text}
+                placeholder="Your email address"
+                onChange={(event) => setEmail(event.target.value)}
+              />
+              <Input
+                textType={TextType.password}
+                placeholder="Create password"
+                onChange={(event) => setPassword(event.target.value)}
+              />
+              <Input
+                textType={TextType.password}
+                placeholder="Confirm password"
+                onChange={(event) => setConfirmPassword(event.target.value)}
+              />
+              <Button type={BtnType.submit}>Next</Button>
+              <p className="mb-4">or</p>
+            </div>
+          </form>
+          <Button type={BtnType.regular_google} onClick={handleGoogleAuth}>
+            Sign up with Google
+          </Button>
+        </div>
+      )}
 
-        {loginStatus === LoginStatus.SigningUp && (
-          // second step
-          <div>
-            <form onSubmit={handleSingUp}>
-              <div className="flex flex-col">
-                <Input
-                  textType={TextType.text}
-                  placeholder="type your name"
-                  onChange={(event) => setName(event.target.value)}
-                />
-                <Button type={BtnType.submit}>Register</Button>
-              </div>
-            </form>
-          </div>
-        )}
-      </div>
-    </>
+      {loginStatus === LoginStatus.SigningUp && (
+        // second step
+        <div>
+          <form onSubmit={handleSingUp} name="handlesSingUp">
+            <div className="flex flex-col">
+              <Input
+                textType={TextType.text}
+                placeholder="type your name"
+                onChange={(event) => setName(event.target.value)}
+              />
+              <Button type={BtnType.submit}>Register</Button>
+            </div>
+          </form>
+        </div>
+      )}
+    </div>
   );
 }
