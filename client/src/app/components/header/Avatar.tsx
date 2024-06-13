@@ -13,7 +13,14 @@ export default function Avatar() {
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
   const { activeTab, setActiveTab } = useContext(DropDownContext);
-  const { setUser, setLoginStatus } = useContext(UserContext);
+  const { user, setUser, setLoginStatus } = useContext(UserContext);
+
+  let icon = "";
+  for (let i = 0; i < user?.user_name.length!; i++) {
+    if (i === 0) {
+      icon += user?.user_name[0].toUpperCase();
+    }
+  }
 
   const changedTabs = (tabName: string) => {
     setActiveTab(tabName);
@@ -40,7 +47,7 @@ export default function Avatar() {
       <summary className="btn btn-secondary btn-circle avatar placeholder">
         <div className="w-10 rounded-full">
           {/* <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
-          <span>SY</span>
+          <span>{icon}</span>
         </div>
       </summary>
       <ul className="mt-3  p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 z-10">
