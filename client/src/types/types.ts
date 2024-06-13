@@ -51,7 +51,7 @@ type PageContextProps = {
 };
 
 // Type for Users
-type User = {
+type UserInfo = {
   _id: string;
   user_name: string;
   user_picture: string;
@@ -81,8 +81,8 @@ export enum LoginStatus {
 }
 
 type UserContextProps = {
-  user: User | null;
-  setUser: (userStatus: User | null) => void;
+  user: UserInfo | null;
+  setUser: (userStatus: UserInfo | null) => void;
   firebaseAccount: FirebaseAccount | null;
   setFirebaseAccount: (firebaseAccount: FirebaseAccount | null) => void;
   loginStatus: LoginStatus;
@@ -96,7 +96,7 @@ export type {
   Review,
   RestaurantContextType,
   PageContextProps,
-  User,
+  UserInfo,
   FirebaseAccount,
   UserContextProps,
 };

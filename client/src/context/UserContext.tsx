@@ -1,7 +1,7 @@
 "use client";
 import { createContext, ReactNode, useState } from "react";
 import {
-  User,
+  UserInfo,
   LoginStatus,
   FirebaseAccount,
   UserContextProps,
@@ -12,7 +12,7 @@ export const UserContext = createContext<UserContextProps>(
 );
 
 export function UserContextProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<UserInfo | null>(null);
   const [firebaseAccount, setFirebaseAccount] =
     useState<FirebaseAccount | null>(null);
   const [loginStatus, setLoginStatus] = useState(LoginStatus.Unknown);
