@@ -52,3 +52,7 @@ export const findRestaurant = async (
     res.status(500).json(error);
   }
 };
+
+// export const getSearchResults = async (req: express.Request, res: express.Response) => {
+//   const text = req.query.text !== undefined ? req.query.text : "";
+// };

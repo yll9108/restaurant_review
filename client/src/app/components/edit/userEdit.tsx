@@ -42,7 +42,7 @@ export default function UserEdit() {
   };
 
   return (
-    <div className="w-64 bg-secondary mx-auto mt-10">
+    <div className="w-64 mx-auto mt-10">
       <h2 className="text-center text-2xl mb-4">User Profile</h2>
       <User />
       <form onSubmit={changedUserName}>

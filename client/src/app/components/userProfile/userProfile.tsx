@@ -54,7 +54,7 @@ export default function UserProfile() {
 
   return (
     <>
-      <div className="w-64 bg-secondary mx-auto mt-10">
+      <div className="w-64 mx-auto mt-10">
         <h2 className="text-center text-2xl mb-4">User Profile</h2>
         <User />
         <Button
@@ -95,20 +95,23 @@ export default function UserProfile() {
                 />
               </div>
             )}
-            <div className="flex justify-around">
+            <div className="flex justify-around mt-1">
               <div className="modal-action m-0">
-                <form method="dialog">
+                <form method="dialog" onSubmit={() => setReauthenticate(false)}>
                   {/* if there is a button in form, it will close the modal */}
                   <Button type={BtnType.cancel}>Cancel</Button>
                 </form>
               </div>
               <div>
-                <Button
-                  type={BtnType.delete}
-                  onClick={() => setReauthenticate(true)}
-                >
-                  Confirm
-                </Button>
+                {!reauthenticate && (
+                  <Button
+                    type={BtnType.delete}
+                    onClick={() => setReauthenticate(true)}
+                  >
+                    Confirm
+                  </Button>
+                )}
+
                 {reauthenticate && (
                   <Button type={BtnType.delete} onClick={handleDelete}>
                     Delete

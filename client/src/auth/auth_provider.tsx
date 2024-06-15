@@ -126,6 +126,7 @@ export default function AuthProvider({
     if (
       pathName.length > 0 &&
       pathName !== "/login" &&
+      pathName !== "/signup" &&
       pageStatus === PageStatus.Ready
     ) {
       return true;
