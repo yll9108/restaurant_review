@@ -91,7 +91,7 @@ export default function AuthProvider({
         if (page.limitation !== Limitation.None) {
           // Go to the login page, but don't redirect from sign up page
           if (pathName !== "/signup" && pathName !== "/login") {
-            return { isAllowed: false, redirection: "/login" };
+            return { isAllowed: false, redirection: "/" };
           }
         }
       }
