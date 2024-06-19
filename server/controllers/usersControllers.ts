@@ -48,3 +48,45 @@ export const getUser = async (req: express.Request, res: express.Response) => {
     res.status(500).send(err.message);
   }
 };
+
+export const editUser = async (req: express.Request, res: express.Response) => {
+  const userId = req.params.id;
+  console.log("editUser", userId);
+  if (!userId) {
+    res.status(404).send("User not found");
+  } else {
+    try {
+      const updateData = req.body;
+      console.log("updateData", updateData);
+
+      const editUser = await UserModel.findByIdAndUpdate(userId, updateData, {
+        new: true,
+      });
+
+      res.status(200).json(editUser);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      res.status(500).send(err.message);
+    }
+  }
+};
+
+export const deleteUser = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const userId = req.params.id;
+  console.log("deleteUser", userId);
+
+  if (!userId) {
+    res.status(404).send("Delete user not found");
+  } else {
+    try {
+      const deleteUser = await UserModel.findByIdAndDelete(userId);
+      res.status(200).json(deleteUser);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (err: any) {
+      res.status(500).send(err.message);
+    }
+  }
+};
