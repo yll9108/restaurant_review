@@ -9,7 +9,7 @@ export default function HeaderLogo() {
     homeRouter.push("/");
   };
   return (
-    <div className="flex-1 ml-12">
+    <div className="flex-1 ml-4 sm:ml-12">
       <a
         className="btn btn-ghost text-xl p-0 text-accent"
         onClick={clickedHomeHandler}

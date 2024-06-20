@@ -22,7 +22,7 @@ export default function Header() {
   return (
     <header className="w-full bg-primary h-16 flex justify-end items-center">
       <HeaderLogo />
-      <div className="flex justify-center items-center mr-4">
+      <div className="flex justify-center items-center sm:mr-4">
         <SearchBar />
         {user ? (
           <Avatar />

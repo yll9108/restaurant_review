@@ -43,14 +43,14 @@ export default function Avatar() {
   };
 
   return (
-    <details className="dropdown dropdown-end mr-12 " ref={dropDownRef}>
+    <details className="dropdown dropdown-end mr-4 sm:mr-12 " ref={dropDownRef}>
       <summary className="btn btn-secondary btn-circle avatar placeholder">
         <div className="w-10 rounded-full">
           {/* <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
           <span>{icon}</span>
         </div>
       </summary>
-      <ul className="mt-3  p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 z-10">
+      <ul className="mt-3 p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-44 z-10">
         <li
           className="btn btn-ghost px-2 min-h-0 h-9"
           onClick={() => changedTabs("favorite")}
