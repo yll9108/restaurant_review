@@ -61,7 +61,8 @@ export function Input(props: TextProps) {
         <input
           type="text"
           className={`${props.className} grow`}
-          placeholder="Search"
+          placeholder={props.placeholder}
+          onChange={props.onChange}
         />
         {/* {RRText} */}
       </label>

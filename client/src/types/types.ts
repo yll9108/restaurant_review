@@ -17,6 +17,8 @@ type RestaurantContextType = {
   restaurantsData: Restaurant[];
   clickedRestaurant: Restaurant | null;
   setClickedRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>;
+  searchValue: string;
+  setSearchValue: (value: string) => void;
 };
 
 // Type for Pagination

@@ -8,9 +8,22 @@ export const getRestaurant = async (
   res: express.Response
 ) => {
   try {
-    const restaurants = await restaurantModels.find();
-    res.status(200).json(restaurants);
-    // console.log("restaurants", restaurants);
+    const text =
+      req.query.text !== undefined
+        ? req.query.text.toString().toUpperCase()
+        : "";
+    if (text) {
+      const searchRegex = new RegExp(text, "i"); // Create a case-insensitive regex
+      console.log("searchRegex", searchRegex);
+
+      const restaurants = await restaurantModels.find({
+        restaurant_name: searchRegex,
+      }); // Assuming you're searching by name
+      res.status(200).json(restaurants);
+    } else {
+      const restaurants = await restaurantModels.find();
+      res.status(200).json(restaurants);
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
@@ -52,7 +65,3 @@ export const findRestaurant = async (
     res.status(500).json(error);
   }
 };
-
-// export const getSearchResults = async (req: express.Request, res: express.Response) => {
-//   const text = req.query.text !== undefined ? req.query.text : "";
-// };
