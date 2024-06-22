@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-
+import Image from "next/image";
 export default function HeaderLogo() {
   const homeRouter = useRouter();
 
@@ -9,12 +9,12 @@ export default function HeaderLogo() {
     homeRouter.push("/");
   };
   return (
-    <div className="flex-1 ml-4 sm:ml-12">
+    <div className=" flex flex-1 ml-4 sm:ml-12 items-center">
       <a
         className="btn btn-ghost text-xl p-0 text-accent"
         onClick={clickedHomeHandler}
       >
-        home
+        <Image src="/logo.png" width={40} height={40} alt="logo" />
       </a>
     </div>
   );

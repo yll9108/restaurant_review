@@ -11,13 +11,6 @@ import axios from "axios";
 export default function Header() {
   const router = useRouter();
   const { user } = useContext(UserContext);
-  // const [restaurants, setRestaurants] =
-
-  const searchRestaurants = (text: string) => {
-    axios
-      .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/search/?text=` + text)
-      .then((res) => {});
-  };
 
   return (
     <header className="w-full bg-primary h-16 flex justify-end items-center">
