@@ -41,6 +41,13 @@ export default function UserEdit() {
     }
   };
 
+  const handleCancel = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+    changedTabs("userProfile");
+  };
+
   return (
     <div className="w-64 mx-auto mt-10">
       <h2 className="text-center text-2xl mb-4">User Profile</h2>
@@ -55,7 +62,7 @@ export default function UserEdit() {
           <Button
             type={BtnType.cancel}
             className="block mx-auto "
-            onClick={() => changedTabs("userProfile")}
+            onClick={handleCancel}
           >
             Cancel
           </Button>

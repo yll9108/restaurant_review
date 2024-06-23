@@ -39,6 +39,11 @@ type Review = {
   review_description: string;
 };
 
+type ShowConfirmProps = {
+  showConfirm: boolean;
+  setShowConfirm: (showConfirm: boolean) => void;
+};
+
 // Type for PageContext
 export enum PageStatus {
   Loading = "Loading",
@@ -96,6 +101,7 @@ export type {
   PartialRestaurantData,
   PaginationData,
   Review,
+  ShowConfirmProps,
   RestaurantContextType,
   PageContextProps,
   UserInfo,

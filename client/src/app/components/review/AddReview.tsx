@@ -1,5 +1,6 @@
-import { Button } from "@/components/common/button";
-import React, { useState } from "react";
+import { BtnType, Button } from "@/components/common/button";
+import { Input, TextType } from "@/components/common/Input";
+import { useRef, useState } from "react";
 import {
   BsEmojiAngry,
   BsEmojiAstonished,
@@ -11,11 +12,7 @@ import ConfirmationAddReview from "./ConfirmationAddReview";
 
 function AddReview() {
   const [showConfirm, setShowConfirm] = useState(false);
-
-  const handleConfirm = () => {
-    setShowConfirm(!showConfirm);
-    console.log(showConfirm);
-  };
+  const modalRef = useRef<HTMLDialogElement>(null);
 
   const options = [];
   for (let i = 1.0; i <= 5.0; i += 0.5) {
@@ -37,18 +34,16 @@ function AddReview() {
   return (
     <>
       <Button
-        type={0}
+        type={BtnType.submit}
         onClick={() => {
-          if (document) {
-            (
-              document.getElementById("my_modal_1") as HTMLFormElement
-            ).showModal();
+          if (modalRef.current) {
+            modalRef.current.showModal();
           }
         }}
       >
         Add reviews
       </Button>
-      <dialog id="my_modal_1" className="modal">
+      <dialog className="modal" ref={modalRef}>
         <div className="modal-box">
           {/* <div className="modal-action"> */}
           <form method="dialog" className="flex flex-col gap-4">
@@ -62,14 +57,24 @@ function AddReview() {
                 </label>
               ))}
             </div>
-
-            <input type="text" className="input" placeholder="Title" />
-            <input type="text" className="input" placeholder="Description" />
+            <Input textType={TextType.text} placeholder="Title" />
+            <textarea
+              className="textarea textarea-bordered"
+              placeholder="Description"
+            ></textarea>
             <div className="flex">
-              <Button type={3} className="btn">
+              <Button
+                type={BtnType.cancel}
+                className="btn"
+                onClick={() => setShowConfirm(false)}
+              >
                 Cancel
               </Button>
-              <Button type={0} className="btn" onClick={() => handleConfirm()}>
+              <Button
+                type={BtnType.submit}
+                className="btn"
+                onClick={() => setShowConfirm(true)}
+              >
                 Add
               </Button>
             </div>
@@ -77,7 +82,10 @@ function AddReview() {
         </div>
         {/* </div> */}
       </dialog>
-      <ConfirmationAddReview showConfirm={showConfirm} />
+      <ConfirmationAddReview
+        showConfirm={showConfirm}
+        setShowConfirm={setShowConfirm}
+      />
     </>
   );
 }

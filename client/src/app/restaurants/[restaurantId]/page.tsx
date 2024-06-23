@@ -8,6 +8,7 @@ import { RestaurantContext } from "@/context/RestaurantContext";
 // import { useParams, usePathname, useRouter } from "next/navigation";
 import { useParams } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 function Page() {
   const params = useParams();
@@ -23,34 +24,36 @@ function Page() {
   }, [restaurantId, setRestaurantId]);
 
   // create only one function that fetch restaurant data and review data
-  const getData = async () => {
-    try {
-      await fetch(`http://localhost:8080/api/restaurants/${restaurantId}`)
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("1111", data);
-          setClickedRestaurant(data);
-        });
-      await fetch(
-        `http://localhost:8080/api/restaurants/${restaurantId}/review/`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          console.log("2222", data);
-          setReviews(data);
-          if (data.length > 0) {
-            setHasReviews(true);
-          }
-          console.log("hasReviews???", hasReviews);
-        });
-    } catch (error) {
-      console.log("error", error);
-    }
-  };
 
   useEffect(() => {
+    const getData = async () => {
+      try {
+        await axios
+          .get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}`
+          )
+          .then((res) => {
+            console.log("1111", res.data);
+            setClickedRestaurant(res.data);
+          });
+        await axios
+          .get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`
+          )
+          .then((res) => {
+            console.log("2222", res.data);
+            setReviews(res.data);
+            if (res.data.length > 0) {
+              setHasReviews(true);
+            }
+            console.log("hasReviews???", hasReviews);
+          });
+      } catch (error) {
+        console.log("error", error);
+      }
+    };
     getData();
-  }, []);
+  }, [hasReviews, restaurantId, setClickedRestaurant]);
 
   return (
     <>

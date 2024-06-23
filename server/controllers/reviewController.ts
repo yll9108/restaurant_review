@@ -8,6 +8,8 @@ export const getReview = async (
   req: express.Request,
   res: express.Response
 ) => {
+  console.log("getReview", req.params);
+
   try {
     // Get the restaurantId from request parameters
     const restaurantId = req.params.restaurantId;

@@ -1,7 +1,11 @@
-import { Button } from "@/components/common/button";
+import { BtnType, Button } from "@/components/common/button";
 import React from "react";
+import { ShowConfirmProps } from "@/types/types";
 
-function ConfirmationAddReview({ showConfirm }: { showConfirm: boolean }) {
+function ConfirmationAddReview({
+  showConfirm,
+  setShowConfirm,
+}: ShowConfirmProps) {
   return (
     <>
       {showConfirm && (
@@ -11,10 +15,14 @@ function ConfirmationAddReview({ showConfirm }: { showConfirm: boolean }) {
             <p className="py-4">Will you publish?</p>
             {/* <div className="modal-action"> */}
             <div className="flex gap-2">
-              <Button type={3} className="btn flex-1">
+              <Button
+                type={BtnType.cancel}
+                className="btn flex-1"
+                onClick={() => setShowConfirm(false)}
+              >
                 Cancel
               </Button>
-              <Button type={0} className="btn flex-1">
+              <Button type={BtnType.submit} className="btn flex-1">
                 Add
               </Button>
               {/* </div> */}

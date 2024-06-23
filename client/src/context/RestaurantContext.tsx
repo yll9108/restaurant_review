@@ -4,18 +4,9 @@ import { Restaurant, RestaurantContextType } from "@/types/types";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export const RestaurantContext = createContext<RestaurantContextType>({
-  restaurantId: "",
-  setRestaurantId: () => {},
-  restaurantsData: [],
-  clickedRestaurant: null,
-  setClickedRestaurant: () => {},
-  searchValue: "",
-  setSearchValue: () => {},
-});
-// export const RestaurantContext = createContext<RestaurantContextType>(
-//   {} as RestaurantContextType
-// );
+export const RestaurantContext = createContext<RestaurantContextType>(
+  {} as RestaurantContextType
+);
 
 export function RestaurantContextProvider({
   children,
@@ -28,16 +19,6 @@ export function RestaurantContextProvider({
   const [clickedRestaurant, setClickedRestaurant] = useState<Restaurant | null>(
     null
   );
-
-  // Homepage, fetch all restaurant data
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/api/restaurants")
-  //     .then((response) => response.json())
-  //     .then((data) => {
-  //       console.log(data);
-  //       setRestaurantsData(data);
-  //     });
-  // }, []);
 
   // Homepage, fetch all restaurant data
   useEffect(() => {
