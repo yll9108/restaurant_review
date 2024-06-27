@@ -13,8 +13,13 @@ export const getReview = async (
   try {
     // Get the restaurantId from request parameters
     const restaurantId = req.params.restaurantId;
+    console.log("restaurantId", restaurantId);
+
     // Ask DB to find review(s) which have this restaurantId
     const reviews: ReviewInput[] = await reviewModels.find();
+
+    console.log("reviews", reviews);
+
     // Filter reviews based on restaurantId
     const filteredReviews = reviews.filter(
       (review) => review.restaurantId === restaurantId
@@ -36,9 +41,10 @@ export const addReview = async (
   res: express.Response
 ) => {
   const restaurantId = req.params.restaurantId;
-  const reviewInput: ReviewInput = req.body;
+  const reviewInput = req.body;
 
-  console.log("restaurantId", restaurantId);
+  console.log("addReview restaurantId", restaurantId);
+  console.log("addReview reviewInput", reviewInput);
 
   try {
     const restaurant = await restaurantModels.findById(restaurantId);
@@ -46,7 +52,7 @@ export const addReview = async (
       console.log("please select a restaurant");
       return res.status(400).json("restaurantId not exist");
     } else {
-      const review = createReview(reviewInput, restaurantId);
+      const review = await createReview(reviewInput, restaurantId);
       console.log("successful");
       return res.status(200).json(review);
     }

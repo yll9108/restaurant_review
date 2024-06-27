@@ -36,6 +36,8 @@ function Page() {
             console.log("1111", res.data);
             setClickedRestaurant(res.data);
           });
+        console.log("here", restaurantId);
+
         await axios
           .get(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`

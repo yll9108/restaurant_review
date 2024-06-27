@@ -1,3 +1,5 @@
+import { ReactNode, RefObject } from "react";
+
 // Type for Restaurant
 type Restaurant = {
   _id: string;
@@ -31,7 +33,7 @@ type PaginationData = {
 
 // Type for Reviews
 type Review = {
-  _id: number;
+  _id: string;
   review_icon: string;
   review_ratings: number;
   review_date: Date;
@@ -42,6 +44,36 @@ type Review = {
 type ShowConfirmProps = {
   showConfirm: boolean;
   setShowConfirm: (showConfirm: boolean) => void;
+  modalRef: RefObject<HTMLDialogElement>;
+};
+
+type Rating = {
+  num: number;
+  face: ReactNode;
+};
+
+type NewReview = {
+  review_ratings: number;
+  review_date: string;
+  review_title: string;
+  review_description: string;
+  restaurantId: string;
+  userId: string | undefined;
+};
+
+type ReviewInputProps = {
+  reviewTitle: string;
+  setReviewTitle: (reviewTitle: string) => void;
+  reviewDesc: string;
+  setReviewDesc: (reviewDesc: string) => void;
+  reviewRating: number;
+  setReviewRating: (reviewRating: number) => void;
+};
+
+type InitialReviewStateProps = {
+  reviewTitle: string;
+  reviewDesc: string;
+  reviewRating: number;
 };
 
 // Type for PageContext
@@ -97,13 +129,21 @@ type UserContextProps = {
 };
 
 export type {
+  //Restaurants
   Restaurant,
   PartialRestaurantData,
+  RestaurantContextType,
   PaginationData,
+  //Reviews
   Review,
   ShowConfirmProps,
-  RestaurantContextType,
+  Rating,
+  NewReview,
+  ReviewInputProps,
+  InitialReviewStateProps,
+  //PageContext
   PageContextProps,
+  //Users
   UserInfo,
   FirebaseAccount,
   UserContextProps,

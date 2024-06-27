@@ -55,6 +55,7 @@ export default function UserEdit() {
       <form onSubmit={changedUserName}>
         <Input
           textType={TextType.text}
+          name="userName"
           placeholder="Type your name"
           onChange={(event) => setUpdatedName(event.target.value)}
         />

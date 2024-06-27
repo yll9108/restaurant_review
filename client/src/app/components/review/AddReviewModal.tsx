@@ -1,85 +1,162 @@
 "use client";
-import { useState, useRef, forwardRef, RefObject } from "react";
+import { useState, useContext, forwardRef, RefObject } from "react";
+import { UserContext } from "@/context/UserContext";
 import { BtnType, Button } from "@/components/common/button";
-import { Input, TextType } from "@/components/common/Input";
-import {
-  BsEmojiAngry,
-  BsEmojiAstonished,
-  BsEmojiExpressionless,
-  BsEmojiSmile,
-  BsEmojiHeartEyes,
-} from "react-icons/bs";
-import ConfirmationAddReview from "./ConfirmationAddReview";
 
+import { NewReview, InitialReviewStateProps } from "@/types/types";
+// import ConfirmationAddReview from "./ConfirmationAddReview";
+import { useParams } from "next/navigation";
+import moment from "moment";
+import ReviewInput from "./ReviewInput";
+import axios from "axios";
+import { log } from "console";
 interface AddReviewModalProps {
   modalRef: RefObject<HTMLDialogElement>;
 }
+
 const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
   ({ modalRef }, ref) => {
-    const [showConfirm, setShowConfirm] = useState(false);
-    // const modalRef = useRef<HTMLDialogElement>(null);
+    const [showConfirm, setShowConfirm] = useState<boolean>(false);
+    const [reviewTitle, setReviewTitle] = useState("");
+    const [reviewDesc, setReviewDesc] = useState("");
+    const [reviewRating, setReviewRating] = useState(5);
 
-    const options = [];
-    for (let i = 1.0; i <= 5.0; i += 0.5) {
-      let face;
-      if (i === 1.0 || i === 1.5) {
-        face = <BsEmojiAngry />;
-      } else if (i === 2.0 || i === 2.5) {
-        face = <BsEmojiAstonished />;
-      } else if (i === 3.0 || i === 3.5) {
-        face = <BsEmojiExpressionless />;
-      } else if (i === 4.0 || i === 4.5) {
-        face = <BsEmojiSmile />;
+    const { user } = useContext(UserContext);
+
+    //Get restaurant ID
+    const reviewParams = useParams();
+    const restaurantId = reviewParams.restaurantId as string;
+
+    //Get postedTime
+    const postedTime = moment().calendar();
+
+    const AddedReview = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      event.preventDefault();
+
+      if (!user?._id && !reviewParams) {
+        console.log("error add review");
       } else {
-        face = <BsEmojiHeartEyes />;
+        if (!reviewTitle) {
+          alert("Please enter a title");
+          return;
+        } else if (!reviewDesc) {
+          alert("Please enter a description");
+          return;
+        } else {
+          console.log("reviewTitle2", reviewTitle);
+          console.log("reviewDescription2", reviewDesc);
+          console.log("reviewRating2", reviewRating);
+
+          setShowConfirm(true);
+        }
+        // if (modalRef.current) {
+        //   modalRef.current.showModal();
+        // }
       }
-      options.push({ num: i, face });
-    }
+    };
+
+    // Handle cancel button
+    const closedModal = (
+      event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+    ) => {
+      event.preventDefault();
+      if (modalRef.current) {
+        modalRef.current.close();
+      }
+      setReviewTitle("");
+      setReviewDesc("");
+      setReviewRating(5);
+
+      setShowConfirm(false);
+    };
+
+    const submittedReviewState = async (
+      event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+      event.preventDefault();
+      console.log("submit title", reviewTitle);
+      console.log("submit desc", reviewDesc);
+      console.log("submit rating", reviewRating);
+
+      const formData = new FormData();
+
+      if (user?._id) {
+        formData.append("review_ratings", reviewRating.toString());
+        formData.append("review_date", postedTime);
+        formData.append("review_title", reviewTitle);
+        formData.append("review_description", reviewDesc);
+        formData.append("restaurantId", restaurantId);
+        formData.append("userId", user?._id);
+      }
+
+      await axios
+        .post(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/addReview`,
+          formData,
+          { headers: { "Content-Type": "application/json" } }
+        )
+        .then((res) => {
+          console.log("posted review", res);
+        });
+    };
+
     return (
       <>
         <dialog className="modal" ref={ref || modalRef}>
           <div className="modal-box">
             {/* <div className="modal-action"> */}
-            <form method="dialog" className="flex flex-col gap-4">
-              {/* if there is a button in form, it will close the modal */}
-              <div className="bg-red-300 flex">
-                {options.map((option) => (
-                  <label key={option.num}>
-                    <input type="radio" name="options" value={option.num} />
-                    {option.face}
-                    {option.num}
-                  </label>
-                ))}
+            {!showConfirm && (
+              <ReviewInput
+                reviewTitle={reviewTitle}
+                setReviewTitle={setReviewTitle}
+                reviewDesc={reviewDesc}
+                setReviewDesc={setReviewDesc}
+                reviewRating={reviewRating}
+                setReviewRating={setReviewRating}
+              />
+            )}
+            {showConfirm && (
+              <div>
+                <h3 className="font-bold text-lg">Preview</h3>
+                <p>{reviewRating}</p>
+                <p>{reviewTitle}</p>
+                <p>{reviewDesc}</p>
+                <p className="py-4">Will you publish?</p>
               </div>
-              <Input textType={TextType.text} placeholder="Title" />
-              <textarea
-                className="textarea textarea-bordered"
-                placeholder="Description"
-              ></textarea>
-              <div className="flex">
-                <Button
-                  type={BtnType.cancel}
-                  className="btn"
-                  onClick={() => setShowConfirm(false)}
-                >
-                  Cancel
-                </Button>
+            )}
+            <div className="flex">
+              <form method="dialog" className="flex flex-col gap-4">
+                {/* if there is a button in form, it will close the modal */}
+                <div className="flex">
+                  <Button
+                    type={BtnType.cancel}
+                    className="btn"
+                    onClick={closedModal}
+                  >
+                    Cancel
+                  </Button>
+                </div>
+              </form>
+
+              {!showConfirm && (
                 <Button
                   type={BtnType.submit}
                   className="btn"
-                  onClick={() => setShowConfirm(true)}
+                  onClick={AddedReview}
                 >
                   Add
                 </Button>
-              </div>
-            </form>
+              )}
+              {showConfirm && (
+                <Button type={BtnType.submit} onClick={submittedReviewState}>
+                  Publish
+                </Button>
+              )}
+            </div>
           </div>
-          {/* </div> */}
         </dialog>
-        <ConfirmationAddReview
-          showConfirm={showConfirm}
-          setShowConfirm={setShowConfirm}
-        />
       </>
     );
   }

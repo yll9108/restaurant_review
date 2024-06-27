@@ -6,8 +6,8 @@ const ReviewSchema = new Schema({
     type: Number,
     required: true,
   },
-  reviews_date: {
-    type: Date,
+  review_date: {
+    type: String,
     require: true,
   },
   review_title: {

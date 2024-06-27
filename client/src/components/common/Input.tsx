@@ -11,7 +11,8 @@ export type TextProps = {
   textType: TextType;
   className?: string;
   placeholder?: string;
-  value?: TextType;
+  value?: string;
+  name: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
@@ -38,9 +39,11 @@ export function Input(props: TextProps) {
   const RRText = (
     <input
       type={type}
+      value={props.value}
       placeholder={props.placeholder}
       className={` ${props.className} input input-bordered w-64  mb-4`}
       onChange={props.onChange}
+      name={props.name}
     />
   );
   if (props.textType === TextType.question) {
@@ -63,6 +66,7 @@ export function Input(props: TextProps) {
           className={`${props.className} grow`}
           placeholder={props.placeholder}
           onChange={props.onChange}
+          name={props.name}
         />
         {/* {RRText} */}
       </label>
