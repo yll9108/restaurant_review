@@ -36,9 +36,11 @@ type Review = {
   _id: string;
   review_icon: string;
   review_ratings: number;
-  review_date: Date;
+  review_date: string;
   review_title: string;
   review_description: string;
+  restaurantId: string;
+  userId: string;
 };
 
 type ShowConfirmProps = {
@@ -74,6 +76,11 @@ type InitialReviewStateProps = {
   reviewTitle: string;
   reviewDesc: string;
   reviewRating: number;
+};
+
+type ReviewsContextProps = {
+  reviews: Review | null;
+  setReviews: (reviews: Review | null) => void;
 };
 
 // Type for PageContext
@@ -141,6 +148,7 @@ export type {
   NewReview,
   ReviewInputProps,
   InitialReviewStateProps,
+  ReviewsContextProps,
   //PageContext
   PageContextProps,
   //Users

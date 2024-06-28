@@ -1,15 +1,15 @@
 "use client";
 import { useState, useContext, forwardRef, RefObject } from "react";
 import { UserContext } from "@/context/UserContext";
+import { ReviewsContext } from "@/context/ReviewsContext";
 import { BtnType, Button } from "@/components/common/button";
 
 import { NewReview, InitialReviewStateProps } from "@/types/types";
 // import ConfirmationAddReview from "./ConfirmationAddReview";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import moment from "moment";
 import ReviewInput from "./ReviewInput";
 import axios from "axios";
-import { log } from "console";
 interface AddReviewModalProps {
   modalRef: RefObject<HTMLDialogElement>;
 }
@@ -22,13 +22,22 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5);
 
     const { user } = useContext(UserContext);
+    const { setReviews } = useContext(ReviewsContext);
+
+    const reviewRouter = useRouter();
 
     //Get restaurant ID
     const reviewParams = useParams();
     const restaurantId = reviewParams.restaurantId as string;
 
     //Get postedTime
-    const postedTime = moment().calendar();
+    const postedTime = moment().calendar({
+      sameDay: "[Today] dddd",
+      lastDay: "[Yesterday]",
+      lastWeek: "[last] dddd",
+      lastMonth: "[last] mmmm",
+      sameElse: "MM/DD/YYYY",
+    });
 
     const AddedReview = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -98,7 +107,9 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
           { headers: { "Content-Type": "application/json" } }
         )
         .then((res) => {
-          console.log("posted review", res);
+          console.log("posted review", res.data);
+          setReviews(res.data);
+          reviewRouter.push(`/restaurants/${restaurantId}`);
         });
     };
 

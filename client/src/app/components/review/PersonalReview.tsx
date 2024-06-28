@@ -2,7 +2,7 @@ import ReviewDetail from "@/components/common/ReviewDetail";
 import User from "@/components/common/User";
 import React, { useState } from "react";
 import "./custom.css";
-import { Button } from "@/components/common/button";
+import { BtnType, Button } from "@/components/common/button";
 import { Review } from "@/types/types";
 
 // this props that the componment is receving has props called reviews that
@@ -49,7 +49,7 @@ function PersonalReview({ reviews }: Props) {
         ))}
         {reviews.length > 5 && !showAllReviews && (
           <div className="text-center">
-            <Button type={1} onClick={toggleReviews}>
+            <Button type={BtnType.regular_google} onClick={toggleReviews}>
               See more reviews
             </Button>
           </div>

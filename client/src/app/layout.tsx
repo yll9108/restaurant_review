@@ -1,15 +1,12 @@
 "use client";
 import AuthProvider from "@/auth/auth_provider";
 import "./globals.css";
-import Header from "@/components/header";
 import { DropDownContextProvider } from "@/context/DropDownContext";
 import { PageContextProvider } from "@/context/PageContext";
-import {
-  RestaurantContext,
-  RestaurantContextProvider,
-} from "@/context/RestaurantContext";
+import { RestaurantContextProvider } from "@/context/RestaurantContext";
 import { UserContextProvider } from "@/context/UserContext";
 import { usePathname } from "next/navigation";
+import { ReviewsContextProvider } from "@/context/ReviewsContext";
 
 export default function RootLayout({
   children,
@@ -35,9 +32,11 @@ export default function RootLayout({
           <UserContextProvider>
             <RestaurantContextProvider>
               <DropDownContextProvider>
-                {/* {isHeaderReady() && <Header />} */}
-                <AuthProvider>{children}</AuthProvider>
-                {/* {children} */}
+                <ReviewsContextProvider>
+                  {/* {isHeaderReady() && <Header />} */}
+                  <AuthProvider>{children}</AuthProvider>
+                  {/* {children} */}
+                </ReviewsContextProvider>
               </DropDownContextProvider>
             </RestaurantContextProvider>
           </UserContextProvider>

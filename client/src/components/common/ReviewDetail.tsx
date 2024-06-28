@@ -10,7 +10,11 @@ function ReviewDetail({
   review_date,
   review_title,
   review_description,
+  restaurantId,
+  userId,
 }: Review) {
+  console.log("review date", review_date);
+
   return (
     <>
       {/* <div className="card-body"> */}
@@ -18,7 +22,7 @@ function ReviewDetail({
         <div className="flex" key={_id}>
           <p>{review_icon}</p>
           <p>{review_ratings}</p>
-          <p>Time:{moment(review_date).calendar()}</p>
+          <p>Time:{review_date}</p>
         </div>
         <h2 className="card-title">{review_title}</h2>
         <p>{review_description}</p>
