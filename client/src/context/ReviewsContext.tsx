@@ -8,8 +8,19 @@ export const ReviewsContext = createContext<ReviewsContextProps>(
 
 export function ReviewsContextProvider({ children }: { children: ReactNode }) {
   const [reviews, setReviews] = useState<Review | null>(null);
+  const [hasReviews, setHasReviews] = useState<boolean>(false);
+  const [allReviews, setAllReviews] = useState<Review[]>([]);
   return (
-    <ReviewsContext.Provider value={{ reviews, setReviews }}>
+    <ReviewsContext.Provider
+      value={{
+        reviews,
+        setReviews,
+        hasReviews,
+        setHasReviews,
+        allReviews,
+        setAllReviews,
+      }}
+    >
       {children}
     </ReviewsContext.Provider>
   );

@@ -18,7 +18,7 @@ type RestaurantContextType = {
   setRestaurantId: (restaurantId: string) => void;
   restaurantsData: Restaurant[];
   clickedRestaurant: Restaurant | null;
-  setClickedRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>;
+  setClickedRestaurant: (clickedRestaurant: Restaurant | null) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
 };
@@ -81,6 +81,10 @@ type InitialReviewStateProps = {
 type ReviewsContextProps = {
   reviews: Review | null;
   setReviews: (reviews: Review | null) => void;
+  hasReviews: boolean;
+  setHasReviews: (hasReviews: boolean) => void;
+  allReviews: Review[];
+  setAllReviews: (allReviews: Review[]) => void;
 };
 
 // Type for PageContext

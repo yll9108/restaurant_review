@@ -15,20 +15,54 @@ const RestaurantSchema = new Schema({
     required: true,
   },
   restaurant_tags: {
-    type: String,
-    // required: true,
+    type: String, // Changed back to a single string
+    required: true,
   },
   restaurant_number_reviews: {
     type: Number,
-    // required: true,
+    required: true,
   },
-  restaurant_reviews: {
-    type: String,
-    // required: true,
-    default: "good",
-  },
+  reviewsId: [
+    {
+      // type: mongoose.Schema.Types.ObjectId,
+      type: String,
+      ref: "Review", // Reference to the Review model
+      required: true,
+    },
+  ],
 });
 
 const RestaurantModel = mongoose.model("Restaurant", RestaurantSchema);
 
-export default module.exports = RestaurantModel;
+export default RestaurantModel;
+// const RestaurantSchema = new Schema({
+//   restaurant_name: {
+//     type: String,
+//     required: true,
+//   },
+//   restaurant_avg_ratings: {
+//     type: Number,
+//     required: true,
+//   },
+//   restaurant_add: {
+//     type: String,
+//     required: true,
+//   },
+//   restaurant_tags: {
+//     type: String,
+//     // required: true,
+//   },
+//   restaurant_number_reviews: {
+//     type: Number,
+//     // required: true,
+//   },
+//   reviewsId: {
+//     type: String,
+//     // required: true,
+//     // default: "good",
+//   },
+// });
+
+// const RestaurantModel = mongoose.model("Restaurant", RestaurantSchema);
+
+// export default module.exports = RestaurantModel;

@@ -3,10 +3,7 @@ import { useState, useContext, forwardRef, RefObject } from "react";
 import { UserContext } from "@/context/UserContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
 import { BtnType, Button } from "@/components/common/button";
-
-import { NewReview, InitialReviewStateProps } from "@/types/types";
-// import ConfirmationAddReview from "./ConfirmationAddReview";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import moment from "moment";
 import ReviewInput from "./ReviewInput";
 import axios from "axios";
@@ -22,9 +19,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5);
 
     const { user } = useContext(UserContext);
-    const { setReviews } = useContext(ReviewsContext);
-
-    const reviewRouter = useRouter();
+    const { reviews, setReviews, setHasReviews } = useContext(ReviewsContext);
 
     //Get restaurant ID
     const reviewParams = useParams();
@@ -54,15 +49,12 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
           alert("Please enter a description");
           return;
         } else {
-          console.log("reviewTitle2", reviewTitle);
-          console.log("reviewDescription2", reviewDesc);
-          console.log("reviewRating2", reviewRating);
+          // console.log("reviewTitle2", reviewTitle);
+          // console.log("reviewDescription2", reviewDesc);
+          // console.log("reviewRating2", reviewRating);
 
           setShowConfirm(true);
         }
-        // if (modalRef.current) {
-        //   modalRef.current.showModal();
-        // }
       }
     };
 
@@ -81,13 +73,11 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
       setShowConfirm(false);
     };
 
+    // Publish users review
     const submittedReviewState = async (
       event: React.MouseEvent<HTMLButtonElement>
     ) => {
       event.preventDefault();
-      console.log("submit title", reviewTitle);
-      console.log("submit desc", reviewDesc);
-      console.log("submit rating", reviewRating);
 
       const formData = new FormData();
 
@@ -98,20 +88,24 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
         formData.append("review_description", reviewDesc);
         formData.append("restaurantId", restaurantId);
         formData.append("userId", user?._id);
-      }
 
-      await axios
-        .post(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/addReview`,
-          formData,
-          { headers: { "Content-Type": "application/json" } }
-        )
-        .then((res) => {
-          console.log("posted review", res.data);
-          setReviews(res.data);
-          reviewRouter.push(`/restaurants/${restaurantId}`);
-        });
+        await axios
+          .post(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/addReview`,
+            formData,
+            { headers: { "Content-Type": "application/json" } }
+          )
+          .then((res) => {
+            // console.log("posted review", res.data);
+            setReviews(res.data);
+            setHasReviews(true);
+            if (modalRef.current) {
+              modalRef.current.close();
+            }
+          });
+      }
     };
+    // console.log("posted review2", reviews);
 
     return (
       <>

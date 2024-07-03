@@ -29,10 +29,6 @@ export default function ReviewInput(props: ReviewInputProps) {
     options.push({ num: i, face });
   }
 
-  console.log("reviewRating1", props.reviewRating);
-  console.log("reviewTitle1", props.reviewTitle);
-  console.log("reviewDesc1", props.reviewDesc);
-
   return (
     <div className="flex flex-col ">
       <div className="bg-red-300 flex ">
