@@ -16,7 +16,7 @@ export type RestaurantInput = {
   restaurant_add: string;
   restaurant_tags: string;
   restaurant_number_reviews: number;
-  restaurant_reviews: string;
+  reviewsId: mongoose.Schema.Types.ObjectId[];
 };
 
 export type ReviewInput = {

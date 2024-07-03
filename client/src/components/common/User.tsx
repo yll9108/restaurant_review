@@ -57,9 +57,9 @@ function User({ uid }: Props) {
   }, [reviews?.userId, uid, user?._id, user?.user_name]);
   console.log("getUser", getUser);
 
-  getUser.map((name) => {
-    setUserName(name.user_name);
-  });
+  // getUser.map((name) => {
+  //   setUserName(name.user_name);
+  // });
   return (
     <>
       <div className="flex flex-col items-center">
