@@ -24,7 +24,9 @@ function Page() {
 
   useEffect(() => {
     setRestaurantId(restaurantId);
-  }, [restaurantId, setRestaurantId]);
+    setAllReviews([]);
+    setHasReviews(false);
+  }, [restaurantId, setAllReviews, setHasReviews, setRestaurantId]);
 
   // create only one function that fetch restaurant data and review data
 
@@ -45,7 +47,7 @@ function Page() {
             });
         }
       } catch (error) {
-        console.log("error", error);
+        console.log("Error fetching restaurant data", error);
       }
     };
     getData();
@@ -59,8 +61,8 @@ function Page() {
 
   useEffect(() => {
     const getReviews = async () => {
-      if (restaurantId) {
-        try {
+      try {
+        if (restaurantId) {
           await axios
             .get(
               `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`
@@ -71,14 +73,13 @@ function Page() {
               console.log("2222", res.data);
               // setReviews(res.data);
               setAllReviews(res.data);
-              if (res.data.length > 0) {
-                setHasReviews(true);
-              }
+              setHasReviews(res.data.length > 0);
+
               console.log("hasReviews2???", hasReviews);
             });
-        } catch (error) {
-          console.log("Error fetching reviews:", error);
         }
+      } catch (error) {
+        console.log("Error fetching reviews:", error);
       }
     };
     getReviews();

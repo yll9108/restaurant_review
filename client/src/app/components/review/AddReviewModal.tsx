@@ -19,7 +19,8 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5);
 
     const { user } = useContext(UserContext);
-    const { setReview, setHasReviews } = useContext(ReviewsContext);
+    const { setReview, setHasReviews, allReviews, setAllReviews } =
+      useContext(ReviewsContext);
 
     //Get restaurant ID
     const reviewParams = useParams();
@@ -82,27 +83,39 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
       const formData = new FormData();
 
       if (user?._id) {
-        formData.append("review_ratings", reviewRating.toString());
-        formData.append("review_date", postedTime);
-        formData.append("review_title", reviewTitle);
-        formData.append("review_description", reviewDesc);
-        formData.append("restaurantId", restaurantId);
-        formData.append("userId", user?._id);
+        try {
+          // formData.append("review_ratings", reviewRating.toString());
+          // formData.append("review_date", postedTime);
+          // formData.append("review_title", reviewTitle);
+          // formData.append("review_description", reviewDesc);
+          // formData.append("restaurantId", restaurantId);
+          // formData.append("userId", user?._id);
 
-        await axios
-          .post(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/addReview`,
-            formData,
-            { headers: { "Content-Type": "application/json" } }
-          )
-          .then((res) => {
-            // console.log("posted review", res.data);
-            setReview(res.data);
-            setHasReviews(true);
-            if (modalRef.current) {
-              modalRef.current.close();
-            }
-          });
+          await axios
+            .post(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/addReview`,
+              {
+                review_ratings: reviewRating,
+                review_date: postedTime,
+                review_title: reviewTitle,
+                review_description: reviewDesc,
+                restaurantId: restaurantId,
+                userId: user?._id,
+              },
+              { headers: { "Content-Type": "application/json" } }
+            )
+            .then((res) => {
+              // console.log("posted review", res.data);
+              // setReview(res.data);
+              setAllReviews([...allReviews, res.data]);
+              setHasReviews(true);
+              if (modalRef.current) {
+                modalRef.current.close();
+              }
+            });
+        } catch (err) {
+          console.error("Error posting review", err);
+        }
       }
     };
     // console.log("posted review2", reviews);
