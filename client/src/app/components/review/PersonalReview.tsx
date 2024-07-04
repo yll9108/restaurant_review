@@ -24,15 +24,7 @@ function PersonalReview({ allReviews }: Props) {
   const toggleReviews = () => {
     setShowAllReviews(!showAllReviews);
   };
-  // console.log("displayAllReviews", displayAllReviews);
-  // console.log("reviews", reviews);
-  // const checkUser = () => {
-  //   if(user?._id === reviews?.userId){
-  //     const getUser = async() => {
-  //       await axios.get(``)
-  //     }
-  //   }
-  // }
+
   console.log("allReviews", allReviews);
   let reviewUid: string = "";
   allReviews.map((uid) => {

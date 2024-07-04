@@ -5,9 +5,8 @@ import NoReviews from "@/app/components/review/NoReviews";
 import PersonalReview from "@/app/components/review/PersonalReview";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
-import { Review } from "@/types/types";
 import { useParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import axios from "axios";
 
 function Page() {
@@ -18,10 +17,8 @@ function Page() {
 
   const { allReviews, setAllReviews, hasReviews, setHasReviews } =
     useContext(ReviewsContext);
-  // const [allReviews, setAllReviews] = useState<Review[]>([]);
-  // const [hasReviews, setHasReviews] = useState<boolean>(false);
-  console.log("hasReviews3???", hasReviews);
 
+  //Check RestaurantId and rest reviews when user go to another restaurant page
   useEffect(() => {
     setRestaurantId(restaurantId);
     setAllReviews([]);
@@ -31,52 +28,30 @@ function Page() {
   // create only one function that fetch restaurant data and review data
 
   useEffect(() => {
-    console.log("here1");
-    // console.log("hasReviews0???", hasReviews);
     const getData = async () => {
       try {
         if (restaurantId) {
-          await axios
-            .get(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}`
-            )
-            .then((res) => {
-              console.log("here2");
-              setClickedRestaurant(res.data);
-              // console.log("hasReviews1???", hasReviews);
-            });
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}`
+          );
+          setClickedRestaurant(res.data);
         }
       } catch (error) {
         console.log("Error fetching restaurant data", error);
       }
     };
     getData();
-  }, [
-    // hasReviews,
-    restaurantId,
-    setClickedRestaurant,
-    // setAllReviews,
-    // setHasReviews,
-  ]);
+  }, [restaurantId, setClickedRestaurant]);
 
   useEffect(() => {
     const getReviews = async () => {
       try {
         if (restaurantId) {
-          await axios
-            .get(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`
-            )
-            .then((res) => {
-              console.log("here3");
-
-              console.log("2222", res.data);
-              // setReviews(res.data);
-              setAllReviews(res.data);
-              setHasReviews(res.data.length > 0);
-
-              console.log("hasReviews2???", hasReviews);
-            });
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`
+          );
+          setAllReviews(res.data);
+          setHasReviews(res.data.length > 0);
         }
       } catch (error) {
         console.log("Error fetching reviews:", error);
@@ -84,9 +59,6 @@ function Page() {
     };
     getReviews();
   }, [hasReviews, restaurantId, setAllReviews, setHasReviews]);
-
-  console.log("detail page", hasReviews);
-  console.log("allReviews", allReviews);
 
   return (
     <>

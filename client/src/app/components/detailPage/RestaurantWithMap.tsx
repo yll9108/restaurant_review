@@ -1,14 +1,13 @@
-// RestaurantWithMap.tsx
-import React from "react";
+"use client";
 import RestaurantInfo from "../restaurant/RestaurantInfo";
 import Tags from "../restaurant/Tags";
 import Address from "../restaurant/Address";
 import RestaurantMap from "./RestaurantMap";
-// import { RestaurantMockData, restaurantMockData } from "./mockdata";
-import { Button } from "@/components/common/button";
 import AddReview from "../review/AddReview";
 import { Restaurant } from "@/types/types";
-
+import { useContext } from "react";
+import { UserContext } from "@/context/UserContext";
+import { LoginStatus } from "@/types/types";
 // Add hasReviews prop to RestaurantWithMap component
 type RestaurantWithMapProps = {
   hasReviews: boolean;
@@ -19,6 +18,7 @@ function RestaurantWithMap({
   hasReviews,
   clickedRestaurant,
 }: RestaurantWithMapProps) {
+  const { loginStatus } = useContext(UserContext);
   return (
     <>
       <div className="bg-red-200">
@@ -41,7 +41,11 @@ function RestaurantWithMap({
                 {/* Render button only if hasReviews is false */}
                 {!hasReviews && (
                   <div className="text-center">
-                    <AddReview />
+                    {loginStatus === LoginStatus.LoggedIn ? (
+                      <AddReview />
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 )}
               </div>
