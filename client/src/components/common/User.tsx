@@ -30,22 +30,25 @@ type Props = {
 };
 function User({ uid }: Props) {
   const { user } = useContext(UserContext);
-  const { reviews } = useContext(ReviewsContext);
-  const [getUser, setGetUser] = useState<UserInfo[]>([]);
+  const { allReviews } = useContext(ReviewsContext);
+  // const [getUser, setGetUser] = useState<UserInfo>();
   const [userName, setUserName] = useState<string | undefined>("");
   console.log("uid", uid);
+  let reviewsUid = "";
+  allReviews.map((userName) => {
+    return (reviewsUid += userName.userId);
+  });
+  console.log("reviewsUid", reviewsUid);
 
   useEffect(() => {
-    if (uid === reviews?.userId) {
+    if (uid === reviewsUid) {
       try {
         const getUser = async () => {
-          await axios
-            .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`)
-            .then((res) => {
-              console.log("getUser", res.data);
-              setGetUser(res.data);
-              // setUserName(res.data)
-            });
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`
+          );
+          // console.log("getUser", res.data);
+          setUserName(res.data.user_name);
         };
         getUser();
       } catch (error) {
@@ -54,12 +57,9 @@ function User({ uid }: Props) {
     } else {
       setUserName(user?.user_name);
     }
-  }, [reviews?.userId, uid, user?._id, user?.user_name]);
-  console.log("getUser", getUser);
+  }, [reviewsUid, uid, user]);
+  console.log("userName", userName);
 
-  // getUser.map((name) => {
-  //   setUserName(name.user_name);
-  // });
   return (
     <>
       <div className="flex flex-col items-center">
