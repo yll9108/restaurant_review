@@ -16,23 +16,30 @@ export const getReview = async (
     console.log("restaurantId", restaurantId);
 
     // Ask DB to find review(s) which have this restaurantId
-    const reviews: ReviewInput[] = await reviewModels.find();
+    const reviews: ReviewInput[] = await reviewModels.find({ restaurantId });
 
     console.log("reviews", reviews);
 
-    // Filter reviews based on restaurantId
-    const filteredReviews = reviews.filter(
-      (review) => review.restaurantId === restaurantId
-    );
-
-    if (filteredReviews.length > 0) {
-      res.status(200).json(filteredReviews);
-      console.log("reviews", filteredReviews);
+    if (reviews.length > 0) {
+      res.status(200).json(reviews);
+      console.log("reviews", reviews);
     } else {
       res.status(404).json({ message: "No reviews found for this restaurant" });
     }
+    // // Filter reviews based on restaurantId
+    // const filteredReviews = reviews.filter(
+    //   (review) => review.restaurantId === restaurantId
+    // );
+
+    // if (filteredReviews.length > 0) {
+    //   res.status(200).json(filteredReviews);
+    //   console.log("reviews", filteredReviews);
+    // } else {
+    //   res.status(404).json({ message: "No reviews found for this restaurant" });
+    // }
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -41,7 +48,7 @@ export const addReview = async (
   res: express.Response
 ) => {
   const restaurantId = req.params.restaurantId;
-  const reviewInput = req.body;
+  const reviewInput: ReviewInput = req.body;
 
   console.log("addReview restaurantId", restaurantId);
   console.log("addReview reviewInput", reviewInput);
@@ -53,10 +60,14 @@ export const addReview = async (
       return res.status(400).json("restaurantId not exist");
     } else {
       const review = await createReview(reviewInput, restaurantId);
+
+      restaurant.reviewsId.push(review._id.toString());
+      await restaurant.save();
       console.log("successful");
       return res.status(200).json(review);
     }
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: "Server error" });
   }
 };

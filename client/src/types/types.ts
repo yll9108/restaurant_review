@@ -8,7 +8,7 @@ type Restaurant = {
   restaurant_number_reviews: number;
   restaurant_tags: string;
   restaurant_add: string;
-  mapString: string;
+  reviewsId: string[];
 };
 
 type PartialRestaurantData = Partial<Restaurant>;
@@ -79,8 +79,8 @@ type InitialReviewStateProps = {
 };
 
 type ReviewsContextProps = {
-  reviews: Review | null;
-  setReviews: (reviews: Review | null) => void;
+  review: Review | null;
+  setReview: (reviews: Review | null) => void;
   hasReviews: boolean;
   setHasReviews: (hasReviews: boolean) => void;
   allReviews: Review[];

@@ -40,28 +40,9 @@ function Page() {
             )
             .then((res) => {
               console.log("here2");
-
-              // console.log("1111", res.data);
-              // setHasReviews(false);
               setClickedRestaurant(res.data);
               // console.log("hasReviews1???", hasReviews);
             });
-          // console.log("here", restaurantId);
-
-          // await axios
-          //   .get(
-          //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`
-          //   )
-          //   .then((res) => {
-          //     console.log("here3");
-
-          //     console.log("2222", res.data);
-          //     setAllReviews(res.data);
-          //     if (res.data.length > 0) {
-          //       setHasReviews(true);
-          //     }
-          //     console.log("hasReviews2???", hasReviews);
-          //   });
         }
       } catch (error) {
         console.log("error", error);
@@ -101,7 +82,7 @@ function Page() {
       }
     };
     getReviews();
-  }, [hasReviews, restaurantId, setHasReviews]);
+  }, [hasReviews, restaurantId, setAllReviews, setHasReviews]);
 
   console.log("detail page", hasReviews);
   console.log("allReviews", allReviews);

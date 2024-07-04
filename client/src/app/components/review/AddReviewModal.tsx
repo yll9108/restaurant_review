@@ -19,7 +19,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5);
 
     const { user } = useContext(UserContext);
-    const { reviews, setReviews, setHasReviews } = useContext(ReviewsContext);
+    const { setReview, setHasReviews } = useContext(ReviewsContext);
 
     //Get restaurant ID
     const reviewParams = useParams();
@@ -97,7 +97,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
           )
           .then((res) => {
             // console.log("posted review", res.data);
-            setReviews(res.data);
+            setReview(res.data);
             setHasReviews(true);
             if (modalRef.current) {
               modalRef.current.close();
