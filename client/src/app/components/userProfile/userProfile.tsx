@@ -1,12 +1,12 @@
 "use client";
 import User from "@/components/common/User";
 import { BtnType, Button } from "@/components/common/button";
-import { useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 import DeleteAccount from "./deleteAccount";
 import { UserContext } from "@/context/UserContext";
 
-export default function UserProfile() {
+const UserProfile = () => {
   const { changedTabs } = useContext(DropDownContext);
   const { user } = useContext(UserContext);
   const modalRef = useRef<HTMLDialogElement>(null);
@@ -39,4 +39,6 @@ export default function UserProfile() {
       </div>
     </>
   );
-}
+};
+
+export default React.memo(UserProfile);

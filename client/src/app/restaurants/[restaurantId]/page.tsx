@@ -64,18 +64,14 @@ function Page() {
     <>
       <div className="flex">
         <div className="w-2/3">
-          {hasReviews ? (
-            <PersonalReview allReviews={allReviews} />
-          ) : (
-            <NoReviews />
-          )}
+          {hasReviews ? <PersonalReview /> : <NoReviews />}
         </div>
 
         <div>
           <div className="text-red-800">restaurant {restaurantId}</div>
           {clickedRestaurant && (
             <RestaurantWithMap
-              hasReviews={hasReviews}
+              // hasReviews={hasReviews}
               clickedRestaurant={clickedRestaurant}
             />
           )}

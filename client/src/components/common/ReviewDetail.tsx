@@ -1,9 +1,10 @@
+"use client";
 import React from "react";
 import { Review } from "../../types/types";
 import moment from "moment";
 
 // function ReviewDetail({ id, icon, rating, date, title, content }: Review) {
-function ReviewDetail({
+const ReviewDetail = ({
   _id,
   review_icon,
   review_ratings,
@@ -12,7 +13,7 @@ function ReviewDetail({
   review_description,
   restaurantId,
   userId,
-}: Review) {
+}: Review) => {
   console.log("review date", review_date);
 
   return (
@@ -30,6 +31,6 @@ function ReviewDetail({
       </div>
     </>
   );
-}
+};
 
-export default ReviewDetail;
+export default React.memo(ReviewDetail);

@@ -1,21 +1,18 @@
+"use client";
 import ReviewDetail from "@/components/common/ReviewDetail";
 import User from "@/components/common/User";
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import "./custom.css";
 import { BtnType, Button } from "@/components/common/button";
-import { Review } from "@/types/types";
-import { UserContext } from "@/context/UserContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
-import axios from "axios";
+
 // this props that the componment is receving has props called reviews that
 // is an array of type review
-type Props = {
-  allReviews: Review[];
-};
-function PersonalReview({ allReviews }: Props) {
+
+const PersonalReview = () => {
   const [showAllReviews, setShowAllReviews] = useState(false);
-  const { user } = useContext(UserContext);
-  // const { reviews } = useContext(ReviewsContext);
+  // const [reviewedUid, setReviewedUid] = useState<string>("");
+  const { allReviews } = useContext(ReviewsContext);
   const displayAllReviews = Array.isArray(allReviews)
     ? showAllReviews
       ? allReviews
@@ -25,25 +22,13 @@ function PersonalReview({ allReviews }: Props) {
     setShowAllReviews(!showAllReviews);
   };
 
-  console.log("allReviews", allReviews);
-  let reviewUid: string = "";
-  allReviews.map((uid) => {
-    return (reviewUid = uid.userId);
-  });
-  console.log("reviewUid", reviewUid);
-
   return (
     <>
       <div className="flex flex-col">
         {displayAllReviews.map((review) => (
           <div key={review._id} className="card bg-base-100 shadow-xl m-5">
             <div className="card-body flexRow">
-              {/* {user?._id === review.userId ? (
-                <User name={user.user_name} />
-              ) : (
-                <User name={review.userId} />
-              )} */}
-              <User uid={reviewUid} />
+              <User uid={review.userId} />
 
               <ReviewDetail
                 _id={review._id}
@@ -68,6 +53,6 @@ function PersonalReview({ allReviews }: Props) {
       </div>
     </>
   );
-}
+};
 
-export default PersonalReview;
+export default React.memo(PersonalReview);
