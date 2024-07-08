@@ -20,7 +20,9 @@ const UserSchema = new Schema({
   },
   user_favorite_restaurant: [
     {
+      // type: mongoose.Schema.Types.ObjectId,
       type: String,
+      ref: "Restaurant", // Reference to the Restaurant model
     },
   ],
   provider: {
@@ -30,4 +32,34 @@ const UserSchema = new Schema({
 
 const UserModel = mongoose.model("User", UserSchema);
 
-export default module.exports = UserModel;
+export default UserModel;
+// const UserSchema = new Schema({
+//   _id: {
+//     type: String,
+//     required: true,
+//   },
+//   user_name: {
+//     type: String,
+//     required: true,
+//   },
+//   user_picture: {
+//     type: String,
+//     default: "",
+//   },
+//   user_email: {
+//     type: String,
+//     required: true,
+//   },
+//   user_favorite_restaurant: [
+//     {
+//       type: String,
+//     },
+//   ],
+//   provider: {
+//     type: String,
+//   },
+// });
+
+// const UserModel = mongoose.model("User", UserSchema);
+
+// export default module.exports = UserModel;

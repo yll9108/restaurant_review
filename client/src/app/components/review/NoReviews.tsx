@@ -1,19 +1,16 @@
-import { Button } from "@/components/common/button";
-import React, { useState } from "react";
+import { useContext } from "react";
 import AddReview from "./AddReview";
+import { UserContext } from "@/context/UserContext";
+import { LoginStatus } from "@/types/types";
 
 function NoReviews() {
-  // addReviews set as false, means you don't need to add Reviews now.
-  // const [addReviews, setAddReviews] = useState(false);
-  // const toggleAddReviews = () => {
-  //   setAddReviews(!addReviews);
-  //   console.log("setAddReviews", addReviews);
-  // };
+  const { loginStatus } = useContext(UserContext);
+
   return (
     <>
       <div className="flex flex-col items-center justify-center h-full">
         <div className="mb-5">No reviews</div>
-        <AddReview />
+        {loginStatus === LoginStatus.LoggedIn ? <AddReview /> : <></>}
       </div>
     </>
   );

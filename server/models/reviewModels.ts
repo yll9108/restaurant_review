@@ -6,24 +6,62 @@ const ReviewSchema = new Schema({
     type: Number,
     required: true,
   },
-  reviews_date: {
-    type: Date,
-    require: true,
+  review_date: {
+    type: String,
+    required: true,
   },
   review_title: {
     type: String,
-    require: true,
+    required: true,
   },
   review_description: {
     type: String,
-    require: true,
+    required: true,
   },
   restaurantId: {
+    // type: mongoose.Schema.Types.ObjectId,
     type: String,
-    require: true,
+    ref: "Restaurant", // Reference to the Restaurant model
+    required: true,
+  },
+  userId: {
+    type: String,
+    ref: "User", // Reference to the User model
+    required: true,
   },
 });
 
 const ReviewModel = mongoose.model("Review", ReviewSchema);
 
-export default module.exports = ReviewModel;
+export default ReviewModel;
+
+// const ReviewSchema = new Schema({
+//   review_ratings: {
+//     type: Number,
+//     required: true,
+//   },
+//   review_date: {
+//     type: String,
+//     require: true,
+//   },
+//   review_title: {
+//     type: String,
+//     require: true,
+//   },
+//   review_description: {
+//     type: String,
+//     require: true,
+//   },
+//   restaurantId: {
+//     type: String,
+//     require: true,
+//   },
+//   userId: {
+//     type: String,
+//     require: true,
+//   },
+// });
+
+// const ReviewModel = mongoose.model("Review", ReviewSchema);
+
+// export default module.exports = ReviewModel;

@@ -1,3 +1,5 @@
+import { ReactNode, RefObject } from "react";
+
 // Type for Restaurant
 type Restaurant = {
   _id: string;
@@ -6,7 +8,7 @@ type Restaurant = {
   restaurant_number_reviews: number;
   restaurant_tags: string;
   restaurant_add: string;
-  mapString: string;
+  reviewsId: string[];
 };
 
 type PartialRestaurantData = Partial<Restaurant>;
@@ -16,7 +18,7 @@ type RestaurantContextType = {
   setRestaurantId: (restaurantId: string) => void;
   restaurantsData: Restaurant[];
   clickedRestaurant: Restaurant | null;
-  setClickedRestaurant: React.Dispatch<React.SetStateAction<Restaurant | null>>;
+  setClickedRestaurant: (clickedRestaurant: Restaurant | null) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
 };
@@ -31,12 +33,58 @@ type PaginationData = {
 
 // Type for Reviews
 type Review = {
-  _id: number;
+  _id: string;
   review_icon: string;
   review_ratings: number;
-  review_date: Date;
+  review_date: string;
   review_title: string;
   review_description: string;
+  restaurantId: string;
+  userId: string;
+};
+
+type ShowConfirmProps = {
+  showConfirm: boolean;
+  setShowConfirm: (showConfirm: boolean) => void;
+  modalRef: RefObject<HTMLDialogElement>;
+};
+
+type Rating = {
+  num: number;
+  face: ReactNode;
+};
+
+type NewReview = {
+  review_ratings: number;
+  review_date: string;
+  review_title: string;
+  review_description: string;
+  restaurantId: string;
+  userId: string | undefined;
+};
+
+type ReviewInputProps = {
+  reviewTitle: string;
+  setReviewTitle: (reviewTitle: string) => void;
+  reviewDesc: string;
+  setReviewDesc: (reviewDesc: string) => void;
+  reviewRating: number;
+  setReviewRating: (reviewRating: number) => void;
+};
+
+type InitialReviewStateProps = {
+  reviewTitle: string;
+  reviewDesc: string;
+  reviewRating: number;
+};
+
+type ReviewsContextProps = {
+  review: Review | null;
+  setReview: (reviews: Review | null) => void;
+  hasReviews: boolean;
+  setHasReviews: (hasReviews: boolean) => void;
+  allReviews: Review[];
+  setAllReviews: (allReviews: Review[]) => void;
 };
 
 // Type for PageContext
@@ -92,12 +140,22 @@ type UserContextProps = {
 };
 
 export type {
+  //Restaurants
   Restaurant,
   PartialRestaurantData,
-  PaginationData,
-  Review,
   RestaurantContextType,
+  PaginationData,
+  //Reviews
+  Review,
+  ShowConfirmProps,
+  Rating,
+  NewReview,
+  ReviewInputProps,
+  InitialReviewStateProps,
+  ReviewsContextProps,
+  //PageContext
   PageContextProps,
+  //Users
   UserInfo,
   FirebaseAccount,
   UserContextProps,

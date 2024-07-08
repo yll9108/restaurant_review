@@ -1,11 +1,13 @@
+import mongoose from "mongoose";
+
 export type UserInput = {
   _id: string;
   user_name: string;
-  user_picture: string;
+  user_picture?: string;
   user_email: string;
   user_password: string;
-  user_favorite_restaurant: string[];
-  provider: string;
+  user_favorite_restaurant?: mongoose.Schema.Types.ObjectId[];
+  provider?: string;
 };
 
 export type RestaurantInput = {
@@ -14,13 +16,14 @@ export type RestaurantInput = {
   restaurant_add: string;
   restaurant_tags: string;
   restaurant_number_reviews: number;
-  restaurant_reviews: string;
+  reviewsId: mongoose.Schema.Types.ObjectId[];
 };
 
 export type ReviewInput = {
   review_ratings: number;
-  review_date: Date;
+  review_date: string;
   review_title: string;
   review_description: string;
   restaurantId: string;
+  userId: string;
 };

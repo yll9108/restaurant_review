@@ -8,24 +8,38 @@ export const getReview = async (
   req: express.Request,
   res: express.Response
 ) => {
+  console.log("getReview", req.params);
+
   try {
     // Get the restaurantId from request parameters
     const restaurantId = req.params.restaurantId;
-    // Ask DB to find review(s) which have this restaurantId
-    const reviews: ReviewInput[] = await reviewModels.find();
-    // Filter reviews based on restaurantId
-    const filteredReviews = reviews.filter(
-      (review) => review.restaurantId === restaurantId
-    );
+    console.log("restaurantId", restaurantId);
 
-    if (filteredReviews.length > 0) {
-      res.status(200).json(filteredReviews);
-      console.log("reviews", filteredReviews);
+    // Ask DB to find review(s) which have this restaurantId
+    const reviews: ReviewInput[] = await reviewModels.find({ restaurantId });
+
+    console.log("reviews", reviews);
+
+    if (reviews.length > 0) {
+      res.status(200).json(reviews);
+      console.log("reviews", reviews);
     } else {
       res.status(404).json({ message: "No reviews found for this restaurant" });
     }
+    // // Filter reviews based on restaurantId
+    // const filteredReviews = reviews.filter(
+    //   (review) => review.restaurantId === restaurantId
+    // );
+
+    // if (filteredReviews.length > 0) {
+    //   res.status(200).json(filteredReviews);
+    //   console.log("reviews", filteredReviews);
+    // } else {
+    //   res.status(404).json({ message: "No reviews found for this restaurant" });
+    // }
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: "Server error" });
   }
 };
 
@@ -36,7 +50,8 @@ export const addReview = async (
   const restaurantId = req.params.restaurantId;
   const reviewInput: ReviewInput = req.body;
 
-  console.log("restaurantId", restaurantId);
+  console.log("addReview restaurantId", restaurantId);
+  console.log("addReview reviewInput", reviewInput);
 
   try {
     const restaurant = await restaurantModels.findById(restaurantId);
@@ -44,11 +59,15 @@ export const addReview = async (
       console.log("please select a restaurant");
       return res.status(400).json("restaurantId not exist");
     } else {
-      const review = createReview(reviewInput, restaurantId);
+      const review = await createReview(reviewInput, restaurantId);
+
+      restaurant.reviewsId.push(review._id.toString());
+      await restaurant.save();
       console.log("successful");
       return res.status(200).json(review);
     }
   } catch (err) {
     console.log(err);
+    res.status(500).json({ message: "Server error" });
   }
 };

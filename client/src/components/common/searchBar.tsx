@@ -11,6 +11,7 @@ export default function SearchBar() {
   return (
     <Input
       textType={TextType.question}
+      name="question"
       className="mr-2 mb-0"
       placeholder="Enter restaurant name"
       onChange={handleInputChange}

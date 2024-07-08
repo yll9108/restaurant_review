@@ -1,9 +1,40 @@
 "use client";
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import Image from "next/image";
-function User() {
+import { ReviewsContext } from "@/context/ReviewsContext";
+import axios from "axios";
+
+type Props = {
+  uid: string | undefined;
+};
+const User = ({ uid }: Props) => {
   const { user } = useContext(UserContext);
+  const { allReviews } = useContext(ReviewsContext);
+  const [userName, setUserName] = useState<string | undefined>("");
+
+  useEffect(() => {
+    allReviews.forEach((review) => {
+      if (uid === review.userId) {
+        try {
+          const getUser = async () => {
+            const res = await axios.get(
+              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`
+            );
+            console.log("success");
+
+            console.log("getUser", res.data);
+            setUserName(res.data.user_name);
+          };
+          getUser();
+        } catch (error) {
+          console.log("getUser error", error);
+        }
+      } else {
+        setUserName(user?.user_name);
+      }
+    });
+  }, [allReviews, uid, user]);
 
   return (
     <>
@@ -18,10 +49,10 @@ function User() {
             />
           </div>
         </div>
-        <div className=" w-24 text-center">{user?.user_name}</div>
+        <div className=" w-24 text-center">{userName}</div>
       </div>
     </>
   );
-}
+};
 
-export default User;
+export default React.memo(User);

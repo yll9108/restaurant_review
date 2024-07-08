@@ -2,6 +2,7 @@ import express from "express";
 import UserModel from "../models/userModels";
 import { UserInput } from "../types/types";
 import { createUser, validateUserInput } from "../helpers/helpers";
+// import mongoose from "mongoose";
 
 export const registerUser = async (
   req: express.Request,

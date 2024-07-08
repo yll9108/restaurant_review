@@ -1,24 +1,45 @@
-// RestaurantWithMap.tsx
-import React from "react";
+"use client";
 import RestaurantInfo from "../restaurant/RestaurantInfo";
 import Tags from "../restaurant/Tags";
 import Address from "../restaurant/Address";
 import RestaurantMap from "./RestaurantMap";
-// import { RestaurantMockData, restaurantMockData } from "./mockdata";
-import { Button } from "@/components/common/button";
 import AddReview from "../review/AddReview";
-import { Restaurant } from "@/types/types";
+import { Restaurant, LoginStatus } from "@/types/types";
+import React, { useContext, useEffect, useState } from "react";
+import { UserContext } from "@/context/UserContext";
+import { ReviewsContext } from "@/context/ReviewsContext";
+import { logEvent } from "firebase/analytics";
 
 // Add hasReviews prop to RestaurantWithMap component
 type RestaurantWithMapProps = {
-  hasReviews: boolean;
+  // hasReviews: boolean;
   clickedRestaurant: Restaurant | null;
 };
 
-function RestaurantWithMap({
-  hasReviews,
+const RestaurantWithMap = ({
+  // hasReviews,
   clickedRestaurant,
-}: RestaurantWithMapProps) {
+}: RestaurantWithMapProps) => {
+  const { loginStatus } = useContext(UserContext);
+  const { hasReviews, allReviews } = useContext(ReviewsContext);
+  const { user } = useContext(UserContext);
+
+  const [isReview, setIsReview] = useState<Boolean>(false);
+
+  console.log("userId1", user?._id);
+  console.log("allReviews", allReviews);
+  useEffect(() => {
+    let letUserHasReviewed = false;
+    allReviews.map((review) => {
+      if (review.userId === user?._id) {
+        letUserHasReviewed = true;
+      }
+      setIsReview(letUserHasReviewed);
+    });
+  }, [allReviews, setIsReview, user?._id]);
+
+  console.log("isReview", isReview);
+
   return (
     <>
       <div className="bg-red-200">
@@ -36,13 +57,24 @@ function RestaurantWithMap({
                   }
                 />
                 <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
-                <RestaurantMap mapString={"/mockMap.png"} />
+                {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
                 <Address restaurant_add={clickedRestaurant.restaurant_add} />
-                {/* Render button only if hasReviews is false */}
-                {!hasReviews && (
-                  <div className="text-center">
-                    <AddReview />
-                  </div>
+                {/* Render button */}
+
+                {loginStatus === LoginStatus.LoggedIn ? (
+                  !hasReviews ? (
+                    <div className="text-center">
+                      <AddReview />
+                    </div>
+                  ) : !isReview ? (
+                    <div className="text-center">
+                      <AddReview />
+                    </div>
+                  ) : (
+                    <></>
+                  )
+                ) : (
+                  <></>
                 )}
               </div>
             )}
@@ -51,6 +83,6 @@ function RestaurantWithMap({
       </div>
     </>
   );
-}
+};
 
-export default RestaurantWithMap;
+export default React.memo(RestaurantWithMap);

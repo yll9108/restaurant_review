@@ -69,11 +69,13 @@ export default function Login() {
         <form onSubmit={handleEmailLogin} className="w-64">
           <Input
             textType={TextType.email}
+            name="email"
             placeholder="Email"
             onChange={(event) => setEmail(event.target.value)}
           />
           <Input
             textType={TextType.password}
+            name="password"
             placeholder="Password"
             onChange={(event) => setPassword(event.target.value)}
           />

@@ -122,16 +122,19 @@ export default function Signup() {
             <div className="flex flex-col items-center">
               <Input
                 textType={TextType.text}
+                name="userEmail"
                 placeholder="Your email address"
                 onChange={(event) => setEmail(event.target.value)}
               />
               <Input
                 textType={TextType.password}
+                name="userPassword"
                 placeholder="Create password"
                 onChange={(event) => setPassword(event.target.value)}
               />
               <Input
                 textType={TextType.password}
+                name="userConfirmPassword"
                 placeholder="Confirm password"
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
@@ -152,6 +155,7 @@ export default function Signup() {
             <div className="flex flex-col">
               <Input
                 textType={TextType.text}
+                name="userName"
                 placeholder="type your name"
                 onChange={(event) => setName(event.target.value)}
               />
