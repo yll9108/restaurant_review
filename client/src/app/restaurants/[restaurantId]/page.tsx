@@ -48,7 +48,7 @@ function Page() {
       try {
         if (restaurantId) {
           const res = await axios.get(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/`
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/reviews/${restaurantId}`
           );
           setAllReviews(res.data);
           setHasReviews(res.data.length > 0);

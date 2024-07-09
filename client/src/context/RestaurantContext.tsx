@@ -47,6 +47,7 @@ export function RestaurantContextProvider({
     <RestaurantContext.Provider
       value={{
         restaurantsData,
+        setRestaurantsData,
         clickedRestaurant,
         setClickedRestaurant,
         restaurantId,

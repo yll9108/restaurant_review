@@ -17,6 +17,7 @@ type RestaurantContextType = {
   restaurantId: Restaurant["_id"];
   setRestaurantId: (restaurantId: string) => void;
   restaurantsData: Restaurant[];
+  setRestaurantsData: (restaurantsData: Restaurant[]) => void;
   clickedRestaurant: Restaurant | null;
   setClickedRestaurant: (clickedRestaurant: Restaurant | null) => void;
   searchValue: string;
@@ -34,7 +35,7 @@ type PaginationData = {
 // Type for Reviews
 type Review = {
   _id: string;
-  review_icon: string;
+  // review_icon: string;
   review_ratings: number;
   review_date: string;
   review_title: string;

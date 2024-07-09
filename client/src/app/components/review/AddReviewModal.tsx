@@ -19,7 +19,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5);
 
     const { user } = useContext(UserContext);
-    const { setHasReviews, allReviews, setAllReviews } =
+    const { setHasReviews, allReviews, setAllReviews, setReview } =
       useContext(ReviewsContext);
 
     //Get restaurant ID
@@ -88,7 +88,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
           // formData.append("userId", user?._id);
 
           const res = await axios.post(
-            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}/review/addReview`,
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/review/${restaurantId}/new`,
             {
               review_ratings: reviewRating,
               review_date: postedTime,
@@ -100,6 +100,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             { headers: { "Content-Type": "application/json" } }
           );
           const newReview = res.data;
+          // setReview(newReview);
           setAllReviews([...allReviews, newReview]);
           setHasReviews(true);
           if (modalRef.current) {

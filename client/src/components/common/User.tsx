@@ -21,9 +21,7 @@ const User = ({ uid }: Props) => {
             const res = await axios.get(
               `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`
             );
-            console.log("success");
 
-            console.log("getUser", res.data);
             setUserName(res.data.user_name);
           };
           getUser();

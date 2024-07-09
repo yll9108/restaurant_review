@@ -1,9 +1,13 @@
 import express, { Router } from "express";
-import { addReview, getReview } from "../controllers/reviewController";
+import {
+  getReviews,
+  getReviewsByUserId,
+} from "../controllers/reviewController";
 
 const reviewRouter: Router = express.Router({ mergeParams: true });
 
-reviewRouter.get("/", getReview);
-reviewRouter.post("/addReview", addReview);
+reviewRouter.get("/", getReviews);
+reviewRouter.get("/:userId", getReviewsByUserId);
+// reviewRouter.post("/addReview", addReview);
 
 export default reviewRouter;

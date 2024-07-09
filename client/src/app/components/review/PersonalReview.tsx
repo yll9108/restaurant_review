@@ -11,7 +11,6 @@ import { ReviewsContext } from "@/context/ReviewsContext";
 
 const PersonalReview = () => {
   const [showAllReviews, setShowAllReviews] = useState(false);
-  // const [reviewedUid, setReviewedUid] = useState<string>("");
   const { allReviews } = useContext(ReviewsContext);
   const displayAllReviews = Array.isArray(allReviews)
     ? showAllReviews
@@ -32,7 +31,6 @@ const PersonalReview = () => {
 
               <ReviewDetail
                 _id={review._id}
-                review_icon={review.review_icon}
                 review_ratings={review.review_ratings}
                 review_date={review.review_date}
                 review_title={review.review_title}

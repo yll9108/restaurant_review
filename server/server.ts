@@ -4,6 +4,7 @@ import connectDB from "./db";
 import "dotenv/config";
 import usersRouter from "./routes/usersRoutes";
 import restaurantRouter from "./routes/restaurantRoutes";
+import reviewRouter from "./routes/reviewRoutes";
 
 const corsOptions = {
   origin: process.env.FRONTEND_URL,
@@ -31,4 +32,5 @@ server.get("/", (req: express.Request, res: express.Response) => {
 
 server.use("/api/users", usersRouter);
 server.use("/api/restaurants", restaurantRouter);
+server.use("/api/reviews", reviewRouter);
 export default server;
