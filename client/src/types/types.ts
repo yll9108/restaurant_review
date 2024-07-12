@@ -22,6 +22,7 @@ type RestaurantContextType = {
   setClickedRestaurant: (clickedRestaurant: Restaurant | null) => void;
   searchValue: string;
   setSearchValue: (value: string) => void;
+  updatedRestaurantData: (updatedRestaurant: Restaurant) => void;
 };
 
 // Type for Pagination
@@ -101,6 +102,12 @@ type PageContextProps = {
   notFound: () => void;
 };
 
+//Type for common properties
+type RatingProps = {
+  ratings: number; // The rating value, e.g., 4.5
+  maxRating?: number; // The maximum rating value, e.g., 5 (default is 5)
+};
+
 // Type for Users
 type UserInfo = {
   _id: string;
@@ -156,6 +163,8 @@ export type {
   ReviewsContextProps,
   //PageContext
   PageContextProps,
+  //Common Properties
+  RatingProps,
   //Users
   UserInfo,
   FirebaseAccount,

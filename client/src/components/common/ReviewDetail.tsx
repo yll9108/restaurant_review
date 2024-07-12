@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { Review } from "../../types/types";
-
+import Ratings from "./ratings";
 // function ReviewDetail({ id, icon, rating, date, title, content }: Review) {
 const ReviewDetail = ({
   _id,
@@ -18,6 +18,7 @@ const ReviewDetail = ({
     <>
       <div className="flex flex-col">
         <div className="flex" key={_id}>
+          <Ratings ratings={review_ratings} />
           <p>{review_ratings}</p>
           <p>Time:{review_date}</p>
         </div>

@@ -9,6 +9,8 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
 import { logEvent } from "firebase/analytics";
+import { RestaurantContext } from "@/context/RestaurantContext";
+import axios from "axios";
 
 // Add hasReviews prop to RestaurantWithMap component
 type RestaurantWithMapProps = {
@@ -20,14 +22,13 @@ const RestaurantWithMap = ({
   // hasReviews,
   clickedRestaurant,
 }: RestaurantWithMapProps) => {
-  const { loginStatus } = useContext(UserContext);
+  const { loginStatus, user } = useContext(UserContext);
   const { hasReviews, allReviews } = useContext(ReviewsContext);
-  const { user } = useContext(UserContext);
+  const { restaurantsData, updatedRestaurantData } =
+    useContext(RestaurantContext);
 
   const [isReview, setIsReview] = useState<Boolean>(false);
 
-  console.log("userId1", user?._id);
-  console.log("allReviews", allReviews);
   useEffect(() => {
     let letUserHasReviewed = false;
     allReviews.map((review) => {
@@ -38,7 +39,19 @@ const RestaurantWithMap = ({
     });
   }, [allReviews, setIsReview, user?._id]);
 
-  console.log("isReview", isReview);
+  useEffect(() => {
+    if (clickedRestaurant) {
+      const updatedRes = async () => {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${clickedRestaurant._id}`
+        );
+        if (JSON.stringify(clickedRestaurant) !== JSON.stringify(res.data)) {
+          updatedRestaurantData(res.data);
+        }
+        updatedRes();
+      };
+    }
+  }, [clickedRestaurant, updatedRestaurantData]);
 
   return (
     <>

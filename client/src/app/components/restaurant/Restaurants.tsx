@@ -11,9 +11,6 @@ function Restaurants() {
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
 
-  // move to context
-  // const [restaurantsData, setRestaurantsData] = useState([]);
-
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
   const indexOfFirstRestaurant = indexOfLastRestaurant - restaurantPerPage;

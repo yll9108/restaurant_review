@@ -35,8 +35,8 @@ function Card({
               restaurant_avg_ratings={restaurant_avg_ratings}
               restaurant_number_reviews={restaurant_number_reviews}
             />
-            <Tags restaurant_tags={restaurant_tags} />
             <Address restaurant_add={restaurant_add} />
+            <Tags restaurant_tags={restaurant_tags} />
           </div>
         </div>
       </div>
@@ -44,4 +44,4 @@ function Card({
   );
 }
 
-export default Card;
+export default React.memo(Card);
