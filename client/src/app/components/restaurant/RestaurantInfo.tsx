@@ -2,11 +2,11 @@ import React from "react";
 import { PartialRestaurantData } from "@/types/types";
 import Ratings from "@/components/common/ratings";
 
-function RestaurantInfo({
+const RestaurantInfo = ({
   restaurant_name,
   restaurant_avg_ratings,
   restaurant_number_reviews,
-}: PartialRestaurantData) {
+}: PartialRestaurantData) => {
   return (
     <>
       {/* <div className="bg-primary">this is res info</div> */}
@@ -18,6 +18,6 @@ function RestaurantInfo({
       </div>
     </>
   );
-}
+};
 
-export default RestaurantInfo;
+export default React.memo(RestaurantInfo);

@@ -62,9 +62,9 @@ function Page() {
         {/*display right side */}
         <div>
           <div className="text-red-800">restaurant {restaurantId}</div>
-          {/* {clickedRestaurant && (
-          )} */}
-          <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
+          {clickedRestaurant && (
+            <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
+          )}
         </div>
       </div>
     </>
