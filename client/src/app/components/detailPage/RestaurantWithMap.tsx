@@ -44,11 +44,25 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
         if (JSON.stringify(clickedRestaurant) !== JSON.stringify(res.data)) {
           updatedRestaurantData(res.data);
         }
-        updatedRes();
       };
+      updatedRes();
+      // Check if the restaurant is in the user's favorites
+      const checkIsFav = user?.user_favorite_restaurant.includes(
+        clickedRestaurant._id
+      );
+      if (checkIsFav) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
     }
-  }, [clickedRestaurant, updatedRestaurantData]);
+  }, [
+    clickedRestaurant,
+    updatedRestaurantData,
+    user?.user_favorite_restaurant,
+  ]);
 
+  //favorite button handler
   const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
 
@@ -68,7 +82,6 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
       console.error("Error updating favorite restaurant:", error);
     }
   };
-  console.log("isFav", isFav);
 
   return (
     <>

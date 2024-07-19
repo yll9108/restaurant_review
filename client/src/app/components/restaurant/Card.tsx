@@ -42,7 +42,7 @@ function Card({
             <Address restaurant_add={restaurant_add} />
             <div className="flex gap-5 bg-yellow-200">
               <Tags restaurant_tags={restaurant_tags} />
-              <FavButton className="" onClick={submitFav} />
+              {/* <FavButton className="" onClick={submitFav} /> */}
             </div>
           </div>
         </div>
