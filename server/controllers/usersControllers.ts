@@ -91,3 +91,35 @@ export const deleteUser = async (
     }
   }
 };
+
+export const toggleFavoriteRestaurant = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  const userId = req.params.id;
+  const { restaurantId } = req.body;
+  console.log("toggleFavoriteRestaurant userId: ", userId);
+  console.log("toggleFavoriteRestaurant restaurantId: ", restaurantId);
+
+  try {
+    const user = await UserModel.findById(userId);
+
+    if (!user) {
+      res.status(404).send("User not found");
+      return;
+    }
+    const favoriteIndex = user.user_favorite_restaurant.indexOf(restaurantId);
+
+    if (favoriteIndex === -1) {
+      user.user_favorite_restaurant.push(restaurantId);
+    } else {
+      user.user_favorite_restaurant.splice(favoriteIndex, 1);
+    }
+
+    await user.save();
+    res.status(200).json(user);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (err: any) {
+    res.status(500).send(err.message);
+  }
+};

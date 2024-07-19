@@ -7,6 +7,7 @@ import { useParams } from "next/navigation";
 import moment from "moment";
 import ReviewInput from "./ReviewInput";
 import axios from "axios";
+import { RestaurantContext } from "@/context/RestaurantContext";
 interface AddReviewModalProps {
   modalRef: RefObject<HTMLDialogElement>;
 }
@@ -21,6 +22,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const { user } = useContext(UserContext);
     const { setHasReviews, allReviews, setAllReviews, setReview } =
       useContext(ReviewsContext);
+    const { updatedRestaurantData } = useContext(RestaurantContext);
 
     //Get restaurant ID
     const reviewParams = useParams();
@@ -100,9 +102,18 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             { headers: { "Content-Type": "application/json" } }
           );
           const newReview = res.data;
-          // setReview(newReview);
           setAllReviews([...allReviews, newReview]);
           setHasReviews(true);
+
+          // Fetch the updated restaurant data
+          const updatedRestaurantRes = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${restaurantId}`
+          );
+          const updatedRestaurant = updatedRestaurantRes.data;
+
+          // Update the restaurant data in context
+          updatedRestaurantData(updatedRestaurant);
+
           if (modalRef.current) {
             modalRef.current.close();
           }

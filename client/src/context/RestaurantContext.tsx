@@ -20,6 +20,21 @@ export function RestaurantContextProvider({
     null
   );
 
+  const updatedRestaurantData = (updatedRestaurant: Restaurant) => {
+    setRestaurantsData((prevData) =>
+      prevData.map((restaurant) =>
+        restaurant._id === updatedRestaurant._id
+          ? updatedRestaurant
+          : restaurant
+      )
+    );
+    setClickedRestaurant((prevRestaurant) =>
+      prevRestaurant && prevRestaurant._id === updatedRestaurant._id
+        ? updatedRestaurant
+        : prevRestaurant
+    );
+  };
+
   // Homepage, fetch all restaurant data
   useEffect(() => {
     if (searchValue) {
@@ -54,6 +69,7 @@ export function RestaurantContextProvider({
         setRestaurantId,
         searchValue,
         setSearchValue,
+        updatedRestaurantData,
       }}
     >
       {children}

@@ -114,6 +114,18 @@ export const newReview = async (
       const review = await createReview(reviewInput, restaurantId);
 
       restaurant.reviewsId.push(review._id.toString());
+
+      //  Update the restaurant's average rating and number of reviews
+      const newNumberOfReviews = restaurant.restaurant_number_reviews + 1;
+      const newAvgRating =
+        (restaurant.restaurant_avg_ratings *
+          restaurant.restaurant_number_reviews +
+          reviewInput.review_ratings) /
+        newNumberOfReviews;
+
+      restaurant.restaurant_number_reviews = newNumberOfReviews;
+      restaurant.restaurant_avg_ratings = Math.round(newAvgRating * 10) / 10;
+
       await restaurant.save();
       console.log("successful");
       return res.status(200).json(review);

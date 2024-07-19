@@ -2,7 +2,7 @@
 import { BtnType, Button } from "@/components/common/button";
 import { useRouter } from "next/navigation";
 import { FaExclamationTriangle } from "react-icons/fa";
-import { useContext, useState, RefObject, forwardRef } from "react";
+import React, { useContext, useState, RefObject, forwardRef } from "react";
 import axios from "axios";
 import { UserContext } from "@/context/UserContext";
 import {
@@ -102,4 +102,4 @@ const DeleteAccount = forwardRef<HTMLDialogElement, DeleteAccountProps>(
   }
 );
 DeleteAccount.displayName = "DeleteAccount";
-export default DeleteAccount;
+export default React.memo(DeleteAccount);

@@ -14,24 +14,25 @@ const User = ({ uid }: Props) => {
   const [userName, setUserName] = useState<string | undefined>("");
 
   useEffect(() => {
-    allReviews.forEach((review) => {
-      if (uid === review.userId) {
-        try {
-          const getUser = async () => {
-            const res = await axios.get(
-              `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`
-            );
+    const fetchUserName = async () => {
+      if (!uid) return;
 
-            setUserName(res.data.user_name);
-          };
-          getUser();
-        } catch (error) {
-          console.log("getUser error", error);
+      //Check if the current user ID matches any review's user ID
+      const review = allReviews.find((review) => review.userId === uid);
+      if (review) {
+        try {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${uid}`
+          );
+          setUserName(res.data.user_name);
+        } catch (err) {
+          console.error("getUser error", err);
         }
       } else {
         setUserName(user?.user_name);
       }
-    });
+    };
+    fetchUserName();
   }, [allReviews, uid, user]);
 
   return (

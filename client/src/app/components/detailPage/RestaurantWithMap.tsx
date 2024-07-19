@@ -8,26 +8,23 @@ import { Restaurant, LoginStatus } from "@/types/types";
 import React, { useContext, useEffect, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
-import { logEvent } from "firebase/analytics";
+import { RestaurantContext } from "@/context/RestaurantContext";
+import axios from "axios";
+import FavButton from "../restaurant/FavButton";
 
-// Add hasReviews prop to RestaurantWithMap component
 type RestaurantWithMapProps = {
-  // hasReviews: boolean;
   clickedRestaurant: Restaurant | null;
 };
 
-const RestaurantWithMap = ({
-  // hasReviews,
-  clickedRestaurant,
-}: RestaurantWithMapProps) => {
-  const { loginStatus } = useContext(UserContext);
+const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
+  const { loginStatus, user, setUser } = useContext(UserContext);
   const { hasReviews, allReviews } = useContext(ReviewsContext);
-  const { user } = useContext(UserContext);
+  const { restaurantsData, updatedRestaurantData } =
+    useContext(RestaurantContext);
 
   const [isReview, setIsReview] = useState<Boolean>(false);
+  const [isFav, setIsFav] = useState<Boolean>(false);
 
-  console.log("userId1", user?._id);
-  console.log("allReviews", allReviews);
   useEffect(() => {
     let letUserHasReviewed = false;
     allReviews.map((review) => {
@@ -38,7 +35,53 @@ const RestaurantWithMap = ({
     });
   }, [allReviews, setIsReview, user?._id]);
 
-  console.log("isReview", isReview);
+  useEffect(() => {
+    if (clickedRestaurant) {
+      const updatedRes = async () => {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/${clickedRestaurant._id}`
+        );
+        if (JSON.stringify(clickedRestaurant) !== JSON.stringify(res.data)) {
+          updatedRestaurantData(res.data);
+        }
+      };
+      updatedRes();
+      // Check if the restaurant is in the user's favorites
+      const checkIsFav = user?.user_favorite_restaurant.includes(
+        clickedRestaurant._id
+      );
+      if (checkIsFav) {
+        setIsFav(true);
+      } else {
+        setIsFav(false);
+      }
+    }
+  }, [
+    clickedRestaurant,
+    updatedRestaurantData,
+    user?.user_favorite_restaurant,
+  ]);
+
+  //favorite button handler
+  const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+
+    if (!clickedRestaurant) return;
+
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${user?._id}/favorite`,
+        { restaurantId: clickedRestaurant?._id },
+        {
+          headers: { Accept: "application/json" },
+        }
+      );
+      setUser(response.data);
+      setIsFav(!isFav);
+    } catch (error) {
+      console.error("Error updating favorite restaurant:", error);
+    }
+  };
 
   return (
     <>
@@ -56,9 +99,18 @@ const RestaurantWithMap = ({
                     clickedRestaurant.restaurant_number_reviews
                   }
                 />
-                <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
-                {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
                 <Address restaurant_add={clickedRestaurant.restaurant_add} />
+                <div className="flex gap-5 bg-yellow-200">
+                  <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
+                  <FavButton
+                    className={
+                      isFav ? "btn btn-sm btn-warning" : "btn btn-sm btn-accent"
+                    }
+                    onClick={registeredFav}
+                    isFav={isFav}
+                  />
+                </div>
+                {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
                 {/* Render button */}
 
                 {loginStatus === LoginStatus.LoggedIn ? (
