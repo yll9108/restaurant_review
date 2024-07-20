@@ -7,14 +7,14 @@ import { useRouter } from "next/navigation";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import FavButton from "./FavButton";
 
-function Card({
+const Card = ({
   _id,
   restaurant_name,
   restaurant_avg_ratings,
   restaurant_number_reviews,
   restaurant_tags,
   restaurant_add,
-}: PartialRestaurantData) {
+}: PartialRestaurantData) => {
   // click restaurant div, will lead to detailPage //
   const router = useRouter();
 
@@ -33,22 +33,20 @@ function Card({
     <div onClick={clickRestaurant}>
       <div className="card w-96 bg-base-100 shadow-xl m-4 hover:scale-110 cursor-pointer">
         <div className="card-body">
-          <div>
-            <RestaurantInfo
-              restaurant_name={restaurant_name}
-              restaurant_avg_ratings={restaurant_avg_ratings}
-              restaurant_number_reviews={restaurant_number_reviews}
-            />
-            <Address restaurant_add={restaurant_add} />
-            <div className="flex gap-5 bg-yellow-200">
-              <Tags restaurant_tags={restaurant_tags} />
-              {/* <FavButton className="" onClick={submitFav} /> */}
-            </div>
+          <RestaurantInfo
+            restaurant_name={restaurant_name}
+            restaurant_avg_ratings={restaurant_avg_ratings}
+            restaurant_number_reviews={restaurant_number_reviews}
+          />
+          <Address restaurant_add={restaurant_add} />
+          <div className="flex">
+            <Tags restaurant_tags={restaurant_tags} />
+            {/* <FavButton className="" onClick={submitFav} /> */}
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default React.memo(Card);

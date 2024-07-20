@@ -2,6 +2,8 @@
 
 import Restaurants from "../components/restaurant/Restaurants";
 
-export default function Page() {
+const Page = () => {
   return <Restaurants />;
-}
+};
+
+export default Page;

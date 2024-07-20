@@ -6,7 +6,7 @@ import Pagination from "./Pagination";
 import { Restaurant } from "@/types/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
 
-function Restaurants() {
+const Restaurants = () => {
   const { restaurantsData } = useContext(RestaurantContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
@@ -23,8 +23,8 @@ function Restaurants() {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <>
-      <div className="flex flex-wrap">
+    <div className="bg-accent h-screen">
+      <div className="flex flex-wrap ">
         {currentRestaurants &&
           currentRestaurants.map((restaurant: Restaurant, index: number) => (
             <Card
@@ -38,7 +38,7 @@ function Restaurants() {
             />
           ))}
       </div>
-      <div className="mt-5 flex justify-center">
+      <div className="mt-12 flex justify-center">
         <Pagination
           restaurantsPerPage={restaurantPerPage}
           totalRestaurants={restaurantsData.length}
@@ -46,7 +46,7 @@ function Restaurants() {
           currentPage={currentPage}
         />
       </div>
-    </>
+    </div>
   );
-}
+};
 export default Restaurants;
