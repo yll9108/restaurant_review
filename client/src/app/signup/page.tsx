@@ -1,10 +1,12 @@
 "use client";
 import Signup from "../components/signup/signup";
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="bg-accent h-screen flex items-center justify-center ">
+    <main className="bg-accent h-screen flex pt-32 justify-center ">
       <Signup />
     </main>
   );
-}
+};
+
+export default Home;

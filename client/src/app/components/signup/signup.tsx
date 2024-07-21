@@ -14,7 +14,7 @@ import {
 } from "firebase/auth";
 import { getErrorMessage } from "@/auth/errors";
 
-export default function Signup() {
+const Signup = () => {
   const {
     setUser,
     firebaseAccount,
@@ -33,6 +33,7 @@ export default function Signup() {
   //Alert Message
   const [alertMessage, setAlertMessage] = useState("");
 
+  //signup with email and password
   const handleEmailAuth = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -51,6 +52,7 @@ export default function Signup() {
     }
   };
 
+  //signup with google account
   const handleGoogleAuth = async () => {
     await signInWithPopup(getAuth(), new GoogleAuthProvider())
       .then((result) => {
@@ -63,6 +65,7 @@ export default function Signup() {
       });
   };
 
+  // register to DB
   const handleSingUp = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -166,4 +169,6 @@ export default function Signup() {
       )}
     </div>
   );
-}
+};
+
+export default Signup;
