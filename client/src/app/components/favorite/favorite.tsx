@@ -16,22 +16,25 @@ export default function MyFavorite() {
   );
 
   return (
-    <div className="flex flex-wrap">
-      {favoriteRestaurants.length > 0 ? (
-        favoriteRestaurants.map((restaurant: Restaurant) => (
-          <Card
-            key={restaurant._id}
-            _id={restaurant._id}
-            restaurant_name={restaurant.restaurant_name}
-            restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
-            restaurant_number_reviews={restaurant.restaurant_number_reviews}
-            restaurant_tags={restaurant.restaurant_tags}
-            restaurant_add={restaurant.restaurant_add}
-          />
-        ))
-      ) : (
-        <p>No favorite restaurants found.</p>
-      )}
-    </div>
+    <>
+      <h2 className="text-3xl text-center my-8">My favorite</h2>
+      <div className="flex flex-wrap w-full justify-around pt-8">
+        {favoriteRestaurants.length > 0 ? (
+          favoriteRestaurants.map((restaurant: Restaurant) => (
+            <Card
+              key={restaurant._id}
+              _id={restaurant._id}
+              restaurant_name={restaurant.restaurant_name}
+              restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
+              restaurant_number_reviews={restaurant.restaurant_number_reviews}
+              restaurant_tags={restaurant.restaurant_tags}
+              restaurant_add={restaurant.restaurant_add}
+            />
+          ))
+        ) : (
+          <p>No favorite restaurants found.</p>
+        )}
+      </div>
+    </>
   );
 }

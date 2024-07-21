@@ -49,29 +49,31 @@ export default function UserEdit() {
   };
 
   return (
-    <div className="w-64 mx-auto mt-10">
-      <h2 className="text-center text-2xl mb-4">User Profile</h2>
-      <User />
-      <form onSubmit={changedUserName}>
-        <Input
-          textType={TextType.text}
-          name="userName"
-          placeholder="Type your name"
-          onChange={(event) => setUpdatedName(event.target.value)}
-        />
-        <div className="flex">
-          <Button
-            type={BtnType.cancel}
-            className="block mx-auto "
-            onClick={handleCancel}
-          >
-            Cancel
-          </Button>
-          <Button type={BtnType.logIn} className="block mx-auto">
-            Submit
-          </Button>
-        </div>
-      </form>
-    </div>
+    <>
+      <h2 className="text-center text-3xl my-8">User Profile</h2>
+      <div className="w-64 mx-auto mt-10">
+        <User uid={user?._id} />
+        <form onSubmit={changedUserName}>
+          <Input
+            textType={TextType.text}
+            name="userName"
+            placeholder="Type your name"
+            onChange={(event) => setUpdatedName(event.target.value)}
+          />
+          <div className="flex">
+            <Button
+              type={BtnType.cancel}
+              className="block mx-auto "
+              onClick={handleCancel}
+            >
+              Cancel
+            </Button>
+            <Button type={BtnType.logIn} className="block mx-auto">
+              Submit
+            </Button>
+          </div>
+        </form>
+      </div>
+    </>
   );
 }

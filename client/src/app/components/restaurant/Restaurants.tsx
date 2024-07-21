@@ -23,8 +23,8 @@ const Restaurants = () => {
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
   return (
-    <div className="bg-accent h-screen">
-      <div className="flex flex-wrap ">
+    <div className="bg-accent h-screen mt-16">
+      <div className="flex flex-wrap w-full justify-around pt-16">
         {currentRestaurants &&
           currentRestaurants.map((restaurant: Restaurant, index: number) => (
             <Card

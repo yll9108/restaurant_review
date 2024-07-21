@@ -13,8 +13,8 @@ const UserProfile = () => {
 
   return (
     <>
+      <h2 className="text-center text-3xl my-8">User Profile</h2>
       <div className="w-64 mx-auto mt-10">
-        <h2 className="text-center text-2xl mb-4">User Profile</h2>
         <User uid={user?._id} />
         <Button
           type={BtnType.submit}

@@ -10,7 +10,7 @@ import { useContext, useEffect } from "react";
 import axios from "axios";
 import React from "react";
 
-function Page() {
+const Page = () => {
   const params = useParams();
   const restaurantId = params.restaurantId as string;
   const { clickedRestaurant, setClickedRestaurant, setRestaurantId } =
@@ -50,25 +50,20 @@ function Page() {
     getData();
   }, [restaurantId, setAllReviews, setClickedRestaurant, setHasReviews]);
 
-  console.log("clicked restaurant", clickedRestaurant);
-
   return (
-    <>
-      <div className="flex">
-        {/*display left side */}
-        <div className="w-2/3">
-          {hasReviews ? <PersonalReview /> : <NoReviews />}
-        </div>
-        {/*display right side */}
-        <div>
-          <div className="text-red-800">restaurant {restaurantId}</div>
-          {clickedRestaurant && (
-            <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
-          )}
-        </div>
+    <div className="flex pt-16 bg-accent h-screen">
+      {/*display left side */}
+      <div className="w-2/3">
+        {hasReviews ? <PersonalReview /> : <NoReviews />}
       </div>
-    </>
+      {/*display right side */}
+      <div className="w-1/3">
+        {clickedRestaurant && (
+          <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
+        )}
+      </div>
+    </div>
   );
-}
+};
 
 export default React.memo(Page);

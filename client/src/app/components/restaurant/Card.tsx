@@ -32,7 +32,7 @@ const Card = ({
   return (
     <div onClick={clickRestaurant}>
       <div className="card w-96 bg-base-100 shadow-xl m-4 hover:scale-110 cursor-pointer">
-        <div className="card-body">
+        <div className="card-body p-4">
           <RestaurantInfo
             restaurant_name={restaurant_name}
             restaurant_avg_ratings={restaurant_avg_ratings}
