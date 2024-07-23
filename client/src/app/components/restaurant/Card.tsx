@@ -27,7 +27,9 @@ const Card = ({
   };
   const submitFav = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
+
     console.log("clicked");
+    // setIsFav(true);
   };
   return (
     <div onClick={clickRestaurant}>

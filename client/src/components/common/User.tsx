@@ -35,22 +35,31 @@ const User = ({ uid }: Props) => {
     fetchUserName();
   }, [allReviews, uid, user]);
 
+  // icons show capital letter of user name
+  let icon = "";
+  if (userName) {
+    for (let i = 0; i < userName?.length!; i++) {
+      if (i === 0) {
+        icon += userName[0].toUpperCase();
+      }
+    }
+  }
+
   return (
-    <>
-      <div className="flex flex-col items-center">
-        <div className="avatar">
-          <div className="w-24 rounded-full">
-            <Image
-              src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
-              alt="image picture"
-              width={100}
-              height={100}
-            />
-          </div>
+    <div className="flex flex-col items-center">
+      <div className="avatar placeholder">
+        <div
+          className={` w-24 rounded-full ${
+            userName === user?.user_name
+              ? "bg-secondary text-gray-900"
+              : "bg-primary text-gray-50"
+          }`}
+        >
+          <span className="text-3xl">{icon}</span>
         </div>
-        <div className=" w-24 text-center">{userName}</div>
       </div>
-    </>
+      <h3 className="w-24 text-center mt-1 text-xl">{userName}</h3>
+    </div>
   );
 };
 

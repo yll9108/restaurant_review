@@ -15,17 +15,15 @@ const ReviewDetail = ({
   console.log("review date", review_date);
 
   return (
-    <>
-      <div className="flex flex-col">
-        <div className="flex" key={_id}>
-          <Ratings ratings={review_ratings} />
-          <p>{review_ratings}</p>
-          <p>Time:{review_date}</p>
-        </div>
-        <h2 className="card-title">{review_title}</h2>
-        <p>{review_description}</p>
+    <div className="flex flex-col ml-2">
+      <div className="flex" key={_id}>
+        <Ratings ratings={review_ratings} />
+        <p className="ml-1">{review_ratings}</p>
+        <p className="ml-1">{review_date}</p>
       </div>
-    </>
+      <h2 className="card-title text-2xl">{review_title}</h2>
+      <p className="text-lg">{review_description}</p>
+    </div>
   );
 };
 

@@ -78,17 +78,8 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     ) => {
       event.preventDefault();
 
-      const formData = new FormData();
-
       if (user?._id) {
         try {
-          // formData.append("review_ratings", reviewRating.toString());
-          // formData.append("review_date", postedTime);
-          // formData.append("review_title", reviewTitle);
-          // formData.append("review_description", reviewDesc);
-          // formData.append("restaurantId", restaurantId);
-          // formData.append("userId", user?._id);
-
           const res = await axios.post(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/review/${restaurantId}/new`,
             {
@@ -126,8 +117,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     return (
       <>
         <dialog className="modal" ref={ref || modalRef}>
-          <div className="modal-box">
-            {/* <div className="modal-action"> */}
+          <div className="modal-box w-1/2 max-w-5xl">
             {!showConfirm && (
               <ReviewInput
                 reviewTitle={reviewTitle}
@@ -140,25 +130,23 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             )}
             {showConfirm && (
               <div>
-                <h3 className="font-bold text-lg">Preview</h3>
-                <p>{reviewRating}</p>
-                <p>{reviewTitle}</p>
-                <p>{reviewDesc}</p>
-                <p className="py-4">Will you publish?</p>
+                <h3 className="font-bold text-2xl pb-4">Preview</h3>
+                <p className="text-lg">Rating is {reviewRating}</p>
+                <p className="text-lg">{reviewTitle}</p>
+                <p className="text-lg">{reviewDesc}</p>
+                <p className="text-xl py-4">Will you publish?</p>
               </div>
             )}
-            <div className="flex">
+            <div className="flex justify-between mt-4">
               <form method="dialog" className="flex flex-col gap-4">
                 {/* if there is a button in form, it will close the modal */}
-                <div className="flex">
-                  <Button
-                    type={BtnType.cancel}
-                    className="btn"
-                    onClick={closedModal}
-                  >
-                    Cancel
-                  </Button>
-                </div>
+                <Button
+                  type={BtnType.cancel}
+                  className="btn"
+                  onClick={closedModal}
+                >
+                  Cancel
+                </Button>
               </form>
 
               {!showConfirm && (

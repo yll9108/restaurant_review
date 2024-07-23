@@ -1,5 +1,6 @@
 "use client";
 import { CiHeart } from "react-icons/ci";
+import { IoIosHeart } from "react-icons/io";
 
 type FavBtnProps = {
   className?: string;
@@ -7,9 +8,11 @@ type FavBtnProps = {
   isFav: Boolean;
 };
 const FavButton = (props: FavBtnProps) => {
+  console.log("isFav", props.isFav);
+
   return (
     <button className={props.className} onClick={props.onClick}>
-      <CiHeart className={props.isFav ? "bg-warning-200" : "bg-accent-200"} />
+      <IoIosHeart className={props.isFav ? "fill-red-600" : "fill-gray-200"} />
     </button>
   );
 };

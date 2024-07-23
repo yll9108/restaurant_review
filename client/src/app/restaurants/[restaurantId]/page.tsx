@@ -51,17 +51,21 @@ const Page = () => {
   }, [restaurantId, setAllReviews, setClickedRestaurant, setHasReviews]);
 
   return (
-    <div className="flex pt-16 bg-accent h-screen">
+    <div
+      // className={`flex pt-16 bg-accent  ${hasReviews ? "h-screen" : "h-full"}`}
+      className="bg-accent pt-16 h-full"
+    >
       {/*display left side */}
-      <div className="w-2/3">
-        {hasReviews ? <PersonalReview /> : <NoReviews />}
+      <div className="bg-accent">
+        <div className="w-2/3">
+          {hasReviews ? <PersonalReview /> : <NoReviews />}
+        </div>
       </div>
       {/*display right side */}
-      <div className="w-1/3">
-        {clickedRestaurant && (
-          <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
-        )}
-      </div>
+
+      {clickedRestaurant && (
+        <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
+      )}
     </div>
   );
 };
