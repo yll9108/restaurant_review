@@ -59,6 +59,7 @@ export default function UserEdit() {
             name="userName"
             placeholder="Type your name"
             onChange={(event) => setUpdatedName(event.target.value)}
+            className="mt-4"
           />
           <div className="flex">
             <Button

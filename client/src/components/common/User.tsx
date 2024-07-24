@@ -52,7 +52,7 @@ const User = ({ uid }: Props) => {
           className={` w-24 rounded-full ${
             userName === user?.user_name
               ? "bg-secondary text-gray-900"
-              : "bg-primary text-gray-50"
+              : "bg-primary text-accent"
           }`}
         >
           <span className="text-3xl">{icon}</span>

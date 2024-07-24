@@ -12,7 +12,7 @@ export default function Page() {
 
   return (
     <>
-      <div id="TabContainer" className="bg-accent h-screen pt-24">
+      <div id="TabContainer" className="bg-accent h-full pt-24">
         <div id="TabHead" className="flex py-2 mx-4 border-b-2 border-black ">
           <label
             className={`block text-center rounded-tl-lg w-32 cursor-pointer ${

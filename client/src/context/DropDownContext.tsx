@@ -31,7 +31,6 @@ export function DropDownContextProvider({ children }: { children: ReactNode }) {
   return (
     <DropDownContext.Provider
       value={{ searchParams, activeTab, setActiveTab, changedTabs }}
-      // value={{ searchParams, activeTab, setActiveTab }}
     >
       {children}
     </DropDownContext.Provider>

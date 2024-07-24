@@ -85,7 +85,7 @@ const MyReviews = () => {
             <div className="collapse-title text-xl font-medium bg-primary text-accent">
               {restaurantName}
             </div>
-            <div className="collapse-content">
+            <div className="collapse-content ">
               <ReviewDetail
                 key={review._id}
                 _id={review._id}
