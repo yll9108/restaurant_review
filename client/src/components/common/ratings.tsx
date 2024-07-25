@@ -14,7 +14,7 @@ const Ratings = ({ ratings, maxRating = 5 }: RatingProps) => {
           key={index}
           type="radio"
           name="rating-10"
-          className="mask mask-star-2 bg-secondary cursor-default"
+          className="mask mask-star-2 bg-secondary cursor-default mr-1"
           checked
           disabled
         />
@@ -23,7 +23,7 @@ const Ratings = ({ ratings, maxRating = 5 }: RatingProps) => {
         <input
           type="radio"
           name="rating-10"
-          className="mask mask-star-2 bg-secondary cursor-default"
+          className="mask mask-star-2 bg-secondary cursor-default mr-1"
           style={{ clipPath: "polygon(0 0, 50% 0, 50% 100%, 0 100%)" }}
           checked
           disabled
@@ -34,7 +34,7 @@ const Ratings = ({ ratings, maxRating = 5 }: RatingProps) => {
           key={index + fullStars}
           type="radio"
           name="rating-10"
-          className="mask mask-star-2 bg-gray-400 cursor-default"
+          className="mask mask-star-2 bg-gray-400 cursor-default mr-1"
           disabled
         />
       ))}

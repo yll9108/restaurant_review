@@ -13,7 +13,7 @@ const RestaurantInfo = ({
       <h2 className="card-title text-gray-900 text-2xl">{restaurant_name}</h2>
       <div className="flex">
         <Ratings ratings={restaurant_avg_ratings!} />
-        <p className="ml-1">{restaurant_avg_ratings}</p>
+        <p className="ml-1">{restaurant_avg_ratings?.toFixed(1)}</p>
         <p>
           {restaurant_number_reviews} <span className="ml-1">reviews</span>
         </p>

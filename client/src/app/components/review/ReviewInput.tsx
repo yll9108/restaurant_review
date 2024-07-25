@@ -42,7 +42,7 @@ const ReviewInput = (props: ReviewInputProps) => {
               onChange={() => props.setReviewRating(option.num)}
             />
             {option.face}
-            {option.num}
+            {option.num.toFixed(1)}
           </label>
         ))}
       </div>

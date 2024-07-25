@@ -69,7 +69,7 @@ const MyReviews = () => {
   }, [allReviews, restaurantsData]);
 
   return (
-    <div>
+    <div className="bg-accent">
       <h2 className="text-3xl text-center my-8">Review</h2>
       <div className="join join-vertical w-1/2 mx-auto mt-2 block">
         {restaurantReviews.map(({ restaurantName, review }, i) => (
@@ -96,6 +96,7 @@ const MyReviews = () => {
                 restaurantId={review.restaurantId}
                 userId={review.userId}
               />
+              <button className="absolute top-16 right-3">delete</button>
             </div>
           </div>
         ))}

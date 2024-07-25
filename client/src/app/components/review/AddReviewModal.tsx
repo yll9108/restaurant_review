@@ -17,7 +17,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [showConfirm, setShowConfirm] = useState<boolean>(false);
     const [reviewTitle, setReviewTitle] = useState("");
     const [reviewDesc, setReviewDesc] = useState("");
-    const [reviewRating, setReviewRating] = useState(5);
+    const [reviewRating, setReviewRating] = useState(5.0);
 
     const { user } = useContext(UserContext);
     const { setHasReviews, allReviews, setAllReviews, setReview } =
@@ -67,7 +67,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
       }
       setReviewTitle("");
       setReviewDesc("");
-      setReviewRating(5);
+      setReviewRating(5.0);
 
       setShowConfirm(false);
     };
