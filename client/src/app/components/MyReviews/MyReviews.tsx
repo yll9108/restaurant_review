@@ -69,8 +69,8 @@ const MyReviews = () => {
   }, [allReviews, restaurantsData]);
 
   return (
-    <div>
-      <h2 className="text-2xl text-center my-8">Review</h2>
+    <div className="bg-accent">
+      <h2 className="text-3xl text-center my-8">Review</h2>
       <div className="join join-vertical w-1/2 mx-auto mt-2 block">
         {restaurantReviews.map(({ restaurantName, review }, i) => (
           <div
@@ -85,7 +85,7 @@ const MyReviews = () => {
             <div className="collapse-title text-xl font-medium bg-primary text-accent">
               {restaurantName}
             </div>
-            <div className="collapse-content">
+            <div className="collapse-content ">
               <ReviewDetail
                 key={review._id}
                 _id={review._id}
@@ -96,6 +96,7 @@ const MyReviews = () => {
                 restaurantId={review.restaurantId}
                 userId={review.userId}
               />
+              <button className="absolute top-16 right-3">delete</button>
             </div>
           </div>
         ))}

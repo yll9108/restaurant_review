@@ -12,11 +12,7 @@ import Loading from "@/app/loading";
 import NotFound from "@/app/not-found";
 import Header from "@/components/header";
 
-export default function AuthProvider({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const router = useRouter();
   const pathName = usePathname();
 
@@ -154,10 +150,12 @@ export default function AuthProvider({
       {getComponent()}
     </>
   );
-}
+};
 
-function getPage(pathName: string): Page | undefined {
+const getPage = (pathName: string): Page | undefined => {
   return PAGES.find((PAGE: Page) => {
     return PAGE.path.test(pathName);
   });
-}
+};
+
+export default AuthProvider;

@@ -7,12 +7,10 @@ function NoReviews() {
   const { loginStatus } = useContext(UserContext);
 
   return (
-    <>
-      <div className="flex flex-col items-center justify-center h-full">
-        <div className="mb-5">No reviews</div>
-        {loginStatus === LoginStatus.LoggedIn ? <AddReview /> : <></>}
-      </div>
-    </>
+    <div className="flex flex-col items-center pt-28">
+      <h3 className="text-2xl mb-5">No reviews</h3>
+      {loginStatus === LoginStatus.LoggedIn ? <AddReview /> : <></>}
+    </div>
   );
 }
 

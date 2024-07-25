@@ -8,12 +8,12 @@ import { BtnType, Button } from "./common/button";
 import SearchBar from "./common/searchBar";
 import axios from "axios";
 
-export default function Header() {
+const Header = () => {
   const router = useRouter();
   const { user } = useContext(UserContext);
 
   return (
-    <header className="w-full bg-primary h-16 flex justify-end items-center">
+    <header className="w-full bg-primary h-16 flex justify-end items-center fixed z-50 top-0">
       <HeaderLogo />
       <div className="flex justify-center items-center sm:mr-4">
         <SearchBar />
@@ -27,4 +27,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+};
+
+export default Header;

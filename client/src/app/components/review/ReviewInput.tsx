@@ -10,30 +10,30 @@ import {
   BsEmojiHeartEyes,
 } from "react-icons/bs";
 
-export default function ReviewInput(props: ReviewInputProps) {
+const ReviewInput = (props: ReviewInputProps) => {
   //Ratings
   const options: Array<Rating> = [];
   for (let i = 1.0; i <= 5.0; i += 0.5) {
     let face: ReactNode;
     if (i === 1.0 || i === 1.5) {
-      face = <BsEmojiAngry />;
+      face = <BsEmojiAngry className="fill-primary w-6" />;
     } else if (i === 2.0 || i === 2.5) {
-      face = <BsEmojiAstonished />;
+      face = <BsEmojiAstonished className="fill-primary w-6" />;
     } else if (i === 3.0 || i === 3.5) {
-      face = <BsEmojiExpressionless />;
+      face = <BsEmojiExpressionless className="fill-primary w-6" />;
     } else if (i === 4.0 || i === 4.5) {
-      face = <BsEmojiSmile />;
+      face = <BsEmojiSmile className="fill-primary w-6" />;
     } else {
-      face = <BsEmojiHeartEyes />;
+      face = <BsEmojiHeartEyes className="fill-primary w-6" />;
     }
     options.push({ num: i, face });
   }
 
   return (
     <div className="flex flex-col ">
-      <div className="bg-red-300 flex ">
+      <div className="flex mb-4 ">
         {options.map((option) => (
-          <label key={option.num} className="flex items-center">
+          <label key={option.num} className="flex items-center mr-2">
             <input
               type="radio"
               name="rating"
@@ -42,7 +42,7 @@ export default function ReviewInput(props: ReviewInputProps) {
               onChange={() => props.setReviewRating(option.num)}
             />
             {option.face}
-            {option.num}
+            {option.num.toFixed(1)}
           </label>
         ))}
       </div>
@@ -52,6 +52,7 @@ export default function ReviewInput(props: ReviewInputProps) {
         name="title"
         value={props.reviewTitle}
         onChange={(event) => props.setReviewTitle(event?.target.value)}
+        className="w-auto"
       />
       <textarea
         className="textarea textarea-bordered"
@@ -62,4 +63,6 @@ export default function ReviewInput(props: ReviewInputProps) {
       ></textarea>
     </div>
   );
-}
+};
+
+export default ReviewInput;

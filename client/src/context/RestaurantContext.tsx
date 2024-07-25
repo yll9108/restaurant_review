@@ -13,8 +13,8 @@ export function RestaurantContextProvider({
 }: {
   children: ReactNode;
 }) {
-  const [restaurantId, setRestaurantId] = useState("");
-  const [searchValue, setSearchValue] = useState("");
+  const [restaurantId, setRestaurantId] = useState<string>("");
+  const [searchValue, setSearchValue] = useState<string>("");
   const [restaurantsData, setRestaurantsData] = useState<Restaurant[]>([]);
   const [clickedRestaurant, setClickedRestaurant] = useState<Restaurant | null>(
     null
@@ -37,27 +37,31 @@ export function RestaurantContextProvider({
 
   // Homepage, fetch all restaurant data
   useEffect(() => {
-    if (searchValue) {
-      console.log("search value: ", searchValue);
+    const getRestaurantsData = async () => {
+      try {
+        if (searchValue) {
+          console.log("search value: ", searchValue);
 
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/?text=` +
-            searchValue
-        )
-        .then((res) => {
-          console.log("result", res.data);
+          const searchRes = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/?text=` +
+              searchValue
+          );
+          console.log("result", searchRes.data);
+          setRestaurantsData(searchRes.data);
+        } else {
+          const res = await axios.get(
+            `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`
+          );
+          console.log("restaurants context ", res.data);
           setRestaurantsData(res.data);
-        });
-    } else {
-      axios
-        .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`)
-        .then((response) => {
-          console.log("restaurants context ", response.data);
-          setRestaurantsData(response.data);
-        });
-    }
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getRestaurantsData();
   }, [searchValue]);
+
   return (
     <RestaurantContext.Provider
       value={{

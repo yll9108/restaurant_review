@@ -84,56 +84,44 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
   };
 
   return (
-    <>
-      <div className="bg-red-200">
-        <div className="card w-96 bg-base-100 shadow-xl m-4">
-          <div className="card-body">
-            {clickedRestaurant && (
-              <div>
-                <RestaurantInfo
-                  restaurant_name={clickedRestaurant.restaurant_name}
-                  restaurant_avg_ratings={
-                    clickedRestaurant.restaurant_avg_ratings
-                  }
-                  restaurant_number_reviews={
-                    clickedRestaurant.restaurant_number_reviews
-                  }
-                />
-                <Address restaurant_add={clickedRestaurant.restaurant_add} />
-                <div className="flex gap-5 bg-yellow-200">
-                  <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
-                  <FavButton
-                    className={
-                      isFav ? "btn btn-sm btn-warning" : "btn btn-sm btn-accent"
-                    }
-                    onClick={registeredFav}
-                    isFav={isFav}
-                  />
-                </div>
-                {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
-                {/* Render button */}
+    <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-5 fixed right-16 top-16">
+      <div className="card-body p-4">
+        {clickedRestaurant && (
+          <>
+            <RestaurantInfo
+              restaurant_name={clickedRestaurant.restaurant_name}
+              restaurant_avg_ratings={clickedRestaurant.restaurant_avg_ratings}
+              restaurant_number_reviews={
+                clickedRestaurant.restaurant_number_reviews
+              }
+            />
+            <Address restaurant_add={clickedRestaurant.restaurant_add} />
+            <div className="flex gap-2">
+              <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
+              <FavButton onClick={registeredFav} isFav={isFav} />
+            </div>
+            {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
+            {/* Render button */}
 
-                {loginStatus === LoginStatus.LoggedIn ? (
-                  !hasReviews ? (
-                    <div className="text-center">
-                      <AddReview />
-                    </div>
-                  ) : !isReview ? (
-                    <div className="text-center">
-                      <AddReview />
-                    </div>
-                  ) : (
-                    <></>
-                  )
-                ) : (
-                  <></>
-                )}
-              </div>
+            {loginStatus === LoginStatus.LoggedIn ? (
+              !hasReviews ? (
+                <div className="text-center mt-1 ">
+                  <AddReview />
+                </div>
+              ) : !isReview ? (
+                <div className="text-center mt-1">
+                  <AddReview />
+                </div>
+              ) : (
+                <></>
+              )
+            ) : (
+              <></>
             )}
-          </div>
-        </div>
+          </>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 

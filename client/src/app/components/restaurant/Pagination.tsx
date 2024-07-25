@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import { PaginationData } from "@/types/types";
 import React from "react";
 
@@ -18,8 +19,11 @@ function Pagination({
       {pageNumbers.map((number) => (
         <input
           key={number}
-          className={`join-item btn btn-square ${
-            number === currentPage ? "active" : ""
+          className={`${number === currentPage ? "active" : ""} 
+          ${
+            number === 1
+              ? "join-item btn btn-square rounded-lg"
+              : "join-item btn btn-square"
           }`}
           type="radio"
           name="options"

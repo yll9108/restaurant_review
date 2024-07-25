@@ -12,7 +12,13 @@ export function PageContextProvider({ children }: { children: ReactNode }) {
   const notFound = () => setPageStatus(PageStatus.NotFound);
 
   return (
-    <PageContext.Provider value={{ pageStatus, setPageStatus, notFound }}>
+    <PageContext.Provider
+      value={{
+        pageStatus,
+        setPageStatus,
+        notFound,
+      }}
+    >
       {children}
     </PageContext.Provider>
   );

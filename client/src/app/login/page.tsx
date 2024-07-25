@@ -1,10 +1,12 @@
 "use client";
 import Login from "../components/login/Login";
 
-export default function Home() {
+const Home = () => {
   return (
-    <main className="bg-accent h-screen flex items-center">
+    <main className="bg-accent h-screen pt-32 ">
       <Login />
     </main>
   );
-}
+};
+
+export default Home;

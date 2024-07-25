@@ -5,11 +5,13 @@ import Card from "./Card";
 import Pagination from "./Pagination";
 import { Restaurant } from "@/types/types";
 import { RestaurantContext } from "@/context/RestaurantContext";
+import FavButton from "./FavButton";
 
-function Restaurants() {
+const Restaurants = () => {
   const { restaurantsData } = useContext(RestaurantContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
+  const [isFav, setIsFav] = useState<Boolean>(false);
 
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
@@ -22,23 +24,50 @@ function Restaurants() {
   // when click on different page, set to that page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
+  const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    console.log("clicked");
+    setIsFav(!isFav);
+    // if (!clickedRestaurant) return;
+
+    // try {
+    //   const response = await axios.post(
+    //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${user?._id}/favorite`,
+    //     { restaurantId: clickedRestaurant?._id },
+    //     {
+    //       headers: { Accept: "application/json" },
+    //     }
+    //   );
+    //   setUser(response.data);
+    //   setIsFav(!isFav);
+    // } catch (error) {
+    //   console.error("Error updating favorite restaurant:", error);
+    // }
+  };
   return (
-    <>
-      <div className="flex flex-wrap">
+    <div className="bg-accent h-screen mt-16">
+      <div className="flex flex-wrap w-full justify-around pt-16">
         {currentRestaurants &&
           currentRestaurants.map((restaurant: Restaurant, index: number) => (
-            <Card
-              key={index}
-              _id={restaurant._id}
-              restaurant_name={restaurant.restaurant_name}
-              restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
-              restaurant_number_reviews={restaurant.restaurant_number_reviews}
-              restaurant_tags={restaurant.restaurant_tags}
-              restaurant_add={restaurant.restaurant_add}
-            />
+            <div key={index} className="relative">
+              <Card
+                key={index}
+                _id={restaurant._id}
+                restaurant_name={restaurant.restaurant_name}
+                restaurant_avg_ratings={restaurant.restaurant_avg_ratings}
+                restaurant_number_reviews={restaurant.restaurant_number_reviews}
+                restaurant_tags={restaurant.restaurant_tags}
+                restaurant_add={restaurant.restaurant_add}
+              />
+              {/* <FavButton
+                className="absolute bottom-10 left-32"
+                isFav={isFav}
+                onClick={registeredFav}
+              /> */}
+            </div>
           ))}
       </div>
-      <div className="mt-5 flex justify-center">
+      <div className="mt-12 flex justify-center">
         <Pagination
           restaurantsPerPage={restaurantPerPage}
           totalRestaurants={restaurantsData.length}
@@ -46,7 +75,7 @@ function Restaurants() {
           currentPage={currentPage}
         />
       </div>
-    </>
+    </div>
   );
-}
+};
 export default Restaurants;

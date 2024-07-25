@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
 import { LoginStatus } from "@/types/types";
 import axios from "axios";
+import Image from "next/image";
 import {
   GoogleAuthProvider,
   getAuth,
@@ -14,7 +15,7 @@ import {
 } from "firebase/auth";
 import { getErrorMessage } from "@/auth/errors";
 
-export default function Login() {
+const Login = () => {
   const { setUser, setLoginStatus, setFirebaseAccount } =
     useContext(UserContext);
   const router = useRouter();
@@ -63,32 +64,40 @@ export default function Login() {
   };
 
   return (
-    <>
-      <div className="flex flex-col justify-center items-center  w-80 h-96 mx-auto">
-        <p>{alertMessage}</p>
-        <form onSubmit={handleEmailLogin} className="w-64">
-          <Input
-            textType={TextType.email}
-            name="email"
-            placeholder="Email"
-            onChange={(event) => setEmail(event.target.value)}
-          />
-          <Input
-            textType={TextType.password}
-            name="password"
-            placeholder="Password"
-            onChange={(event) => setPassword(event.target.value)}
-          />
-          <Button type={BtnType.submit}>Log In</Button>
-        </form>
-        <Button type={BtnType.regular_google} onClick={handleGoogleLogin}>
-          Log In with Google
-        </Button>
-        <p className="mb-4">or</p>
-        <Button type={BtnType.submit} onClick={() => router.push("/signup")}>
-          Sign Up
-        </Button>
-      </div>
-    </>
+    <div className="flex flex-col justify-center items-center w-80  mx-auto">
+      <Image
+        src="/logo.png"
+        width={90}
+        height={90}
+        alt="logo"
+        className="mb-4"
+      />
+
+      <p>{alertMessage}</p>
+      <form onSubmit={handleEmailLogin} className="w-64">
+        <Input
+          textType={TextType.email}
+          name="email"
+          placeholder="Email"
+          onChange={(event) => setEmail(event.target.value)}
+        />
+        <Input
+          textType={TextType.password}
+          name="password"
+          placeholder="Password"
+          onChange={(event) => setPassword(event.target.value)}
+        />
+        <Button type={BtnType.submit}>Log In</Button>
+      </form>
+      <Button type={BtnType.regular_google} onClick={handleGoogleLogin}>
+        Log In with Google
+      </Button>
+      <p className="mb-4">or</p>
+      <Button type={BtnType.submit} onClick={() => router.push("/signup")}>
+        Sign Up
+      </Button>
+    </div>
   );
-}
+};
+
+export default Login;
