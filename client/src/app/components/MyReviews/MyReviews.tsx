@@ -1,22 +1,24 @@
 "use client";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useRef } from "react";
 import ReviewDetail from "@/components/common/ReviewDetail";
 import { ReviewsContext } from "@/context/ReviewsContext";
 import { UserContext } from "@/context/UserContext";
 import axios from "axios";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import { Review } from "@/types/types";
+import { MdDelete } from "react-icons/md";
+import DeleteReviewModal from "./DeleteReviewModal";
 
 const MyReviews = () => {
   const { allReviews, setAllReviews } = useContext(ReviewsContext);
   const { user } = useContext(UserContext);
+  const modalRef = useRef<HTMLDialogElement>(null);
   const { restaurantsData, setRestaurantsData } = useContext(RestaurantContext);
+  const [reviewId, setReviewId] = useState<string | undefined>("");
 
   const [restaurantReviews, setRestaurantReviews] = useState<
     { restaurantName: string; review: Review }[]
   >([]);
-
-  console.log("myReviews", allReviews);
 
   useEffect(() => {
     const getReviews = async () => {
@@ -37,10 +39,14 @@ const MyReviews = () => {
 
   useEffect(() => {
     const handleReviewChange = async () => {
-      const res = await axios.get(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`
-      );
-      setRestaurantsData(res.data);
+      try {
+        const res = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`
+        );
+        setRestaurantsData(res.data);
+      } catch (err) {
+        console.log("Error handleReviewChange", err);
+      }
     };
 
     handleReviewChange();
@@ -67,6 +73,18 @@ const MyReviews = () => {
       );
     }
   }, [allReviews, restaurantsData]);
+
+  const deleteHandler = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    event.preventDefault();
+
+    setReviewId(event.currentTarget.dataset.reviewId);
+
+    if (modalRef.current) {
+      modalRef.current.showModal();
+    }
+  };
 
   return (
     <div className="bg-accent">
@@ -96,7 +114,25 @@ const MyReviews = () => {
                 restaurantId={review.restaurantId}
                 userId={review.userId}
               />
-              <button className="absolute top-16 right-3">delete</button>
+              {/* <button
+                className="absolute top-16 right-3"
+                onClick={deleteReview}
+                data-review-id={review._id} // Adding data attribute to button
+              >
+                <MdDelete className="fill-warning" />
+              </button> */}
+              <button
+                className="absolute top-16 right-3"
+                data-review-id={review._id} // Adding data attribute to button
+                onClick={deleteHandler}
+              >
+                <MdDelete className="fill-warning" />
+              </button>
+              <DeleteReviewModal
+                modalRef={modalRef}
+                setRestaurantReviews={setRestaurantReviews}
+                reviewId={reviewId!}
+              />
             </div>
           </div>
         ))}
