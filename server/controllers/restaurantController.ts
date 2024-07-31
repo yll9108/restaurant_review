@@ -71,21 +71,21 @@ export const getRestaurantReviews = async (
   req: express.Request,
   res: express.Response
 ) => {
-  console.log("getReview", req.params);
-
   try {
     // Get the restaurantId from request parameters
     const restaurantId = req.params.restaurantId;
-    console.log("restaurantId", restaurantId);
 
     // Ask DB to find review(s) which have this restaurantId
-    const reviews: ReviewInput[] = await reviewModels.find({ restaurantId });
+    const reviews: ReviewInput[] = await reviewModels
+      .find({
+        restaurantId,
+      })
+      .exec();
 
     console.log("reviews", reviews);
 
     if (reviews.length > 0) {
       res.status(200).json(reviews);
-      console.log("reviews", reviews);
     } else {
       res.status(404).json({ message: "No reviews found for this restaurant" });
     }
@@ -95,7 +95,7 @@ export const getRestaurantReviews = async (
   }
 };
 
-export const newReview = async (
+export const addNewReview = async (
   req: express.Request,
   res: express.Response
 ) => {
@@ -127,8 +127,7 @@ export const newReview = async (
       restaurant.restaurant_avg_ratings = Math.round(newAvgRating * 10) / 10;
 
       await restaurant.save();
-      console.log("successful");
-      return res.status(200).json(review);
+      return res.status(200).json({ message: "add review successfully" });
     }
   } catch (err) {
     console.log(err);

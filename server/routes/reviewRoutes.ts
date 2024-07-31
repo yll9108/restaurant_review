@@ -9,6 +9,6 @@ const reviewRouter: Router = express.Router({ mergeParams: true });
 
 reviewRouter.get("/", getReviews);
 reviewRouter.get("/:userId", getReviewsByUserId);
-reviewRouter.delete("/:reviewId", deleteReview);
+reviewRouter.delete("/delete/:reviewId", deleteReview);
 
 export default reviewRouter;

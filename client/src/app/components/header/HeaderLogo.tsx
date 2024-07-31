@@ -1,13 +1,32 @@
 "use client";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-export default function HeaderLogo() {
+import { useCallback, useContext, useEffect } from "react";
+import { RestaurantContext } from "@/context/RestaurantContext";
+import axios from "axios";
+
+const HeaderLogo = () => {
   const homeRouter = useRouter();
+  const { setRestaurantsData } = useContext(RestaurantContext);
+
+  const getRestaurantsData = useCallback(async () => {
+    const res = await axios.get(
+      `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`
+    );
+    console.log("restaurants context ", res.data);
+    setRestaurantsData(res.data);
+  }, [setRestaurantsData]);
 
   const clickedHomeHandler = (event: React.MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
+    getRestaurantsData(); // Refetch data when navigating back home
     homeRouter.push("/");
   };
+
+  useEffect(() => {
+    getRestaurantsData();
+  }, [getRestaurantsData]);
+
   return (
     <div className=" flex flex-1 ml-4 sm:ml-12 items-center">
       <a
@@ -18,4 +37,6 @@ export default function HeaderLogo() {
       </a>
     </div>
   );
-}
+};
+
+export default HeaderLogo;

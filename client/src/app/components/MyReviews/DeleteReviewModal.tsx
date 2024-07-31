@@ -1,19 +1,13 @@
 "use client";
-import { forwardRef, RefObject } from "react";
+import { forwardRef, RefObject, useContext } from "react";
 import { BtnType, Button } from "@/components/common/button";
 import axios from "axios";
 import { Restaurant, Review } from "@/types/types";
+import { ReviewsContext } from "@/context/ReviewsContext";
+import { UserContext } from "@/context/UserContext";
 
 interface DeleteReviewProps {
   modalRef: RefObject<HTMLDialogElement>;
-  // restaurantReviews: {
-  //   restaurantName: string;
-  //   review: Review;
-  // };
-  // setRestaurantReviews: (restaurantReview: {
-  //   restaurantName: string;
-  //   review: Review;
-  // }) => void;
   reviewId: string;
   setRestaurantReviews: React.Dispatch<
     React.SetStateAction<{ restaurantName: string; review: Review }[]>
@@ -22,6 +16,8 @@ interface DeleteReviewProps {
 
 const DeleteReviewModal = forwardRef<HTMLDialogElement, DeleteReviewProps>(
   ({ modalRef, setRestaurantReviews, reviewId }, ref) => {
+    const { setAllReviews } = useContext(ReviewsContext);
+    const { user } = useContext(UserContext);
     //delete review
     const deleteReviewHandler = async (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -30,13 +26,18 @@ const DeleteReviewModal = forwardRef<HTMLDialogElement, DeleteReviewProps>(
       console.log("reviewId: ", reviewId);
       try {
         const res = await axios.delete(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/${reviewId}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/delete/${reviewId}`
         );
         console.log("review deleted", res.data);
 
         setRestaurantReviews((prev) =>
           prev.filter((review) => review.review._id !== reviewId)
         );
+
+        setAllReviews((prev: Review[]) =>
+          prev.filter((review) => review._id !== reviewId)
+        );
+
         modalRef.current?.close();
       } catch (err) {
         console.log("Error deleting review", err);

@@ -25,6 +25,7 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
   const [isReview, setIsReview] = useState<Boolean>(false);
   const [isFav, setIsFav] = useState<Boolean>(false);
 
+  //Check the user has review
   useEffect(() => {
     let letUserHasReviewed = false;
     allReviews.map((review) => {
@@ -61,6 +62,8 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
     updatedRestaurantData,
     user?.user_favorite_restaurant,
   ]);
+
+  console.log("clickedRestaurant", clickedRestaurant);
 
   //favorite button handler
   const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {

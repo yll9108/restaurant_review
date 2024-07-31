@@ -20,13 +20,14 @@ const MyReviews = () => {
     { restaurantName: string; review: Review }[]
   >([]);
 
+  // Get all my reviews
   useEffect(() => {
     const getReviews = async () => {
       try {
         const res = await axios.get(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/${user?._id}`
         );
-        console.log("getReviews", res.data);
+        console.log("getReviews in my reviews page", res.data);
         setAllReviews(res.data);
       } catch (err) {
         console.log("Error fetching reviews", err);
@@ -37,6 +38,7 @@ const MyReviews = () => {
     }
   }, [setAllReviews, user?._id]);
 
+  //Get all restaurant data
   useEffect(() => {
     const handleReviewChange = async () => {
       try {
@@ -52,6 +54,7 @@ const MyReviews = () => {
     handleReviewChange();
   }, [setRestaurantsData]);
 
+  // Get restaurant name and my review from the restaurant
   useEffect(() => {
     if (allReviews.length && restaurantsData.length) {
       const matchedReviews = allReviews
@@ -74,10 +77,12 @@ const MyReviews = () => {
     }
   }, [allReviews, restaurantsData]);
 
+  // Get review's id to delete itself
   const deleteHandler = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
+    console.log("review delete handler clicked");
 
     setReviewId(event.currentTarget.dataset.reviewId);
 
@@ -86,56 +91,52 @@ const MyReviews = () => {
     }
   };
 
+  console.log("my review get all review", allReviews);
+
   return (
     <div className="bg-accent">
       <h2 className="text-3xl text-center my-8">Review</h2>
       <div className="join join-vertical w-1/2 mx-auto mt-2 block">
-        {restaurantReviews.map(({ restaurantName, review }, i) => (
-          <div
-            key={i}
-            className="collapse collapse-arrow join-item border border-base-300"
-          >
-            <input
-              type="radio"
-              name="my-accordion-4"
-              defaultChecked={i === 0}
-            />
-            <div className="collapse-title text-xl font-medium bg-primary text-accent">
-              {restaurantName}
-            </div>
-            <div className="collapse-content ">
-              <ReviewDetail
-                key={review._id}
-                _id={review._id}
-                review_ratings={review.review_ratings}
-                review_date={review.review_date}
-                review_title={review.review_title}
-                review_description={review.review_description}
-                restaurantId={review.restaurantId}
-                userId={review.userId}
+        {restaurantReviews.length > 0 &&
+          restaurantReviews.map(({ restaurantName, review }, i) => (
+            <div
+              key={i}
+              className="collapse collapse-arrow join-item border border-base-300"
+            >
+              <input
+                type="radio"
+                name="my-accordion-4"
+                defaultChecked={i === 0}
               />
-              {/* <button
-                className="absolute top-16 right-3"
-                onClick={deleteReview}
-                data-review-id={review._id} // Adding data attribute to button
-              >
-                <MdDelete className="fill-warning" />
-              </button> */}
-              <button
-                className="absolute top-16 right-3"
-                data-review-id={review._id} // Adding data attribute to button
-                onClick={deleteHandler}
-              >
-                <MdDelete className="fill-warning" />
-              </button>
-              <DeleteReviewModal
-                modalRef={modalRef}
-                setRestaurantReviews={setRestaurantReviews}
-                reviewId={reviewId!}
-              />
+              <div className="collapse-title text-xl font-medium bg-primary text-accent">
+                {restaurantName}
+              </div>
+              <div className="collapse-content ">
+                <ReviewDetail
+                  key={review._id}
+                  _id={review._id}
+                  review_ratings={review.review_ratings}
+                  review_date={review.review_date}
+                  review_title={review.review_title}
+                  review_description={review.review_description}
+                  restaurantId={review.restaurantId}
+                  userId={review.userId}
+                />
+                <button
+                  className="absolute top-16 right-3"
+                  data-review-id={review._id} // Adding data attribute to button
+                  onClick={deleteHandler}
+                >
+                  <MdDelete className="fill-warning" />
+                </button>
+                <DeleteReviewModal
+                  modalRef={modalRef}
+                  setRestaurantReviews={setRestaurantReviews}
+                  reviewId={reviewId!}
+                />
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </div>
   );

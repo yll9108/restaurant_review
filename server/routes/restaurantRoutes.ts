@@ -3,7 +3,7 @@ import {
   addRestaurant,
   findRestaurant,
   getRestaurant,
-  newReview,
+  addNewReview,
   getRestaurantReviews,
 } from "../controllers/restaurantController";
 // import reviewRouter from "./reviewRoutes";
@@ -15,7 +15,7 @@ restaurantRouter.post("/addRestaurant", addRestaurant);
 restaurantRouter.get("/", getRestaurant);
 restaurantRouter.get("/:restaurantId", findRestaurant);
 
-restaurantRouter.post("/review/:restaurantId/new", newReview);
+restaurantRouter.post("/review/:restaurantId/new", addNewReview);
 
 restaurantRouter.get("/reviews/:restaurantId", getRestaurantReviews);
 
