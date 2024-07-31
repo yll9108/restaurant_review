@@ -86,8 +86,8 @@ type ReviewsContextProps = {
   hasReviews: boolean;
   setHasReviews: (hasReviews: boolean) => void;
   allReviews: Review[];
-  // setAllReviews: (allReviews: Review[]) => void;
   setAllReviews: React.Dispatch<React.SetStateAction<Review[]>>;
+  fetchReviews: (restaurantId: string) => void;
 };
 // Type for PageContext
 export enum PageStatus {
