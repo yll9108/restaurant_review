@@ -50,6 +50,8 @@ const Page = () => {
     getData();
   }, [restaurantId, setAllReviews, setClickedRestaurant, setHasReviews]);
 
+  console.log("allReviews", allReviews);
+
   return (
     <div
       // className={`flex pt-16 bg-accent  ${hasReviews ? "h-screen" : "h-full"}`}

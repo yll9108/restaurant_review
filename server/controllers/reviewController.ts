@@ -1,8 +1,7 @@
+/* eslint-disable indent */
 import express from "express";
 import reviewModels from "../models/reviewModels";
-// import { ReviewInput } from "../types/types";
-// import { createReview } from "../helpers/helpers";
-// import restaurantModels from "../models/restaurantModels";
+import RestaurantModel from "../models/restaurantModels";
 
 // Get all reviews
 export const getReviews = async (
@@ -25,9 +24,12 @@ export const getReviewsByUserId = async (
 ) => {
   try {
     const userId = req.params.userId;
-    const reviews = await reviewModels.find({ userId });
+    const reviews = await reviewModels.find({ userId: userId });
+
     if (reviews.length > 0) {
+      console.log("getReviewsByUserId reviews", reviews);
       res.status(200).json(reviews);
+      // res.status(200).json({ message: "get reviews successfully" });
     } else {
       res.status(404).json({ message: "No reviews found for your account" });
     }
@@ -36,59 +38,56 @@ export const getReviewsByUserId = async (
     console.log(err);
   }
 };
-// export const getReviews = async (
-//   req: express.Request,
-//   res: express.Response
-// ) => {
-//   console.log("getReview", req.params);
 
-//   try {
-//     // Get the restaurantId from request parameters
-//     const restaurantId = req.params.restaurantId;
-//     console.log("restaurantId", restaurantId);
+//Delete reviews
+export const deleteReview = async (
+  req: express.Request,
+  res: express.Response
+) => {
+  try {
+    const reviewId = req.params.reviewId;
 
-//     // Ask DB to find review(s) which have this restaurantId
-//     const reviews: ReviewInput[] = await reviewModels.find({ restaurantId });
+    //Find the restaurant containing the review
+    const restaurant = await RestaurantModel.findOne({ reviewsId: reviewId });
+    if (!restaurant) {
+      return res
+        .status(404)
+        .json({ message: "Review not found in any restaurant" });
+    }
+    //  Remove the review ID from the restaurant's reviewsId array
+    restaurant.reviewsId = restaurant.reviewsId.filter(
+      (id) => id.toString() !== reviewId
+    );
+    await restaurant.save();
 
-//     console.log("reviews", reviews);
+    // Delete the review itself
+    const review = await reviewModels.deleteOne({ _id: reviewId });
+    if (review.deletedCount === 0) {
+      return res.status(404).json({ message: "Review not found" });
+    }
 
-//     if (reviews.length > 0) {
-//       res.status(200).json(reviews);
-//       console.log("reviews", reviews);
-//     } else {
-//       res.status(404).json({ message: "No reviews found for this restaurant" });
-//     }
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
+    //Fetch all remaining reviews for the restaurant
+    const remainingReviews = await reviewModels.find({
+      _id: { $in: restaurant.reviewsId },
+    });
 
-// export const addReview = async (
-//   req: express.Request,
-//   res: express.Response
-// ) => {
-//   const restaurantId = req.params.restaurantId;
-//   const reviewInput: ReviewInput = req.body;
+    // Recalculate the average rating and the number of reviews
+    const numberOfReviews = remainingReviews.length;
+    const avgRating =
+      numberOfReviews > 0
+        ? remainingReviews.reduce(
+            (sum, review) => sum + review.review_ratings,
+            0
+          ) / numberOfReviews
+        : 0;
 
-//   console.log("addReview restaurantId", restaurantId);
-//   console.log("addReview reviewInput", reviewInput);
-
-//   try {
-//     const restaurant = await restaurantModels.findById(restaurantId);
-//     if (!restaurant) {
-//       console.log("please select a restaurant");
-//       return res.status(400).json("restaurantId not exist");
-//     } else {
-//       const review = await createReview(reviewInput, restaurantId);
-
-//       restaurant.reviewsId.push(review._id.toString());
-//       await restaurant.save();
-//       console.log("successful");
-//       return res.status(200).json(review);
-//     }
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Server error" });
-//   }
-// };
+    //Update the restaurant with the new values
+    restaurant.restaurant_avg_ratings = avgRating;
+    restaurant.restaurant_number_reviews = numberOfReviews;
+    await restaurant.save();
+    res.status(200).json({ message: "Review deleted successfully" });
+  } catch (err) {
+    console.error("Error deleting review:", err);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
