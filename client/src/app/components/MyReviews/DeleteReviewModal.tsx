@@ -23,7 +23,7 @@ const DeleteReviewModal = forwardRef<HTMLDialogElement, DeleteReviewProps>(
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
       event.preventDefault();
-      console.log("reviewId: ", reviewId);
+      console.log("deleteReviewModal reviewId: ", reviewId);
       try {
         const res = await axios.delete(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/delete/${reviewId}`
@@ -37,17 +37,22 @@ const DeleteReviewModal = forwardRef<HTMLDialogElement, DeleteReviewProps>(
         setAllReviews((prev: Review[]) =>
           prev.filter((review) => review._id !== reviewId)
         );
+        if (modalRef.current) {
+          console.log("Closing modal");
 
-        modalRef.current?.close();
+          modalRef.current?.close();
+        }
       } catch (err) {
         console.log("Error deleting review", err);
       }
     };
 
     return (
-      <dialog ref={ref || modalRef} id="my_modal_1" className="modal">
+      <dialog ref={ref || modalRef} id={reviewId} className="modal">
         <div className="modal-box">
-          <p className="py-4">Are you sure to delete your review?</p>
+          <p className="py-4 text-center">
+            Are you sure to delete your review?
+          </p>
           <div className="flex justify-around mt-1">
             <div className="modal-action m-0">
               <form method="dialog">

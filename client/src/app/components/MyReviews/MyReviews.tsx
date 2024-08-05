@@ -14,7 +14,7 @@ const MyReviews = () => {
   const { user } = useContext(UserContext);
   const modalRef = useRef<HTMLDialogElement>(null);
   const { restaurantsData, setRestaurantsData } = useContext(RestaurantContext);
-  const [reviewId, setReviewId] = useState<string | undefined>("");
+  // const [reviewId, setReviewId] = useState<string | undefined>("");
 
   const [restaurantReviews, setRestaurantReviews] = useState<
     { restaurantName: string; review: Review }[]
@@ -78,26 +78,55 @@ const MyReviews = () => {
   }, [allReviews, restaurantsData]);
 
   // Get review's id to delete itself
-  const deleteHandler = (
+  // const deleteHandler = (
+  //   event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  // ) => {
+  //   event.preventDefault();
+  //   console.log("review delete handler clicked");
+
+  //   const reviewId = event.currentTarget.dataset.reviewId;
+  //   setReviewId(reviewId);
+
+  //   console.log("modalRef", modalRef.current);
+
+  //   if (modalRef.current) {
+  //     console.log("show modal", modalRef.current);
+  //     modalRef.current.showModal();
+  //   }
+
+  // };
+
+  const deleteReviewHandler = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
     event.preventDefault();
-    console.log("review delete handler clicked");
+    const reviewId = event.currentTarget.dataset.reviewId;
+    try {
+      const res = await axios.delete(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/delete/${reviewId}`
+      );
+      console.log("review deleted", res.data);
 
-    setReviewId(event.currentTarget.dataset.reviewId);
+      setRestaurantReviews((prev) =>
+        prev.filter((review) => review.review._id !== reviewId)
+      );
 
-    if (modalRef.current) {
-      modalRef.current.showModal();
+      setAllReviews((prev: Review[]) =>
+        prev.filter((review) => review._id !== reviewId)
+      );
+      if (modalRef.current) {
+        modalRef.current?.close();
+      }
+    } catch (err) {
+      console.log("Error deleting review", err);
     }
   };
-
-  console.log("my review get all review", allReviews);
 
   return (
     <div className="bg-accent">
       <h2 className="text-3xl text-center my-8">Review</h2>
       <div className="join join-vertical w-1/2 mx-auto mt-2 block">
-        {restaurantReviews.length > 0 &&
+        {restaurantReviews.length > 0 ? (
           restaurantReviews.map(({ restaurantName, review }, i) => (
             <div
               key={i}
@@ -125,18 +154,24 @@ const MyReviews = () => {
                 <button
                   className="absolute top-16 right-3"
                   data-review-id={review._id} // Adding data attribute to button
-                  onClick={deleteHandler}
+                  // onClick={deleteHandler}
+                  onClick={deleteReviewHandler}
                 >
                   <MdDelete className="fill-warning" />
                 </button>
-                <DeleteReviewModal
+                {/* Modal for deletion */}
+                {/* <DeleteReviewModal
                   modalRef={modalRef}
                   setRestaurantReviews={setRestaurantReviews}
                   reviewId={reviewId!}
-                />
+                  // setModalVisible={setModalVisible}
+                /> */}
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-2xl text-center pt-8">You have no reviews yet.</p>
+        )}
       </div>
     </div>
   );

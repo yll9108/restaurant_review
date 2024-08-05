@@ -67,7 +67,7 @@ const Restaurants = () => {
             </div>
           ))}
       </div>
-      <div className="mt-12 flex justify-center">
+      <div className="absolute bottom-1/4 my_position">
         <Pagination
           restaurantsPerPage={restaurantPerPage}
           totalRestaurants={restaurantsData.length}

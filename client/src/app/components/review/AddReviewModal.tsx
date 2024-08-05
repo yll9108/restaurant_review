@@ -134,11 +134,11 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             )}
             {showConfirm && (
               <div>
-                <h3 className="font-bold text-2xl pb-4">Preview</h3>
-                <p className="text-lg">Rating is {reviewRating}</p>
-                <p className="text-lg">{reviewTitle}</p>
-                <p className="text-lg">{reviewDesc}</p>
-                <p className="text-xl py-4">Will you publish?</p>
+                <h3 className="font-bold text-2xl pb-4 text-center">Preview</h3>
+                <p className="text-lg text-center">Rating is {reviewRating}</p>
+                <p className="text-lg text-center">{reviewTitle}</p>
+                <p className="text-lg text-center">{reviewDesc}</p>
+                <p className="text-xl py-4 text-center">Will you publish?</p>
               </div>
             )}
             <div className="flex justify-between mt-4">

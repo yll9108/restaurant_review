@@ -13,7 +13,6 @@ const HeaderLogo = () => {
     const res = await axios.get(
       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`
     );
-    console.log("restaurants context ", res.data);
     setRestaurantsData(res.data);
   }, [setRestaurantsData]);
 
