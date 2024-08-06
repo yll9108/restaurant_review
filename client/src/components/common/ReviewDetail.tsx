@@ -45,7 +45,6 @@ const ReviewDetail = ({
   return (
     <div className="flex flex-col ml-2 pt-4">
       <div className="flex w-46 items-center" key={_id}>
-        <div>{_id}</div>
         {detailPageParams ? (
           <div>{reviewIcon}</div>
         ) : (

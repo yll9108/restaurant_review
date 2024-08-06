@@ -43,7 +43,7 @@ export default function Avatar() {
   };
 
   return (
-    <details className="dropdown dropdown-end mr-4 sm:mr-12 " ref={dropDownRef}>
+    <details className="dropdown dropdown-end mr-4" ref={dropDownRef}>
       <summary className="btn btn-secondary btn-circle avatar placeholder">
         <div className="w-10 rounded-full">
           {/* <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}

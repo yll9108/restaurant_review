@@ -33,7 +33,7 @@ const PersonalReview = () => {
   return (
     <>
       {displayAllReviews.map((review) => (
-        <div key={review._id} className="card bg-base-100 shadow-xl m-5 w-5/6 ">
+        <div key={review._id} className="card bg-base-100 shadow-xl">
           <div className="card-body flexRow">
             <User uid={review.userId} />
             <ReviewDetail

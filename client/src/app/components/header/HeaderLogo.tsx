@@ -27,7 +27,7 @@ const HeaderLogo = () => {
   }, [getRestaurantsData]);
 
   return (
-    <div className=" flex flex-1 ml-4 sm:ml-12 items-center">
+    <div className="flex flex-1 ml-4 items-center">
       <a
         className="btn btn-ghost text-xl p-0 text-accent"
         onClick={clickedHomeHandler}
