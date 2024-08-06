@@ -46,7 +46,7 @@ const Restaurants = () => {
   };
   return (
     <div className="bg-accent h-screen mt-16">
-      <div className="flex flex-wrap w-full justify-around pt-16">
+      <div className="flex flex-wrap w-full justify-around pt-16 bg-accent">
         {currentRestaurants &&
           currentRestaurants.map((restaurant: Restaurant, index: number) => (
             <div key={index} className="relative">
@@ -67,14 +67,12 @@ const Restaurants = () => {
             </div>
           ))}
       </div>
-      <div className="absolute bottom-1/4 my_position">
-        <Pagination
-          restaurantsPerPage={restaurantPerPage}
-          totalRestaurants={restaurantsData.length}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
-      </div>
+      <Pagination
+        restaurantsPerPage={restaurantPerPage}
+        totalRestaurants={restaurantsData.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };
