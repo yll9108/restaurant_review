@@ -1,22 +1,31 @@
 "use client";
 import ReviewDetail from "@/components/common/ReviewDetail";
 import User from "@/components/common/User";
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect, useCallback } from "react";
 import "./custom.css";
 import { BtnType, Button } from "@/components/common/button";
 import { ReviewsContext } from "@/context/ReviewsContext";
-
-// this props that the componment is receving has props called reviews that
-// is an array of type review
+import { useParams } from "next/navigation";
 
 const PersonalReview = () => {
   const [showAllReviews, setShowAllReviews] = useState(false);
-  const { allReviews } = useContext(ReviewsContext);
+  const { allReviews, fetchReviews } = useContext(ReviewsContext);
+  const params = useParams();
+  const restaurantId = params.restaurantId as string;
+
+  const fetchReviewsCallback = useCallback(() => {
+    fetchReviews(restaurantId);
+  }, [restaurantId, fetchReviews]);
+
+  useEffect(() => {
+    fetchReviewsCallback();
+  }, [fetchReviewsCallback]);
   const displayAllReviews = Array.isArray(allReviews)
     ? showAllReviews
       ? allReviews
       : allReviews.slice(0, 5)
     : [];
+
   const toggleReviews = () => {
     setShowAllReviews(!showAllReviews);
   };

@@ -1,3 +1,4 @@
+"use client";
 import { BtnType, Button } from "@/components/common/button";
 import { useRef } from "react";
 import AddReviewModal from "./AddReviewModal";

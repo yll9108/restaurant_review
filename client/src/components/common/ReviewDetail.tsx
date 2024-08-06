@@ -40,15 +40,18 @@ const ReviewDetail = ({
 
   const reviewIcon = getIcon(review_ratings);
 
+  const reviewRating = review_ratings.toFixed(1);
+
   return (
     <div className="flex flex-col ml-2 pt-4">
       <div className="flex w-46 items-center" key={_id}>
+        <div>{_id}</div>
         {detailPageParams ? (
           <div>{reviewIcon}</div>
         ) : (
           <Ratings ratings={review_ratings} />
         )}
-        <p className="w-1">{review_ratings.toFixed(1)}</p>
+        <p className="w-1">{reviewRating}</p>
         <p className={`w-36 ${detailPageParams ? "" : "ml-5"}`}>
           {review_date}
         </p>

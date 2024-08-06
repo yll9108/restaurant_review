@@ -20,8 +20,9 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5.0);
 
     const { user } = useContext(UserContext);
-    const { setHasReviews, allReviews, setAllReviews, setReview } =
-      useContext(ReviewsContext);
+    // const { setHasReviews, allReviews, setAllReviews, setReview } =
+    //   useContext(ReviewsContext);
+    const { setHasReviews, fetchReviews } = useContext(ReviewsContext);
     const { updatedRestaurantData } = useContext(RestaurantContext);
 
     //Get restaurant ID
@@ -68,7 +69,6 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
       setReviewTitle("");
       setReviewDesc("");
       setReviewRating(5.0);
-
       setShowConfirm(false);
     };
 
@@ -92,8 +92,12 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             },
             { headers: { "Content-Type": "application/json" } }
           );
-          const newReview = res.data;
-          setAllReviews([...allReviews, newReview]);
+
+          // const newReview = res.data;
+          // setAllReviews([...allReviews, newReview]);
+
+          // Refresh the reviews
+          await fetchReviews(restaurantId);
           setHasReviews(true);
 
           // Fetch the updated restaurant data
@@ -130,11 +134,11 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             )}
             {showConfirm && (
               <div>
-                <h3 className="font-bold text-2xl pb-4">Preview</h3>
-                <p className="text-lg">Rating is {reviewRating}</p>
-                <p className="text-lg">{reviewTitle}</p>
-                <p className="text-lg">{reviewDesc}</p>
-                <p className="text-xl py-4">Will you publish?</p>
+                <h3 className="font-bold text-2xl pb-4 text-center">Preview</h3>
+                <p className="text-lg text-center">Rating is {reviewRating}</p>
+                <p className="text-lg text-center">{reviewTitle}</p>
+                <p className="text-lg text-center">{reviewDesc}</p>
+                <p className="text-xl py-4 text-center">Will you publish?</p>
               </div>
             )}
             <div className="flex justify-between mt-4">
