@@ -31,9 +31,12 @@ const PersonalReview = () => {
   };
 
   return (
-    <>
+    <div className="bg-accent">
       {displayAllReviews.map((review) => (
-        <div key={review._id} className="card bg-base-100 shadow-xl">
+        <div
+          key={review._id}
+          className="card bg-base-100 shadow-xl mx-4 my-5 lg:w-7/12"
+        >
           <div className="card-body flexRow">
             <User uid={review.userId} />
             <ReviewDetail
@@ -49,13 +52,13 @@ const PersonalReview = () => {
         </div>
       ))}
       {allReviews.length > 5 && !showAllReviews && (
-        <div className="text-center">
+        <div className="text-center lg:mr-96">
           <Button type={BtnType.regular_google} onClick={toggleReviews}>
             See more reviews
           </Button>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

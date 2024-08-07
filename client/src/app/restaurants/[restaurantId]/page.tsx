@@ -54,19 +54,19 @@ const Page = () => {
 
   return (
     <div
-      // className={`flex pt-16 bg-accent  ${hasReviews ? "h-screen" : "h-full"}`}
-      className="bg-accent pt-16 h-full sm:flex "
+      // className={`md:flex pt-16 bg-accent  ${
+      //   hasReviews ? "h-screen" : "h-full"
+      // }`}
+      className="bg-accent pt-16 h-full lg:relative "
     >
       {/*display right side */}
 
       {clickedRestaurant && (
         <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
       )}
+
       {/*display left side */}
-      {/* <div className="bg-accent"> */}
-      <div
-      // className="w-2/3"
-      >
+      <div className="bg-accent">
         {hasReviews ? <PersonalReview /> : <NoReviews />}
       </div>
       {/* </div> */}

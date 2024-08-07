@@ -25,12 +25,12 @@ const Card = ({
     console.log("clicked");
     router.push(`restaurants/${_id}`);
   };
-  const submitFav = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  // const submitFav = (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
 
-    console.log("clicked");
-    // setIsFav(true);
-  };
+  //   console.log("clicked");
+  //   // setIsFav(true);
+  // };
   return (
     <div onClick={clickRestaurant}>
       <div className="card w-96 bg-base-100 shadow-xl m-4 hover:scale-110 cursor-pointer">

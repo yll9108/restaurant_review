@@ -43,8 +43,8 @@ const ReviewDetail = ({
   const reviewRating = review_ratings.toFixed(1);
 
   return (
-    <div className="flex flex-col ml-2 pt-4">
-      <div className="flex w-46 items-center" key={_id}>
+    <div className="flex flex-col ml-2 ">
+      <div className="flex w-56 items-center" key={_id}>
         {detailPageParams ? (
           <div>{reviewIcon}</div>
         ) : (

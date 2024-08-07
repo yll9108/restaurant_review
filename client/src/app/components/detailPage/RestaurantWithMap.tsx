@@ -88,7 +88,12 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
 
   return (
     // <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-5 fixed right-16 top-16">
-    <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-5 ">
+    // <div className="card bg-base-100 shadow-xl mx-4 my-5 h-48 md:order-2">
+    <div
+      className={`card bg-base-100 shadow-xl mx-4 my-5 lg:fixed lg:z-40 lg:right-8 ${
+        hasReviews ? "h-46" : "h-56"
+      }`}
+    >
       <div className="card-body p-4">
         {clickedRestaurant && (
           <>
