@@ -43,19 +43,19 @@ const ReviewDetail = ({
   const reviewRating = review_ratings.toFixed(1);
 
   return (
-    <div className="flex flex-col ml-2 ">
-      <div className="flex w-56 items-center" key={_id}>
+    <div className="flex flex-col ml-2 pt-4">
+      <div className="flex items-center" key={_id}>
         {detailPageParams ? (
           <div>{reviewIcon}</div>
         ) : (
           <Ratings ratings={review_ratings} />
         )}
-        <p className="w-1">{reviewRating}</p>
-        <p className={`w-36 ${detailPageParams ? "" : "ml-5"}`}>
-          {review_date}
-        </p>
+        {/* <p className={`${detailPageParams ? "" : "w-4"} pl-2`}> */}
+        <div className={"pl-2"}>{reviewRating}</div>
+        {/* <p className={`w-36 ${detailPageParams ? "" : "pl-5"}`}> */}
+        <p className="pl-5">{review_date}</p>
       </div>
-      <h2 className="card-title text-2xl">{review_title}</h2>
+      <h2 className="card-title text-2xl my-2">{review_title}</h2>
       <p className="text-lg">{review_description}</p>
     </div>
   );

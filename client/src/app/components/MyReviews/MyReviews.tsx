@@ -125,7 +125,7 @@ const MyReviews = () => {
   return (
     <div className="bg-accent">
       <h2 className="text-3xl text-center my-8">Review</h2>
-      <div className="join join-vertical w-1/2 mx-auto mt-2 block">
+      <div className="join join-vertical w-3/4 mx-auto mt-2 block">
         {restaurantReviews.length > 0 ? (
           restaurantReviews.map(({ restaurantName, review }, i) => (
             <div
