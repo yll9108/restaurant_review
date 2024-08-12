@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className=" bg-primary h-16 flex fixed top-0 w-full z-50">
       <HeaderLogo />
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center mr-4">
         <SearchBar />
         {user ? (
           <Avatar />

@@ -11,12 +11,15 @@ import { ReviewsContext } from "@/context/ReviewsContext";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import axios from "axios";
 import FavButton from "../restaurant/FavButton";
+import { BtnType, Button } from "@/components/common/button";
+import { useRouter } from "next/navigation";
 
 type RestaurantWithMapProps = {
   clickedRestaurant: Restaurant | null;
 };
 
 const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
+  const router = useRouter();
   const { loginStatus, user, setUser } = useContext(UserContext);
   const { hasReviews, allReviews } = useContext(ReviewsContext);
   const { restaurantsData, updatedRestaurantData } =
@@ -125,7 +128,15 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
                 <></>
               )
             ) : (
-              <></>
+              <div className="text-center mt-1">
+                <Button
+                  type={BtnType.logIn}
+                  onClick={() => router.push("/login")}
+                  className="btn px-7"
+                >
+                  Log In
+                </Button>
+              </div>
             )}
           </>
         )}
