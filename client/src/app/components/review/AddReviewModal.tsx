@@ -121,7 +121,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     return (
       <>
         <dialog className="modal" ref={ref || modalRef}>
-          <div className="modal-box w-1/2 max-w-5xl">
+          <div className="modal-box lb:w-1/2 max-w-4xl">
             {!showConfirm && (
               <ReviewInput
                 reviewTitle={reviewTitle}

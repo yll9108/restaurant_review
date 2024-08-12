@@ -31,7 +31,7 @@ const ReviewInput = (props: ReviewInputProps) => {
 
   return (
     <div className="flex flex-col ">
-      <div className="flex mb-4 ">
+      <div className="flex mb-4 flex-wrap">
         {options.map((option) => (
           <label key={option.num} className="flex items-center mr-2">
             <input

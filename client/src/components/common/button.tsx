@@ -16,7 +16,7 @@ export type BtnProps = {
 };
 
 // button styles
-const SUBMIT_STYLE = "btn btn-primary btn-wide text-white text-base mb-4 ";
+const SUBMIT_STYLE = "btn btn-primary sm:btn-wide text-white text-base mb-4 ";
 const REGULAR_GOOGLE_STYLE =
   "btn btn-outline btn-primary btn-wide text-base mb-4 ";
 const CANCEL_STYLE = "btn btn-outline btn-error text-base mb-4 ";

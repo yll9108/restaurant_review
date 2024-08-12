@@ -12,7 +12,7 @@ const UserProfile = () => {
   const modalRef = useRef<HTMLDialogElement>(null);
 
   return (
-    <>
+    <div className="bg-accent">
       <h2 className="text-center text-3xl my-8">User Profile</h2>
       <div className="w-64 mx-auto mt-10">
         <User uid={user?._id} />
@@ -24,7 +24,7 @@ const UserProfile = () => {
           Edit
         </Button>
       </div>
-      <div className="w-64 mt-64 mx-auto text-center">
+      <div className="w-64 mt-48 mx-auto text-center">
         <a
           className="link link-warning"
           onClick={() => {
@@ -37,7 +37,7 @@ const UserProfile = () => {
         </a>
         <DeleteAccount modalRef={modalRef} />
       </div>
-    </>
+    </div>
   );
 };
 

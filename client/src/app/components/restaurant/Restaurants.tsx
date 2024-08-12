@@ -11,7 +11,7 @@ const Restaurants = () => {
   const { restaurantsData } = useContext(RestaurantContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
-  const [isFav, setIsFav] = useState<Boolean>(false);
+  // const [isFav, setIsFav] = useState<Boolean>(false);
 
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
