@@ -2,6 +2,9 @@ import express from "express";
 import UserModel from "../models/userModels";
 import { UserInput } from "../types/types";
 import { createUser, validateUserInput } from "../helpers/helpers";
+import ReviewModel from "../models/reviewModels";
+import RestaurantModel from "../models/restaurantModels";
+// import RestaurantModel from "../models/restaurantModels";
 // import mongoose from "mongoose";
 
 export const registerUser = async (
@@ -83,8 +86,49 @@ export const deleteUser = async (
     res.status(404).send("Delete user not found");
   } else {
     try {
+      // Find all reviews associated with the user
+      const userReviews = await ReviewModel.find({ userId: userId });
+
+      // Extract the review IDs
+      const reviewIds = userReviews.map((review) => review._id.toString());
+      const restaurantIds = userReviews.map((review) => review.restaurantId);
+
+      // Delete all reviews associated with the user
+      await ReviewModel.deleteMany({ userId: userId });
+
+      // Update the Restaurant models to remove references to these reviews
+      await RestaurantModel.updateMany(
+        { reviewsId: { $in: reviewIds } },
+        { $pull: { reviewsId: { $in: reviewIds } } }
+      );
+
+      // Recalculate ratings and number of reviews for each affected restaurant
+      for (const restaurantId of restaurantIds) {
+        const restaurantReviews = await ReviewModel.find({
+          restaurantId: restaurantId,
+        });
+
+        const numberOfReviews = restaurantReviews.length;
+        const avgRating =
+          restaurantReviews.reduce(
+            (sum, review) => sum + review.review_ratings,
+            0
+          ) / numberOfReviews || 0;
+
+        await RestaurantModel.findByIdAndUpdate(restaurantId, {
+          restaurant_number_reviews: numberOfReviews,
+          restaurant_avg_ratings: avgRating,
+        });
+      }
+
+      // Delete the user
       const deleteUser = await UserModel.findByIdAndDelete(userId);
-      res.status(200).json(deleteUser);
+      if (!deleteUser) {
+        res.status(404).send("User not found");
+      } else {
+        res.status(200).json(deleteUser);
+      }
+
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       res.status(500).send(err.message);

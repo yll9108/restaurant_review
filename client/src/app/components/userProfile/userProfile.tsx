@@ -18,7 +18,7 @@ const UserProfile = () => {
         <User uid={user?._id} />
         <Button
           type={BtnType.submit}
-          className=" btn-small block mx-auto mt-10"
+          className="btn block mx-auto mt-10"
           onClick={() => changedTabs("userEdit")}
         >
           Edit

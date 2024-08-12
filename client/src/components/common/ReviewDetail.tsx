@@ -44,16 +44,18 @@ const ReviewDetail = ({
 
   return (
     <div className="flex flex-col ml-2 pt-4">
-      <div className="flex items-center" key={_id}>
-        {detailPageParams ? (
-          <div>{reviewIcon}</div>
-        ) : (
-          <Ratings ratings={review_ratings} />
-        )}
-        {/* <p className={`${detailPageParams ? "" : "w-4"} pl-2`}> */}
-        <div className={"pl-2"}>{reviewRating}</div>
+      <div className="lg:flex" key={_id}>
+        <div className="flex items-center">
+          {detailPageParams ? (
+            <div>{reviewIcon}</div>
+          ) : (
+            <Ratings ratings={review_ratings} />
+          )}
+          {/* <p className={`${detailPageParams ? "" : "w-4"} pl-2`}> */}
+          <div className={"pl-2"}>{reviewRating}</div>
+        </div>
         {/* <p className={`w-36 ${detailPageParams ? "" : "pl-5"}`}> */}
-        <p className="pl-5">{review_date}</p>
+        <p className="lg:pl-5">{review_date}</p>
       </div>
       <h2 className="card-title text-2xl my-2">{review_title}</h2>
       <p className="text-lg">{review_description}</p>

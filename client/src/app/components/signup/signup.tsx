@@ -141,7 +141,9 @@ const Signup = () => {
                 placeholder="Confirm password"
                 onChange={(event) => setConfirmPassword(event.target.value)}
               />
-              <Button type={BtnType.submit}>Next</Button>
+              <Button type={BtnType.submit} className="btn btn-wide">
+                Next
+              </Button>
               <p className="mb-4">or</p>
             </div>
           </form>

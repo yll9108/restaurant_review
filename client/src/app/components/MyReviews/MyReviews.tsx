@@ -114,9 +114,9 @@ const MyReviews = () => {
       setAllReviews((prev: Review[]) =>
         prev.filter((review) => review._id !== reviewId)
       );
-      if (modalRef.current) {
-        modalRef.current?.close();
-      }
+      // if (modalRef.current) {
+      //   modalRef.current?.close();
+      // }
     } catch (err) {
       console.log("Error deleting review", err);
     }
