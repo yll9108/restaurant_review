@@ -42,6 +42,22 @@ const ReviewDetail = ({
 
   const reviewRating = review_ratings.toFixed(1);
 
+  const daysAgo = Math.floor(
+    (new Date().setHours(0, 0, 0, 0) -
+      new Date(review_date).setHours(0, 0, 0, 0)) /
+      (1000 * 3600 * 24)
+  );
+  console.log("daysAgo", daysAgo);
+
+  const daysAgoString = (days: number) => {
+    if (days <= 0) return "Today";
+    if (days === 1) return "Yesterday";
+    if (days > 7) {
+      return (days / 7).toFixed(0) + " weeks ago";
+    } else {
+      return days + " days ago";
+    }
+  };
   return (
     <div className="flex flex-col ml-2 pt-4">
       <div className="lg:flex" key={_id}>
@@ -55,7 +71,7 @@ const ReviewDetail = ({
           <div className={"pl-2"}>{reviewRating}</div>
         </div>
         {/* <p className={`w-36 ${detailPageParams ? "" : "pl-5"}`}> */}
-        <p className="lg:pl-5">{review_date}</p>
+        <p className="lg:pl-5">{daysAgoString(daysAgo)}</p>
       </div>
       <h2 className="card-title text-2xl my-2">{review_title}</h2>
       <p className="text-lg">{review_description}</p>

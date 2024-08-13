@@ -29,6 +29,7 @@ const PersonalReview = () => {
   const toggleReviews = () => {
     setShowAllReviews(!showAllReviews);
   };
+  displayAllReviews.map((review) => console.log("review date", review));
 
   return (
     <div className="bg-accent">

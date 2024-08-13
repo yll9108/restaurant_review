@@ -30,13 +30,14 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const restaurantId = reviewParams.restaurantId as string;
 
     //Get postedTime
-    const postedTime = moment().calendar({
-      sameDay: "[Today] dddd",
-      lastDay: "[Yesterday]",
-      lastWeek: "[last] dddd",
-      lastMonth: "[last] mmmm",
-      sameElse: "MM/DD/YYYY",
-    });
+    // const postedTime = moment().calendar({
+    //   sameDay: "[Today] dddd",
+    //   lastDay: "[Yesterday]",
+    //   lastWeek: "[last] dddd",
+    //   lastMonth: "[last] mmmm",
+    //   sameElse: "MM/DD/YYYY",
+    // });
+    const postedTime = new Date();
 
     const AddedReview = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -97,7 +98,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
           // setAllReviews([...allReviews, newReview]);
 
           // Refresh the reviews
-          await fetchReviews(restaurantId);
+          fetchReviews(restaurantId);
           setHasReviews(true);
 
           // Fetch the updated restaurant data
