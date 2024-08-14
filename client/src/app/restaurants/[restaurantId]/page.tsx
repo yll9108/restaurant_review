@@ -50,7 +50,7 @@ const Page = () => {
     getData();
   }, [restaurantId, setAllReviews, setClickedRestaurant, setHasReviews]);
 
-  console.log("allReviews", allReviews);
+  // console.log("allReviews", allReviews);
 
   return (
     <div
@@ -66,7 +66,7 @@ const Page = () => {
       )}
 
       {/*display left side */}
-      <div className="bg-accent">
+      <div className="bg-accent pb-1">
         {hasReviews ? <PersonalReview /> : <NoReviews />}
       </div>
       {/* </div> */}

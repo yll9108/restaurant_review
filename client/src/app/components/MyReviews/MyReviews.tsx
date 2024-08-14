@@ -20,6 +20,8 @@ const MyReviews = () => {
     { restaurantName: string; review: Review }[]
   >([]);
 
+  console.log("check bugs allReviews", allReviews);
+
   // Get all my reviews
   useEffect(() => {
     const getReviews = async () => {
@@ -31,6 +33,7 @@ const MyReviews = () => {
         setAllReviews(res.data);
       } catch (err) {
         console.log("Error fetching reviews", err);
+        // setAllReviews([]);
       }
     };
     if (user?._id) {
@@ -54,6 +57,8 @@ const MyReviews = () => {
     handleReviewChange();
   }, [setRestaurantsData]);
 
+  console.log("bag check restaurantsData", restaurantsData);
+
   // Get restaurant name and my review from the restaurant
   useEffect(() => {
     if (allReviews.length && restaurantsData.length) {
@@ -71,9 +76,11 @@ const MyReviews = () => {
           return null;
         })
         .filter(Boolean);
+
       setRestaurantReviews(
         matchedReviews as { restaurantName: string; review: Review }[]
       );
+      console.log("matched", matchedReviews);
     }
   }, [allReviews, restaurantsData]);
 

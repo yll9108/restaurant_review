@@ -47,7 +47,6 @@ const ReviewDetail = ({
       new Date(review_date).setHours(0, 0, 0, 0)) /
       (1000 * 3600 * 24)
   );
-  console.log("daysAgo", daysAgo);
 
   const daysAgoString = (days: number) => {
     if (days <= 0) return "Today";

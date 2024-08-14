@@ -1,14 +1,21 @@
 "use client";
 
 import { DropDownContext } from "@/context/DropDownContext";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import MyFavorite from "../components/favorite/favorite";
 import MyReviews from "../components/MyReviews/MyReviews";
 import UserProfile from "../components/userProfile/userProfile";
 import UserEdit from "../components/edit/userEdit";
+import { ReviewsContext } from "@/context/ReviewsContext";
 
 export default function Page() {
   const { activeTab, changedTabs } = useContext(DropDownContext);
+  const { setAllReviews } = useContext(ReviewsContext);
+
+  // Clear allReviews when navigating to "My Reviews" page
+  useEffect(() => {
+    setAllReviews([]);
+  }, [setAllReviews]);
 
   return (
     <>

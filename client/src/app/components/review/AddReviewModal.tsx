@@ -137,7 +137,9 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
               <div>
                 <h3 className="font-bold text-2xl pb-4 text-center">Preview</h3>
                 <p className="text-lg text-center">Rating is {reviewRating}</p>
-                <p className="text-lg text-center">{reviewTitle}</p>
+                <p className="text-lg font-semibold text-center">
+                  {reviewTitle}
+                </p>
                 <p className="text-lg text-center">{reviewDesc}</p>
                 <p className="text-xl py-4 text-center">Will you publish?</p>
               </div>

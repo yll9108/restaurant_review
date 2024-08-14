@@ -66,8 +66,6 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
     user?.user_favorite_restaurant,
   ]);
 
-  console.log("clickedRestaurant", clickedRestaurant);
-
   //favorite button handler
   const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
