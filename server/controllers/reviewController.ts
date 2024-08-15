@@ -27,9 +27,7 @@ export const getReviewsByUserId = async (
     const reviews = await reviewModels.find({ userId: userId });
 
     if (reviews.length > 0) {
-      console.log("getReviewsByUserId reviews", reviews);
       res.status(200).json(reviews);
-      // res.status(200).json({ message: "get reviews successfully" });
     } else {
       res.status(404).json({ message: "No reviews found for your account" });
     }

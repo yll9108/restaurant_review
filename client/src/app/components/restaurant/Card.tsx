@@ -4,7 +4,6 @@ import Tags from "./Tags";
 import Address from "./Address";
 import { PartialRestaurantData } from "@/types/types";
 import { useRouter } from "next/navigation";
-import { RestaurantContext } from "@/context/RestaurantContext";
 import FavButton from "./FavButton";
 
 const Card = ({
@@ -17,8 +16,6 @@ const Card = ({
 }: PartialRestaurantData) => {
   // click restaurant div, will lead to detailPage //
   const router = useRouter();
-
-  // const { setClickedRestaurant } = useContext(RestaurantContext);
 
   const clickRestaurant = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();

@@ -15,8 +15,6 @@ export const getRestaurant = async (
         : "";
     if (text) {
       const searchRegex = new RegExp(text, "i"); // Create a case-insensitive regex
-      console.log("searchRegex", searchRegex);
-
       const restaurants = await restaurantModels.find({
         restaurant_name: searchRegex,
       }); // Assuming you're searching by name
@@ -37,8 +35,6 @@ export const addRestaurant = async (
   res: express.Response
 ) => {
   const restaurantInput: RestaurantInput = req.body;
-  console.log("req.body", req.body);
-  //   console.log("req.params", req.params);
 
   try {
     const restaurant = createRestaurant(restaurantInput);
@@ -55,7 +51,6 @@ export const findRestaurant = async (
   res: express.Response
 ) => {
   const restaurantId = req.params.restaurantId;
-  console.log("restaurantId", restaurantId);
 
   try {
     const restaurant = await restaurantModels.findById(restaurantId);

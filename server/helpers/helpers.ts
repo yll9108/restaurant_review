@@ -4,8 +4,6 @@ import restaurantModels from "../models/restaurantModels";
 import reviewModels from "../models/reviewModels";
 
 export const createUser = async (values: UserInput) => {
-  console.log("createUser", values);
-
   const user = new userModels(values);
   const savedUser = await user.save();
   return savedUser.toObject();
@@ -40,7 +38,6 @@ export const createReview = async (
 ) => {
   try {
     const reviewWithRestaurantId = { ...values, restaurantId };
-    console.log("reviewWithRestaurantId", reviewWithRestaurantId);
 
     const review = await new reviewModels(reviewWithRestaurantId).save();
     return review.toObject();

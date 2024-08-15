@@ -3,7 +3,7 @@ import { FaHeart, FaSignOutAlt } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
-import { useState, useContext, useRef, useEffect } from "react";
+import { useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 import { UserContext } from "@/context/UserContext";
 import { LoginStatus } from "@/types/types";
@@ -13,7 +13,7 @@ import { ReviewsContext } from "@/context/ReviewsContext";
 export default function Avatar() {
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
-  const { activeTab, setActiveTab } = useContext(DropDownContext);
+  const { setActiveTab } = useContext(DropDownContext);
   const { user, setUser, setLoginStatus } = useContext(UserContext);
   const { setAllReviews } = useContext(ReviewsContext);
 
@@ -50,7 +50,6 @@ export default function Avatar() {
     <details className="dropdown dropdown-end mr-4 z-50" ref={dropDownRef}>
       <summary className="btn btn-secondary btn-circle avatar placeholder">
         <div className="w-10 rounded-full">
-          {/* <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
           <span>{icon}</span>
         </div>
       </summary>

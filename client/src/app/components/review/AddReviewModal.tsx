@@ -4,7 +4,6 @@ import { UserContext } from "@/context/UserContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
 import { BtnType, Button } from "@/components/common/button";
 import { useParams } from "next/navigation";
-import moment from "moment";
 import ReviewInput from "./ReviewInput";
 import axios from "axios";
 import { RestaurantContext } from "@/context/RestaurantContext";
@@ -20,8 +19,6 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5.0);
 
     const { user } = useContext(UserContext);
-    // const { setHasReviews, allReviews, setAllReviews, setReview } =
-    //   useContext(ReviewsContext);
     const { setHasReviews, fetchReviews } = useContext(ReviewsContext);
     const { updatedRestaurantData } = useContext(RestaurantContext);
 
@@ -30,13 +27,6 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const restaurantId = reviewParams.restaurantId as string;
 
     //Get postedTime
-    // const postedTime = moment().calendar({
-    //   sameDay: "[Today] dddd",
-    //   lastDay: "[Yesterday]",
-    //   lastWeek: "[last] dddd",
-    //   lastMonth: "[last] mmmm",
-    //   sameElse: "MM/DD/YYYY",
-    // });
     const postedTime = new Date();
 
     const AddedReview = (
@@ -93,9 +83,6 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             },
             { headers: { "Content-Type": "application/json" } }
           );
-
-          // const newReview = res.data;
-          // setAllReviews([...allReviews, newReview]);
 
           // Refresh the reviews
           fetchReviews(restaurantId);

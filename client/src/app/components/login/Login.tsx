@@ -40,6 +40,7 @@ const Login = () => {
       });
   };
 
+  // Login with Email and Password
   const handleEmailLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await signInWithEmailAndPassword(getAuth(), email, password)
@@ -52,6 +53,7 @@ const Login = () => {
       });
   };
 
+  // Google Login
   const handleGoogleLogin = async () => {
     await signInWithPopup(getAuth(), new GoogleAuthProvider())
       .then((result) => {

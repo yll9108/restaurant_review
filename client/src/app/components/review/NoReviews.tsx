@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import AddReview from "./AddReview";
 import { UserContext } from "@/context/UserContext";
 import { LoginStatus } from "@/types/types";
 
@@ -18,13 +17,8 @@ function NoReviews() {
           Please log in before reviewing
         </h3>
       )}
-
-      {/* <div className="w-15"></div> */}
     </div>
   );
 }
 
-{
-  /* {loginStatus === LoginStatus.LoggedIn ? <AddReview /> : <></>} */
-}
 export default NoReviews;

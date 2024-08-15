@@ -20,7 +20,11 @@ const Header = () => {
         {user ? (
           <Avatar />
         ) : (
-          <Button type={BtnType.logIn} onClick={() => router.push("/login")}>
+          <Button
+            type={BtnType.logIn}
+            onClick={() => router.push("/login")}
+            className=" btn px-2"
+          >
             Log In
           </Button>
         )}

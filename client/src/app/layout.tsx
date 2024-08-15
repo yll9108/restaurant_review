@@ -5,7 +5,6 @@ import { DropDownContextProvider } from "@/context/DropDownContext";
 import { PageContextProvider } from "@/context/PageContext";
 import { RestaurantContextProvider } from "@/context/RestaurantContext";
 import { UserContextProvider } from "@/context/UserContext";
-import { usePathname } from "next/navigation";
 import { ReviewsContextProvider } from "@/context/ReviewsContext";
 
 export default function RootLayout({
@@ -13,18 +12,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const pathname = usePathname();
-  // const isHeaderReady = (): boolean => {
-  //   if (
-  //     pathname.length > 0 &&
-  //     pathname !== "/login" &&
-  //     pathname !== "/signup"
-  //   ) {
-  //     return true;
-  //   }
-  //   return false;
-  // };
-
   return (
     <html lang="en" className="h-full">
       <body className="h-full">
@@ -33,9 +20,7 @@ export default function RootLayout({
             <RestaurantContextProvider>
               <DropDownContextProvider>
                 <ReviewsContextProvider>
-                  {/* {isHeaderReady() && <Header />} */}
                   <AuthProvider>{children}</AuthProvider>
-                  {/* {children} */}
                 </ReviewsContextProvider>
               </DropDownContextProvider>
             </RestaurantContextProvider>

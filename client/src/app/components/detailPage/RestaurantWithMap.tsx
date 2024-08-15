@@ -2,7 +2,6 @@
 import RestaurantInfo from "../restaurant/RestaurantInfo";
 import Tags from "../restaurant/Tags";
 import Address from "../restaurant/Address";
-import RestaurantMap from "./RestaurantMap";
 import AddReview from "../review/AddReview";
 import { Restaurant, LoginStatus } from "@/types/types";
 import React, { useContext, useEffect, useState } from "react";
@@ -22,8 +21,7 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
   const router = useRouter();
   const { loginStatus, user, setUser } = useContext(UserContext);
   const { hasReviews, allReviews } = useContext(ReviewsContext);
-  const { restaurantsData, updatedRestaurantData } =
-    useContext(RestaurantContext);
+  const { updatedRestaurantData } = useContext(RestaurantContext);
 
   const [isReview, setIsReview] = useState<Boolean>(false);
   const [isFav, setIsFav] = useState<Boolean>(false);
@@ -88,8 +86,6 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
   };
 
   return (
-    // <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-5 fixed right-16 top-16">
-    // <div className="card bg-base-100 shadow-xl mx-4 my-5 h-48 md:order-2">
     <div
       className={`card bg-base-100 shadow-xl mx-4 my-5 lg:fixed lg:z-40 lg:right-8 ${
         hasReviews ? "h-46" : "h-56"
@@ -110,8 +106,6 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
               <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
               <FavButton onClick={registeredFav} isFav={isFav} />
             </div>
-            {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
-            {/* Render button */}
 
             {loginStatus === LoginStatus.LoggedIn ? (
               !hasReviews ? (

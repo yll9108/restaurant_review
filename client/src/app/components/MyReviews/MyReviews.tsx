@@ -12,15 +12,11 @@ import DeleteReviewModal from "./DeleteReviewModal";
 const MyReviews = () => {
   const { allReviews, setAllReviews } = useContext(ReviewsContext);
   const { user } = useContext(UserContext);
-  const modalRef = useRef<HTMLDialogElement>(null);
+  // const modalRef = useRef<HTMLDialogElement>(null);
   const { restaurantsData, setRestaurantsData } = useContext(RestaurantContext);
-  // const [reviewId, setReviewId] = useState<string | undefined>("");
-
   const [restaurantReviews, setRestaurantReviews] = useState<
     { restaurantName: string; review: Review }[]
   >([]);
-
-  console.log("check bugs allReviews", allReviews);
 
   // Get all my reviews
   useEffect(() => {
@@ -33,7 +29,6 @@ const MyReviews = () => {
         setAllReviews(res.data);
       } catch (err) {
         console.log("Error fetching reviews", err);
-        // setAllReviews([]);
       }
     };
     if (user?._id) {

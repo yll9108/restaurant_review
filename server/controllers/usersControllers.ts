@@ -12,7 +12,6 @@ export const registerUser = async (
   res: express.Response
 ) => {
   const userInput: UserInput = req.body;
-  console.log("registerUser", userInput);
 
   const { result, message } = validateUserInput(userInput);
   if (!result) {
@@ -55,14 +54,11 @@ export const getUser = async (req: express.Request, res: express.Response) => {
 
 export const editUser = async (req: express.Request, res: express.Response) => {
   const userId = req.params.id;
-  console.log("editUser", userId);
   if (!userId) {
     res.status(404).send("User not found");
   } else {
     try {
       const updateData = req.body;
-      console.log("updateData", updateData);
-
       const editUser = await UserModel.findByIdAndUpdate(userId, updateData, {
         new: true,
       });
@@ -80,7 +76,6 @@ export const deleteUser = async (
   res: express.Response
 ) => {
   const userId = req.params.id;
-  console.log("deleteUser", userId);
 
   if (!userId) {
     res.status(404).send("Delete user not found");
@@ -142,8 +137,6 @@ export const toggleFavoriteRestaurant = async (
 ) => {
   const userId = req.params.id;
   const { restaurantId } = req.body;
-  console.log("toggleFavoriteRestaurant userId: ", userId);
-  console.log("toggleFavoriteRestaurant restaurantId: ", restaurantId);
 
   try {
     const user = await UserModel.findById(userId);
