@@ -3,7 +3,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import Card from "./Card";
 import Pagination from "./Pagination";
-import { Restaurant } from "@/types/types";
+import { Restaurant } from "@/types/restaurantTypes";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import FavButton from "./FavButton";
 

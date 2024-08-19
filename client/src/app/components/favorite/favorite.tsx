@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { UserContext } from "@/context/UserContext";
 import Card from "../restaurant/Card";
-import { Restaurant } from "@/types/types";
+import { Restaurant } from "@/types/restaurantTypes";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import Pagination from "../restaurant/Pagination";
 

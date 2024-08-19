@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { UserContext } from "@/context/UserContext";
-import { LoginStatus } from "@/types/types";
+import { LoginStatus } from "@/types/userTypes";
 
 function NoReviews() {
   const { loginStatus } = useContext(UserContext);

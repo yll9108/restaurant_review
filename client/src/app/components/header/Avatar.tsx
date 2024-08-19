@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 import { UserContext } from "@/context/UserContext";
-import { LoginStatus } from "@/types/types";
+import { LoginStatus } from "@/types/userTypes";
 import { getAuth, signOut } from "firebase/auth";
 import { ReviewsContext } from "@/context/ReviewsContext";
 

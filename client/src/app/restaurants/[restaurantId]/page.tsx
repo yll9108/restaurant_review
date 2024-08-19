@@ -15,7 +15,7 @@ const Page = () => {
   const { clickedRestaurant, setClickedRestaurant, setRestaurantId } =
     useContext(RestaurantContext);
 
-  const { allReviews, setAllReviews, hasReviews, setHasReviews } =
+  const { setAllReviews, hasReviews, setHasReviews } =
     useContext(ReviewsContext);
 
   //Check RestaurantId and rest reviews when user go to another restaurant page

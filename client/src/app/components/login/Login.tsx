@@ -4,7 +4,7 @@ import { BtnType, Button } from "@/components/common/button";
 import { useContext, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserContext } from "@/context/UserContext";
-import { LoginStatus } from "@/types/types";
+import { LoginStatus } from "@/types/userTypes";
 import axios from "axios";
 import Image from "next/image";
 import {

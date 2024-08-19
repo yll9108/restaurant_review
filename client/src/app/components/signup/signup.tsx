@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { Input, TextType } from "@/components/common/Input";
 import { BtnType, Button } from "@/components/common/button";
 import { UserContext } from "@/context/UserContext";
-import { LoginStatus } from "@/types/types";
+import { LoginStatus } from "@/types/userTypes";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import {

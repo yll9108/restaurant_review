@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 import { UserContext } from "@/context/UserContext";
 import axios from "axios";
-import { UserInfo } from "@/types/types";
+import { UserInfo } from "@/types/userTypes";
 
 export default function UserEdit() {
   const [updatedName, setUpdatedName] = useState<string>("");

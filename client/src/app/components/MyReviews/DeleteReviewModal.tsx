@@ -2,7 +2,7 @@
 import { forwardRef, RefObject, useContext } from "react";
 import { BtnType, Button } from "@/components/common/button";
 import axios from "axios";
-import { Review } from "@/types/types";
+import { Review } from "@/types/reviewTypes";
 import { ReviewsContext } from "@/context/ReviewsContext";
 
 interface DeleteReviewProps {

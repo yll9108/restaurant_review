@@ -1,18 +1,9 @@
 "use client";
 
 import { ReactNode, createContext, useState } from "react";
-import {
-  ReadonlyURLSearchParams,
-  useSearchParams,
-  useRouter,
-} from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
+import { DropDownContextProps } from "@/types/commonTypes";
 
-type DropDownContextProps = {
-  searchParams: ReadonlyURLSearchParams;
-  activeTab: string;
-  setActiveTab: (tab: string) => void;
-  changedTabs: (tabName: string) => void;
-};
 export const DropDownContext = createContext<DropDownContextProps>(
   {} as DropDownContextProps
 );

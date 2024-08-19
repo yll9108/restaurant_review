@@ -1,5 +1,5 @@
 import React from "react";
-import { PartialRestaurantData } from "@/types/types";
+import { PartialRestaurantData } from "@/types/restaurantTypes";
 
 const Tags = ({ restaurant_tags }: PartialRestaurantData) => {
   return (
