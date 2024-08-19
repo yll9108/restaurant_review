@@ -77,8 +77,6 @@ export const getRestaurantReviews = async (
       })
       .exec();
 
-    console.log("reviews", reviews);
-
     if (reviews.length > 0) {
       res.status(200).json(reviews);
     } else {
@@ -96,9 +94,6 @@ export const addNewReview = async (
 ) => {
   const restaurantId = req.params.restaurantId;
   const reviewInput: ReviewInput = req.body;
-
-  console.log("addReview restaurantId", restaurantId);
-  console.log("addReview reviewInput", reviewInput);
 
   try {
     const restaurant = await restaurantModels.findById(restaurantId);

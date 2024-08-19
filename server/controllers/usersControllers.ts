@@ -4,8 +4,6 @@ import { UserInput } from "../types/types";
 import { createUser, validateUserInput } from "../helpers/helpers";
 import ReviewModel from "../models/reviewModels";
 import RestaurantModel from "../models/restaurantModels";
-// import RestaurantModel from "../models/restaurantModels";
-// import mongoose from "mongoose";
 
 export const registerUser = async (
   req: express.Request,
@@ -38,10 +36,7 @@ export const getUsers = async (req: express.Request, res: express.Response) => {
 };
 
 export const getUser = async (req: express.Request, res: express.Response) => {
-  // console.log("getUsr", req.params);
-
   const userId = req.params.id;
-  // console.log("userId: ", userId);
 
   try {
     const user = await UserModel.findById(userId);
