@@ -6,6 +6,7 @@ type FavBtnProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   isFav: Boolean;
 };
+
 const FavButton = (props: FavBtnProps) => {
   return (
     <button className={props.className} onClick={props.onClick}>

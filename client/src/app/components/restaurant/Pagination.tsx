@@ -15,7 +15,7 @@ function Pagination({
   }
 
   return (
-    <div className="join">
+    <div className="join flex justify-center pt-4 bg-accent">
       {pageNumbers.map((number) => (
         <input
           key={number}

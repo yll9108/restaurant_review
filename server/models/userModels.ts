@@ -20,7 +20,6 @@ const UserSchema = new Schema({
   },
   user_favorite_restaurant: [
     {
-      // type: mongoose.Schema.Types.ObjectId,
       type: String,
       ref: "Restaurant", // Reference to the Restaurant model
     },

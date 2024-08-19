@@ -12,10 +12,8 @@ import DeleteReviewModal from "./DeleteReviewModal";
 const MyReviews = () => {
   const { allReviews, setAllReviews } = useContext(ReviewsContext);
   const { user } = useContext(UserContext);
-  const modalRef = useRef<HTMLDialogElement>(null);
+  // const modalRef = useRef<HTMLDialogElement>(null);
   const { restaurantsData, setRestaurantsData } = useContext(RestaurantContext);
-  // const [reviewId, setReviewId] = useState<string | undefined>("");
-
   const [restaurantReviews, setRestaurantReviews] = useState<
     { restaurantName: string; review: Review }[]
   >([]);
@@ -54,6 +52,8 @@ const MyReviews = () => {
     handleReviewChange();
   }, [setRestaurantsData]);
 
+  console.log("bag check restaurantsData", restaurantsData);
+
   // Get restaurant name and my review from the restaurant
   useEffect(() => {
     if (allReviews.length && restaurantsData.length) {
@@ -71,9 +71,11 @@ const MyReviews = () => {
           return null;
         })
         .filter(Boolean);
+
       setRestaurantReviews(
         matchedReviews as { restaurantName: string; review: Review }[]
       );
+      console.log("matched", matchedReviews);
     }
   }, [allReviews, restaurantsData]);
 
@@ -114,9 +116,9 @@ const MyReviews = () => {
       setAllReviews((prev: Review[]) =>
         prev.filter((review) => review._id !== reviewId)
       );
-      if (modalRef.current) {
-        modalRef.current?.close();
-      }
+      // if (modalRef.current) {
+      //   modalRef.current?.close();
+      // }
     } catch (err) {
       console.log("Error deleting review", err);
     }
@@ -125,7 +127,7 @@ const MyReviews = () => {
   return (
     <div className="bg-accent">
       <h2 className="text-3xl text-center my-8">Review</h2>
-      <div className="join join-vertical w-1/2 mx-auto mt-2 block">
+      <div className="join join-vertical w-3/4 mx-auto mt-2 block">
         {restaurantReviews.length > 0 ? (
           restaurantReviews.map(({ restaurantName, review }, i) => (
             <div

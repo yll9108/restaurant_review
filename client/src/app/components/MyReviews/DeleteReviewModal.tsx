@@ -2,9 +2,8 @@
 import { forwardRef, RefObject, useContext } from "react";
 import { BtnType, Button } from "@/components/common/button";
 import axios from "axios";
-import { Restaurant, Review } from "@/types/types";
+import { Review } from "@/types/types";
 import { ReviewsContext } from "@/context/ReviewsContext";
-import { UserContext } from "@/context/UserContext";
 
 interface DeleteReviewProps {
   modalRef: RefObject<HTMLDialogElement>;
@@ -17,13 +16,12 @@ interface DeleteReviewProps {
 const DeleteReviewModal = forwardRef<HTMLDialogElement, DeleteReviewProps>(
   ({ modalRef, setRestaurantReviews, reviewId }, ref) => {
     const { setAllReviews } = useContext(ReviewsContext);
-    const { user } = useContext(UserContext);
     //delete review
     const deleteReviewHandler = async (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
     ) => {
       event.preventDefault();
-      console.log("deleteReviewModal reviewId: ", reviewId);
+
       try {
         const res = await axios.delete(
           `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/reviews/delete/${reviewId}`
@@ -38,8 +36,6 @@ const DeleteReviewModal = forwardRef<HTMLDialogElement, DeleteReviewProps>(
           prev.filter((review) => review._id !== reviewId)
         );
         if (modalRef.current) {
-          console.log("Closing modal");
-
           modalRef.current?.close();
         }
       } catch (err) {

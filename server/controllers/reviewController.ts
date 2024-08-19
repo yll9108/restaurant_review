@@ -27,9 +27,7 @@ export const getReviewsByUserId = async (
     const reviews = await reviewModels.find({ userId: userId });
 
     if (reviews.length > 0) {
-      console.log("getReviewsByUserId reviews", reviews);
       res.status(200).json(reviews);
-      // res.status(200).json({ message: "get reviews successfully" });
     } else {
       res.status(404).json({ message: "No reviews found for your account" });
     }
@@ -58,13 +56,7 @@ export const deleteReview = async (
     restaurant.reviewsId = restaurant.reviewsId.filter(
       (id) => id.toString() !== reviewId
     );
-    await restaurant.save();
-
-    // Delete the review itself
-    const review = await reviewModels.deleteOne({ _id: reviewId });
-    if (review.deletedCount === 0) {
-      return res.status(404).json({ message: "Review not found" });
-    }
+    // await restaurant.save();
 
     //Fetch all remaining reviews for the restaurant
     const remainingReviews = await reviewModels.find({
@@ -85,6 +77,13 @@ export const deleteReview = async (
     restaurant.restaurant_avg_ratings = avgRating;
     restaurant.restaurant_number_reviews = numberOfReviews;
     await restaurant.save();
+
+    // Delete the review itself
+    const review = await reviewModels.deleteOne({ _id: reviewId });
+    if (review.deletedCount === 0) {
+      return res.status(404).json({ message: "Review not found" });
+    }
+
     res.status(200).json({ message: "Review deleted successfully" });
   } catch (err) {
     console.error("Error deleting review:", err);

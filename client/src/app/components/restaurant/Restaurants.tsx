@@ -11,7 +11,7 @@ const Restaurants = () => {
   const { restaurantsData } = useContext(RestaurantContext);
   const [currentPage, setCurrentPage] = useState(1);
   const [restaurantPerPage, setRestaurantPerPage] = useState(6);
-  const [isFav, setIsFav] = useState<Boolean>(false);
+  // const [isFav, setIsFav] = useState<Boolean>(false);
 
   // logic for pagination
   const indexOfLastRestaurant = currentPage * restaurantPerPage;
@@ -24,32 +24,32 @@ const Restaurants = () => {
   // when click on different page, set to that page
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);
 
-  const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    console.log("clicked");
-    setIsFav(!isFav);
-    // if (!clickedRestaurant) return;
+  // const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
+  //   console.log("clicked");
+  //   setIsFav(!isFav);
+  // if (!clickedRestaurant) return;
 
-    // try {
-    //   const response = await axios.post(
-    //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${user?._id}/favorite`,
-    //     { restaurantId: clickedRestaurant?._id },
-    //     {
-    //       headers: { Accept: "application/json" },
-    //     }
-    //   );
-    //   setUser(response.data);
-    //   setIsFav(!isFav);
-    // } catch (error) {
-    //   console.error("Error updating favorite restaurant:", error);
-    // }
-  };
+  // try {
+  //   const response = await axios.post(
+  //     `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/users/${user?._id}/favorite`,
+  //     { restaurantId: clickedRestaurant?._id },
+  //     {
+  //       headers: { Accept: "application/json" },
+  //     }
+  //   );
+  //   setUser(response.data);
+  //   setIsFav(!isFav);
+  // } catch (error) {
+  //   console.error("Error updating favorite restaurant:", error);
+  // }
+  // };
   return (
     <div className="bg-accent h-screen mt-16">
-      <div className="flex flex-wrap w-full justify-around pt-16">
+      <div className="flex flex-wrap w-full justify-around pt-16 bg-accent">
         {currentRestaurants &&
           currentRestaurants.map((restaurant: Restaurant, index: number) => (
-            <div key={index} className="relative">
+            <div key={index}>
               <Card
                 key={index}
                 _id={restaurant._id}
@@ -67,14 +67,12 @@ const Restaurants = () => {
             </div>
           ))}
       </div>
-      <div className="absolute bottom-1/4 my_position">
-        <Pagination
-          restaurantsPerPage={restaurantPerPage}
-          totalRestaurants={restaurantsData.length}
-          paginate={paginate}
-          currentPage={currentPage}
-        />
-      </div>
+      <Pagination
+        restaurantsPerPage={restaurantPerPage}
+        totalRestaurants={restaurantsData.length}
+        paginate={paginate}
+        currentPage={currentPage}
+      />
     </div>
   );
 };

@@ -72,7 +72,7 @@ const DeleteAccount = forwardRef<HTMLDialogElement, DeleteAccountProps>(
               />
             </div>
           )}
-          <div className="flex justify-around mt-1">
+          <div className="flex justify-around mt-2">
             <div className="modal-action m-0">
               <form method="dialog" onSubmit={() => setReauthenticate(false)}>
                 {/* if there is a button in form, it will close the modal */}

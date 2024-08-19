@@ -4,7 +4,6 @@ import Tags from "./Tags";
 import Address from "./Address";
 import { PartialRestaurantData } from "@/types/types";
 import { useRouter } from "next/navigation";
-import { RestaurantContext } from "@/context/RestaurantContext";
 import FavButton from "./FavButton";
 
 const Card = ({
@@ -18,22 +17,20 @@ const Card = ({
   // click restaurant div, will lead to detailPage //
   const router = useRouter();
 
-  // const { setClickedRestaurant } = useContext(RestaurantContext);
-
   const clickRestaurant = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
     console.log("clicked");
     router.push(`restaurants/${_id}`);
   };
-  const submitFav = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
+  // const submitFav = (e: React.MouseEvent<HTMLElement>) => {
+  //   e.preventDefault();
 
-    console.log("clicked");
-    // setIsFav(true);
-  };
+  //   console.log("clicked");
+  //   // setIsFav(true);
+  // };
   return (
     <div onClick={clickRestaurant}>
-      <div className="card w-96 bg-base-100 shadow-xl m-4 hover:scale-110 cursor-pointer">
+      <div className="card bg-base-100 shadow-xl m-4 hover:scale-110 cursor-pointer">
         <div className="card-body p-4">
           <RestaurantInfo
             restaurant_name={restaurant_name}

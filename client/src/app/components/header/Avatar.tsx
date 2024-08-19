@@ -3,17 +3,19 @@ import { FaHeart, FaSignOutAlt } from "react-icons/fa";
 import { MdReviews } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { useRouter } from "next/navigation";
-import { useState, useContext, useRef } from "react";
+import { useContext, useRef } from "react";
 import { DropDownContext } from "@/context/DropDownContext";
 import { UserContext } from "@/context/UserContext";
 import { LoginStatus } from "@/types/types";
 import { getAuth, signOut } from "firebase/auth";
+import { ReviewsContext } from "@/context/ReviewsContext";
 
 export default function Avatar() {
   const router = useRouter();
   const dropDownRef = useRef<HTMLDetailsElement>(null);
-  const { activeTab, setActiveTab } = useContext(DropDownContext);
+  const { setActiveTab } = useContext(DropDownContext);
   const { user, setUser, setLoginStatus } = useContext(UserContext);
+  const { setAllReviews } = useContext(ReviewsContext);
 
   let icon = "";
   for (let i = 0; i < user?.user_name.length!; i++) {
@@ -24,6 +26,8 @@ export default function Avatar() {
 
   const changedTabs = (tabName: string) => {
     setActiveTab(tabName);
+    // Clear allReviews when navigating to "My Reviews" page
+    setAllReviews([]);
     router.push(`/users?tab=${tabName}`);
     if (dropDownRef.current) {
       dropDownRef.current.removeAttribute("open");
@@ -43,10 +47,9 @@ export default function Avatar() {
   };
 
   return (
-    <details className="dropdown dropdown-end mr-4 sm:mr-12 " ref={dropDownRef}>
+    <details className="dropdown dropdown-end mr-4 z-50" ref={dropDownRef}>
       <summary className="btn btn-secondary btn-circle avatar placeholder">
         <div className="w-10 rounded-full">
-          {/* <img alt="Tailwind CSS Navbar component" src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" /> */}
           <span>{icon}</span>
         </div>
       </summary>

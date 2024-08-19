@@ -40,19 +40,15 @@ export function RestaurantContextProvider({
     const getRestaurantsData = async () => {
       try {
         if (searchValue) {
-          console.log("search value: ", searchValue);
-
           const searchRes = await axios.get(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants/?text=` +
               searchValue
           );
-          console.log("result", searchRes.data);
           setRestaurantsData(searchRes.data);
         } else {
           const res = await axios.get(
             `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/restaurants`
           );
-          console.log("restaurants context ", res.data);
           setRestaurantsData(res.data);
         }
       } catch (error) {

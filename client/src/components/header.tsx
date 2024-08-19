@@ -13,14 +13,18 @@ const Header = () => {
   const { user } = useContext(UserContext);
 
   return (
-    <header className="w-full bg-primary h-16 flex justify-end items-center fixed z-50 top-0">
+    <header className=" bg-primary h-16 flex fixed top-0 w-full z-50">
       <HeaderLogo />
-      <div className="flex justify-center items-center sm:mr-4">
+      <div className="flex justify-center items-center mr-4">
         <SearchBar />
         {user ? (
           <Avatar />
         ) : (
-          <Button type={BtnType.logIn} onClick={() => router.push("/login")}>
+          <Button
+            type={BtnType.logIn}
+            onClick={() => router.push("/login")}
+            className=" btn px-2"
+          >
             Log In
           </Button>
         )}

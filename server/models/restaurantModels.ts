@@ -24,10 +24,8 @@ const RestaurantSchema = new Schema({
   },
   reviewsId: [
     {
-      // type: mongoose.Schema.Types.ObjectId,
       type: String,
       ref: "Review", // Reference to the Review model
-      // required: true,
     },
   ],
 });

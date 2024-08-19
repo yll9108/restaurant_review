@@ -32,7 +32,7 @@ export default function MyFavorite() {
   return (
     <>
       <h2 className="text-3xl text-center my-8">My favorite</h2>
-      <div className="flex flex-wrap w-full justify-around pt-8">
+      <div className="flex flex-wrap w-full justify-around pt-8 bg-accent">
         {currentRestaurants.length > 0 ? (
           currentRestaurants.map((restaurant: Restaurant) => (
             <Card
@@ -50,7 +50,7 @@ export default function MyFavorite() {
         )}
       </div>
       {currentRestaurants.length > 0 && (
-        <div className="absolute bottom-14 my_position">
+        <div className="">
           <Pagination
             restaurantsPerPage={restaurantPerPage}
             totalRestaurants={favoriteRestaurants.length}

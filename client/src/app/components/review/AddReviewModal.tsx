@@ -4,7 +4,6 @@ import { UserContext } from "@/context/UserContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
 import { BtnType, Button } from "@/components/common/button";
 import { useParams } from "next/navigation";
-import moment from "moment";
 import ReviewInput from "./ReviewInput";
 import axios from "axios";
 import { RestaurantContext } from "@/context/RestaurantContext";
@@ -20,8 +19,6 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const [reviewRating, setReviewRating] = useState(5.0);
 
     const { user } = useContext(UserContext);
-    // const { setHasReviews, allReviews, setAllReviews, setReview } =
-    //   useContext(ReviewsContext);
     const { setHasReviews, fetchReviews } = useContext(ReviewsContext);
     const { updatedRestaurantData } = useContext(RestaurantContext);
 
@@ -30,13 +27,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     const restaurantId = reviewParams.restaurantId as string;
 
     //Get postedTime
-    const postedTime = moment().calendar({
-      sameDay: "[Today] dddd",
-      lastDay: "[Yesterday]",
-      lastWeek: "[last] dddd",
-      lastMonth: "[last] mmmm",
-      sameElse: "MM/DD/YYYY",
-    });
+    const postedTime = new Date();
 
     const AddedReview = (
       event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -93,11 +84,8 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
             { headers: { "Content-Type": "application/json" } }
           );
 
-          // const newReview = res.data;
-          // setAllReviews([...allReviews, newReview]);
-
           // Refresh the reviews
-          await fetchReviews(restaurantId);
+          fetchReviews(restaurantId);
           setHasReviews(true);
 
           // Fetch the updated restaurant data
@@ -121,7 +109,7 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
     return (
       <>
         <dialog className="modal" ref={ref || modalRef}>
-          <div className="modal-box w-1/2 max-w-5xl">
+          <div className="modal-box lb:w-1/2 max-w-4xl">
             {!showConfirm && (
               <ReviewInput
                 reviewTitle={reviewTitle}
@@ -136,7 +124,9 @@ const AddReviewModal = forwardRef<HTMLDialogElement, AddReviewModalProps>(
               <div>
                 <h3 className="font-bold text-2xl pb-4 text-center">Preview</h3>
                 <p className="text-lg text-center">Rating is {reviewRating}</p>
-                <p className="text-lg text-center">{reviewTitle}</p>
+                <p className="text-lg font-semibold text-center">
+                  {reviewTitle}
+                </p>
                 <p className="text-lg text-center">{reviewDesc}</p>
                 <p className="text-xl py-4 text-center">Will you publish?</p>
               </div>

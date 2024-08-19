@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "axios": "^1.6.8",
+    "caniuse-lite": "^1.0.30001650",
     "dotenv": "^16.4.5",
     "firebase": "^10.9.0",
     "moment": "^2.29.4",

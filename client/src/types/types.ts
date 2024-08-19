@@ -38,7 +38,7 @@ type Review = {
   _id: string;
   // review_icon: string;
   review_ratings: number;
-  review_date: string;
+  review_date: Date;
   review_title: string;
   review_description: string;
   restaurantId: string;
@@ -58,7 +58,7 @@ type Rating = {
 
 type NewReview = {
   review_ratings: number;
-  review_date: string;
+  review_date: Date;
   review_title: string;
   review_description: string;
   restaurantId: string;
@@ -81,8 +81,8 @@ type InitialReviewStateProps = {
 };
 
 type ReviewsContextProps = {
-  review: Review | null;
-  setReview: (reviews: Review | null) => void;
+  // review: Review | null;
+  // setReview: (reviews: Review | null) => void;
   hasReviews: boolean;
   setHasReviews: (hasReviews: boolean) => void;
   allReviews: Review[];

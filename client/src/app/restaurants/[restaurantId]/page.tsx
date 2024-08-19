@@ -6,9 +6,8 @@ import PersonalReview from "@/app/components/review/PersonalReview";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import { ReviewsContext } from "@/context/ReviewsContext";
 import { useParams } from "next/navigation";
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import axios from "axios";
-import React from "react";
 
 const Page = () => {
   const params = useParams();
@@ -50,24 +49,19 @@ const Page = () => {
     getData();
   }, [restaurantId, setAllReviews, setClickedRestaurant, setHasReviews]);
 
-  console.log("allReviews", allReviews);
-
   return (
-    <div
-      // className={`flex pt-16 bg-accent  ${hasReviews ? "h-screen" : "h-full"}`}
-      className="bg-accent pt-16 h-full"
-    >
-      {/*display left side */}
-      <div className="bg-accent">
-        <div className="w-2/3">
-          {hasReviews ? <PersonalReview /> : <NoReviews />}
-        </div>
-      </div>
+    <div className="bg-accent pt-16 h-full lg:relative ">
       {/*display right side */}
 
       {clickedRestaurant && (
         <RestaurantWithMap clickedRestaurant={clickedRestaurant} />
       )}
+
+      {/*display left side */}
+      <div className="bg-accent pb-1">
+        {hasReviews ? <PersonalReview /> : <NoReviews />}
+      </div>
+      {/* </div> */}
     </div>
   );
 };

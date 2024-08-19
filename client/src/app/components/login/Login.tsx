@@ -40,6 +40,7 @@ const Login = () => {
       });
   };
 
+  // Login with Email and Password
   const handleEmailLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     await signInWithEmailAndPassword(getAuth(), email, password)
@@ -52,6 +53,7 @@ const Login = () => {
       });
   };
 
+  // Google Login
   const handleGoogleLogin = async () => {
     await signInWithPopup(getAuth(), new GoogleAuthProvider())
       .then((result) => {
@@ -87,13 +89,19 @@ const Login = () => {
           placeholder="Password"
           onChange={(event) => setPassword(event.target.value)}
         />
-        <Button type={BtnType.submit}>Log In</Button>
+        <Button type={BtnType.submit} className="btn btn-wide">
+          Log In
+        </Button>
       </form>
       <Button type={BtnType.regular_google} onClick={handleGoogleLogin}>
         Log In with Google
       </Button>
       <p className="mb-4">or</p>
-      <Button type={BtnType.submit} onClick={() => router.push("/signup")}>
+      <Button
+        type={BtnType.submit}
+        className="btn btn-wide"
+        onClick={() => router.push("/signup")}
+      >
         Sign Up
       </Button>
     </div>

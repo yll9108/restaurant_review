@@ -2,7 +2,6 @@
 import RestaurantInfo from "../restaurant/RestaurantInfo";
 import Tags from "../restaurant/Tags";
 import Address from "../restaurant/Address";
-import RestaurantMap from "./RestaurantMap";
 import AddReview from "../review/AddReview";
 import { Restaurant, LoginStatus } from "@/types/types";
 import React, { useContext, useEffect, useState } from "react";
@@ -11,16 +10,18 @@ import { ReviewsContext } from "@/context/ReviewsContext";
 import { RestaurantContext } from "@/context/RestaurantContext";
 import axios from "axios";
 import FavButton from "../restaurant/FavButton";
+import { BtnType, Button } from "@/components/common/button";
+import { useRouter } from "next/navigation";
 
 type RestaurantWithMapProps = {
   clickedRestaurant: Restaurant | null;
 };
 
 const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
+  const router = useRouter();
   const { loginStatus, user, setUser } = useContext(UserContext);
   const { hasReviews, allReviews } = useContext(ReviewsContext);
-  const { restaurantsData, updatedRestaurantData } =
-    useContext(RestaurantContext);
+  const { updatedRestaurantData } = useContext(RestaurantContext);
 
   const [isReview, setIsReview] = useState<Boolean>(false);
   const [isFav, setIsFav] = useState<Boolean>(false);
@@ -63,8 +64,6 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
     user?.user_favorite_restaurant,
   ]);
 
-  console.log("clickedRestaurant", clickedRestaurant);
-
   //favorite button handler
   const registeredFav = async (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
@@ -87,7 +86,11 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
   };
 
   return (
-    <div className="card w-96 bg-base-100 shadow-xl mx-auto mt-5 fixed right-16 top-16">
+    <div
+      className={`card bg-base-100 shadow-xl mx-4 my-5 lg:fixed lg:z-40 lg:right-8 ${
+        hasReviews ? "h-46" : "h-56"
+      }`}
+    >
       <div className="card-body p-4">
         {clickedRestaurant && (
           <>
@@ -103,8 +106,6 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
               <Tags restaurant_tags={clickedRestaurant.restaurant_tags} />
               <FavButton onClick={registeredFav} isFav={isFav} />
             </div>
-            {/* <RestaurantMap mapString={"/mockMap.png"} /> */}
-            {/* Render button */}
 
             {loginStatus === LoginStatus.LoggedIn ? (
               !hasReviews ? (
@@ -119,7 +120,15 @@ const RestaurantWithMap = ({ clickedRestaurant }: RestaurantWithMapProps) => {
                 <></>
               )
             ) : (
-              <></>
+              <div className="text-center mt-1">
+                <Button
+                  type={BtnType.logIn}
+                  onClick={() => router.push("/login")}
+                  className="btn px-7"
+                >
+                  Log In
+                </Button>
+              </div>
             )}
           </>
         )}
