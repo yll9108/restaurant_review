@@ -1,5 +1,5 @@
 "use client";
-import { Review, ReviewsContextProps } from "@/types/types";
+import { Review, ReviewsContextProps } from "@/types/reviewTypes";
 import axios from "axios";
 import { createContext, ReactNode, useCallback, useState } from "react";
 

@@ -58,7 +58,7 @@ const ReviewDetail = ({
     }
   };
   return (
-    <div className="flex flex-col ml-2 pt-4">
+    <div className="flex flex-col flex-wrap ml-2 pt-4">
       <div className="lg:flex" key={_id}>
         <div className="flex items-center">
           {detailPageParams ? (
@@ -66,10 +66,8 @@ const ReviewDetail = ({
           ) : (
             <Ratings ratings={review_ratings} />
           )}
-          {/* <p className={`${detailPageParams ? "" : "w-4"} pl-2`}> */}
           <div className={"pl-2"}>{reviewRating}</div>
         </div>
-        {/* <p className={`w-36 ${detailPageParams ? "" : "pl-5"}`}> */}
         <p className="lg:pl-5">{daysAgoString(daysAgo)}</p>
       </div>
       <h2 className="card-title text-2xl my-2">{review_title}</h2>

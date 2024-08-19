@@ -1,7 +1,7 @@
 "use client";
 import { ReactNode } from "react";
 import { Input, TextType } from "@/components/common/Input";
-import { Rating, ReviewInputProps } from "@/types/types";
+import { Rating, ReviewInputProps } from "@/types/reviewTypes";
 import {
   BsEmojiAngry,
   BsEmojiAstonished,

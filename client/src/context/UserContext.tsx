@@ -5,7 +5,7 @@ import {
   LoginStatus,
   FirebaseAccount,
   UserContextProps,
-} from "@/types/types";
+} from "@/types/userTypes";
 
 export const UserContext = createContext<UserContextProps>(
   {} as UserContextProps

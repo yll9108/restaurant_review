@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { PartialRestaurantData } from "@/types/types";
+import { PartialRestaurantData } from "@/types/restaurantTypes";
 import Ratings from "@/components/common/ratings";
 
 const RestaurantInfo = ({

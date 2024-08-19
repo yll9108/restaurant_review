@@ -1,6 +1,6 @@
 "use client";
 
-import { Restaurant, RestaurantContextType } from "@/types/types";
+import { Restaurant, RestaurantContextType } from "@/types/restaurantTypes";
 import { ReactNode, createContext, useEffect, useState } from "react";
 import axios from "axios";
 

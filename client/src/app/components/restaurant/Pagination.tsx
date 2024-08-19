@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { PaginationData } from "@/types/types";
+import { PaginationData } from "@/types/commonTypes";
 import React from "react";
 
 function Pagination({

@@ -1,5 +1,5 @@
 "use client";
-import { PageStatus, PageContextProps } from "@/types/types";
+import { PageStatus, PageContextProps } from "@/types/commonTypes";
 import { ReactNode, createContext, useState } from "react";
 
 export const PageContext = createContext<PageContextProps>(

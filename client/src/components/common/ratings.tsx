@@ -1,5 +1,5 @@
 "use client";
-import { RatingProps } from "@/types/types";
+import { RatingProps } from "@/types/commonTypes";
 import React from "react";
 
 const Ratings = ({ ratings, maxRating = 5 }: RatingProps) => {

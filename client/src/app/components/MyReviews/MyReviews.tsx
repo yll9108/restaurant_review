@@ -5,7 +5,7 @@ import { ReviewsContext } from "@/context/ReviewsContext";
 import { UserContext } from "@/context/UserContext";
 import axios from "axios";
 import { RestaurantContext } from "@/context/RestaurantContext";
-import { Review } from "@/types/types";
+import { Review } from "@/types/reviewTypes";
 import { MdDelete } from "react-icons/md";
 import DeleteReviewModal from "./DeleteReviewModal";
 

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import RestaurantInfo from "./RestaurantInfo";
 import Tags from "./Tags";
 import Address from "./Address";
-import { PartialRestaurantData } from "@/types/types";
+import { PartialRestaurantData } from "@/types/restaurantTypes";
 import { useRouter } from "next/navigation";
 import FavButton from "./FavButton";
 
