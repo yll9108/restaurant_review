@@ -1,9 +1,19 @@
+import { ReadonlyURLSearchParams } from "next/navigation";
+
 // Type for Pagination
 type PaginationData = {
   restaurantsPerPage: number;
   totalRestaurants: number;
   paginate: (pageNumber: number) => void;
   currentPage: number;
+};
+
+//Type for DropdownContext
+type DropDownContextProps = {
+  searchParams: ReadonlyURLSearchParams;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  changedTabs: (tabName: string) => void;
 };
 
 // Type for PageContext
@@ -25,4 +35,9 @@ type RatingProps = {
   maxRating?: number; // The maximum rating value, e.g., 5 (default is 5)
 };
 
-export type { PaginationData, PageContextProps, RatingProps };
+export type {
+  PaginationData,
+  PageContextProps,
+  RatingProps,
+  DropDownContextProps,
+};
