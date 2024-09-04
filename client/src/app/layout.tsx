@@ -18,13 +18,13 @@ export default function RootLayout({
         <PageContextProvider>
           <UserContextProvider>
             <RestaurantContextProvider>
-              <DropDownContextProvider>
-                <ReviewsContextProvider>
-                  <Suspense>
+              <Suspense>
+                <DropDownContextProvider>
+                  <ReviewsContextProvider>
                     <AuthProvider>{children}</AuthProvider>
-                  </Suspense>
-                </ReviewsContextProvider>
-              </DropDownContextProvider>
+                  </ReviewsContextProvider>
+                </DropDownContextProvider>
+              </Suspense>
             </RestaurantContextProvider>
           </UserContextProvider>
         </PageContextProvider>
