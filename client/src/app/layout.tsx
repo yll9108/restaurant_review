@@ -15,19 +15,19 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className="h-full">
-        <PageContextProvider>
-          <UserContextProvider>
-            <RestaurantContextProvider>
-              <Suspense>
+        <Suspense>
+          <PageContextProvider>
+            <UserContextProvider>
+              <RestaurantContextProvider>
                 <DropDownContextProvider>
                   <ReviewsContextProvider>
                     <AuthProvider>{children}</AuthProvider>
                   </ReviewsContextProvider>
                 </DropDownContextProvider>
-              </Suspense>
-            </RestaurantContextProvider>
-          </UserContextProvider>
-        </PageContextProvider>
+              </RestaurantContextProvider>
+            </UserContextProvider>
+          </PageContextProvider>
+        </Suspense>
       </body>
     </html>
   );
