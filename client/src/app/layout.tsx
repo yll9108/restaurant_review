@@ -6,7 +6,7 @@ import { PageContextProvider } from "@/context/PageContext";
 import { RestaurantContextProvider } from "@/context/RestaurantContext";
 import { UserContextProvider } from "@/context/UserContext";
 import { ReviewsContextProvider } from "@/context/ReviewsContext";
-
+import { Suspense } from "react";
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -20,7 +20,9 @@ export default function RootLayout({
             <RestaurantContextProvider>
               <DropDownContextProvider>
                 <ReviewsContextProvider>
-                  <AuthProvider>{children}</AuthProvider>
+                  <Suspense>
+                    <AuthProvider>{children}</AuthProvider>
+                  </Suspense>
                 </ReviewsContextProvider>
               </DropDownContextProvider>
             </RestaurantContextProvider>
