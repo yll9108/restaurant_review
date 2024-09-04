@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactNode, useState } from "react";
 import { useParams } from "next/navigation";
-import { Review } from "../../types/types";
+import { Review } from "../../types/reviewTypes";
 import Ratings from "./ratings";
 import {
   BsEmojiAngry,
