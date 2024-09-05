@@ -2,7 +2,7 @@
 import { usePathname, useRouter } from "next/navigation";
 import { Limitation, Page, PAGES, Permission } from "./authType";
 import { PageContext } from "@/context/PageContext";
-import { useContext, useEffect, Suspense } from "react";
+import { useContext, useEffect } from "react";
 import { UserContext } from "@/context/UserContext";
 import { initializeFirebase } from "./firebase";
 import { getAuth } from "firebase/auth";
@@ -141,11 +141,7 @@ const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       case PageStatus.Ready:
         return <>{children}</>;
       case PageStatus.NotFound:
-        return (
-          <Suspense>
-            <NotFound />;
-          </Suspense>
-        );
+        return <NotFound />;
     }
   };
 
