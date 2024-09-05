@@ -18,13 +18,14 @@ export default function RootLayout({
         <PageContextProvider>
           <UserContextProvider>
             <RestaurantContextProvider>
-              <DropDownContextProvider>
-                <ReviewsContextProvider>
-                  <AuthProvider>
-                    <Suspense>{children}</Suspense>
-                  </AuthProvider>
-                </ReviewsContextProvider>
-              </DropDownContextProvider>
+              {/* Wrap DropDownContextProvider with Suspense */}
+              <Suspense fallback={<div>Loading Dropdown...</div>}>
+                <DropDownContextProvider>
+                  <ReviewsContextProvider>
+                    <AuthProvider>{children}</AuthProvider>
+                  </ReviewsContextProvider>
+                </DropDownContextProvider>
+              </Suspense>
             </RestaurantContextProvider>
           </UserContextProvider>
         </PageContextProvider>
